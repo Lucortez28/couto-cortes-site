@@ -423,12 +423,13 @@
       const container =
         document.getElementById("products-container");
 
+
       const { data, error } = await supabaseClient
         .from("produtos")
         .select("*")
-        .eq("disponível", true)
-        .eq("destaque", true)
-        .order("created", { ascending: false });
+        .eq("Disponível", true)
+        .eq("Destaque", true)
+        .order("created_at", { ascending: false });
 
 
       if (error) {
@@ -472,7 +473,7 @@
 
 
         const preco =
-          Number(produto.preço || 0)
+          Number(produto["Preço"] || 0)
             .toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL"
@@ -484,7 +485,7 @@
             ? `
               <img
                 src="${produto.imagem_url}"
-                alt="${produto.nome}"
+                alt="${produto["Nome"] || "Produto"}"
                 loading="lazy"
               >
             `
@@ -502,11 +503,11 @@
           <div class="product-info">
 
             <h3>
-              ${produto.nome || "Produto"}
+              ${produto["Nome"] || "Produto"}
             </h3>
 
             <p>
-              ${produto.descrição || ""}
+              ${produto["Descrição"] || ""}
             </p>
 
             <div class="price">
