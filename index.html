@@ -227,7 +227,6 @@
     }
 
     @media (max-width: 650px) {
-
       header {
         flex-direction: column;
         gap: 12px;
@@ -250,285 +249,289 @@
 
 <body>
 
-  <header>
+<header>
 
-    <div class="logo">
-      <span>COUTO</span> &
-      <span>CORTES</span>
+  <div class="logo">
+    <span>COUTO</span> &
+    <span>CORTES</span>
+  </div>
+
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#categorias">Categorias</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+</header>
+
+<main>
+
+  <section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+      <h1>Impressão 3D de alta precisão</h1>
+
+      <p>
+        Soluções em impressão 3D para sua casa,
+        empresa, projetos e ideias.
+      </p>
+
+      <div class="buttons">
+
+        <a href="#produtos" class="button primary">
+          Ver catálogo
+        </a>
+
+        <a
+          href="https://wa.me/5511999999999"
+          class="button secondary"
+        >
+          Solicitar orçamento
+        </a>
+
+      </div>
+
     </div>
 
-    <nav>
-      <a href="#inicio">Início</a>
-      <a href="#categorias">Categorias</a>
-      <a href="#produtos">Produtos</a>
-      <a href="#contato">Contato</a>
-    </nav>
+  </section>
 
-  </header>
+  <section id="categorias">
 
-  <main>
+    <div class="section-title">
 
-    <section class="hero" id="inicio">
+      <h2>Categorias</h2>
 
-      <div class="hero-content">
+      <p>
+        Encontre produtos para diferentes necessidades.
+      </p>
 
-        <h1>Impressão 3D de alta precisão</h1>
+    </div>
 
-        <p>
-          Soluções em impressão 3D para sua casa,
-          empresa, projetos e ideias.
-        </p>
+    <div class="categories">
 
-        <div class="buttons">
+      <div class="category">🏠 Casa e Decoração</div>
+      <div class="category">📦 Organização</div>
+      <div class="category">🎮 Games</div>
+      <div class="category">🚗 Automotivo</div>
+      <div class="category">📚 Educacional</div>
+      <div class="category">🏢 Corporativo</div>
+      <div class="category">🎁 Presentes</div>
+      <div class="category">🛠️ Utilidades</div>
 
-          <a href="#produtos" class="button primary">
-            Ver catálogo
-          </a>
+    </div>
 
-          <a
-            href="https://wa.me/5511999999999"
-            class="button secondary"
-          >
-            Solicitar orçamento
-          </a>
+  </section>
 
-        </div>
+  <section id="produtos">
 
+    <div class="section-title">
+
+      <h2>Produtos em destaque</h2>
+
+      <p>
+        Alguns dos produtos disponíveis na Couto & Cortes.
+      </p>
+
+    </div>
+
+    <div class="products" id="products-container">
+
+      <div class="loading">
+        Carregando produtos...
       </div>
 
-    </section>
+    </div>
 
+  </section>
 
-    <section id="categorias">
+  <section id="contato">
+
+    <div class="contact">
 
       <div class="section-title">
 
-        <h2>Categorias</h2>
+        <h2>Tem uma ideia?</h2>
 
         <p>
-          Encontre produtos para diferentes necessidades.
+          Nós podemos transformar sua ideia em uma peça 3D.
         </p>
 
       </div>
 
-      <div class="categories">
+      <div class="buttons">
 
-        <div class="category">🏠 Casa e Decoração</div>
-        <div class="category">📦 Organização</div>
-        <div class="category">🎮 Games</div>
-        <div class="category">🚗 Automotivo</div>
-        <div class="category">📚 Educacional</div>
-        <div class="category">🏢 Corporativo</div>
-        <div class="category">🎁 Presentes</div>
-        <div class="category">🛠️ Utilidades</div>
+        <a
+          href="https://wa.me/5511999999999"
+          class="button primary"
+        >
+          Falar pelo WhatsApp
+        </a>
 
       </div>
 
-    </section>
+    </div>
 
+  </section>
 
-    <section id="produtos">
+</main>
 
-      <div class="section-title">
+<footer>
 
-        <h2>Produtos em destaque</h2>
+  <p>
+    <strong>Couto & Cortes Soluções 3D</strong>
+  </p>
 
-        <p>
-          Alguns dos produtos disponíveis na Couto & Cortes.
-        </p>
+  <p>
+    Impressão 3D de alta precisão.
+  </p>
 
-      </div>
+  <p>
+    Instagram: @coutoecortessolucoes3d
+  </p>
 
-      <div class="products" id="products-container">
+</footer>
 
-        <div class="loading">
-          Carregando produtos...
-        </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-      </div>
+<script>
 
-    </section>
+  const SUPABASE_URL =
+    "https://sixuzdcsafbqgkijhrkn.supabase.co";
 
+  const SUPABASE_KEY =
+    "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
 
-    <section id="contato">
-
-      <div class="contact">
-
-        <div class="section-title">
-
-          <h2>Tem uma ideia?</h2>
-
-          <p>
-            Nós podemos transformar sua ideia em uma peça 3D.
-          </p>
-
-        </div>
-
-        <div class="buttons">
-
-          <a
-            href="https://wa.me/5511999999999"
-            class="button primary"
-          >
-            Falar pelo WhatsApp
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <footer>
-
-    <p>
-      <strong>Couto & Cortes Soluções 3D</strong>
-    </p>
-
-    <p>
-      Impressão 3D de alta precisão.
-    </p>
-
-    <p>
-      Instagram: @coutoecortessolucoes3d
-    </p>
-
-  </footer>
-
-
-  <!-- SUPABASE -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script>
-
-    const SUPABASE_URL =
-      "https://sixuzdcsafbqgkijhrkn.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
-
-
-    const supabaseClient = window.supabase.createClient(
+  const supabaseClient =
+    window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_KEY
     );
 
 
-    async function carregarProdutos() {
+  async function carregarProdutos() {
 
-      const container =
-        document.getElementById("products-container");
+    const container =
+      document.getElementById("products-container");
 
 
-      const { data, error } = await supabaseClient
+    const resultado =
+      await supabaseClient
         .from("produtos")
-        .select("*")
-        .eq("Disponível", true)
-        .eq("Destaque", true)
-        .order("created_at", { ascending: false });
+        .select("*");
 
 
-      if (error) {
+    if (resultado.error) {
 
-        console.error(
-          "Erro ao carregar produtos:",
-          error
-        );
+      console.error(
+        "Erro ao carregar produtos:",
+        resultado.error
+      );
 
-        container.innerHTML = `
-          <div class="loading">
-            Não foi possível carregar os produtos.
-          </div>
-        `;
+      container.innerHTML = `
+        <div class="loading">
+          Erro ao carregar produtos.
+        </div>
+      `;
 
-        return;
-      }
-
-
-      if (!data || data.length === 0) {
-
-        container.innerHTML = `
-          <div class="loading">
-            Nenhum produto em destaque no momento.
-          </div>
-        `;
-
-        return;
-      }
-
-
-      container.innerHTML = "";
-
-
-      data.forEach(produto => {
-
-        const card =
-          document.createElement("div");
-
-        card.className = "product";
-
-
-        const preco =
-          Number(produto["Preço"] || 0)
-            .toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL"
-            });
-
-
-        const imagem =
-          produto.imagem_url
-            ? `
-              <img
-                src="${produto.imagem_url}"
-                alt="${produto["Nome"] || "Produto"}"
-                loading="lazy"
-              >
-            `
-            : `
-              Foto do produto
-            `;
-
-
-        card.innerHTML = `
-
-          <div class="product-image">
-            ${imagem}
-          </div>
-
-          <div class="product-info">
-
-            <h3>
-              ${produto["Nome"] || "Produto"}
-            </h3>
-
-            <p>
-              ${produto["Descrição"] || ""}
-            </p>
-
-            <div class="price">
-              ${preco}
-            </div>
-
-          </div>
-
-        `;
-
-
-        container.appendChild(card);
-
-      });
-
+      return;
     }
 
 
-    carregarProdutos();
+    const produtos =
+      resultado.data || [];
 
-  </script>
+
+    const produtosDestaque =
+      produtos.filter(produto =>
+        produto["Disponível"] === true &&
+        produto["Destaque"] === true
+      );
+
+
+    if (produtosDestaque.length === 0) {
+
+      container.innerHTML = `
+        <div class="loading">
+          Nenhum produto em destaque no momento.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    produtosDestaque.forEach(produto => {
+
+      const card =
+        document.createElement("div");
+
+      card.className = "product";
+
+
+      const preco =
+        Number(produto["Preço"] || 0)
+          .toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+          });
+
+
+      let imagem = "Foto do produto";
+
+
+      if (produto.imagem_url) {
+
+        imagem = `
+          <img
+            src="${produto.imagem_url}"
+            alt="${produto["Nome"] || "Produto"}"
+            loading="lazy"
+          >
+        `;
+
+      }
+
+
+      card.innerHTML = `
+
+        <div class="product-image">
+          ${imagem}
+        </div>
+
+        <div class="product-info">
+
+          <h3>
+            ${produto["Nome"] || "Produto"}
+          </h3>
+
+          <p>
+            ${produto["Descrição"] || ""}
+          </p>
+
+          <div class="price">
+            ${preco}
+          </div>
+
+        </div>
+
+      `;
+
+
+      container.appendChild(card);
+
+    });
+
+  }
+
+
+  carregarProdutos();
+
+</script>
 
 </body>
 </html>
