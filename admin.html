@@ -22,23 +22,23 @@
     }
 
     header {
-      background: #ffffff;
+      background: #fff;
       padding: 18px 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
     }
 
     header h1 {
       font-size: 22px;
     }
 
-    header span:first-child {
+    header h1 .vermelho {
       color: #e53935;
     }
 
-    header span:last-child {
+    header h1 .azul {
       color: #1976d2;
     }
 
@@ -77,7 +77,7 @@
       background: white;
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
     }
 
     .login h2 {
@@ -141,7 +141,7 @@
       border-radius: 15px;
       padding: 25px;
       margin-bottom: 25px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+      box-shadow: 0 3px 15px rgba(0,0,0,.07);
     }
 
     .card h2 {
@@ -262,6 +262,12 @@
       color: #b42318;
     }
 
+    .categoria-status {
+      margin-top: 7px;
+      font-size: 13px;
+      color: #667085;
+    }
+
     @media (max-width: 700px) {
       .grid {
         grid-template-columns: 1fr;
@@ -294,706 +300,486 @@
 
 <body>
 
-  <!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-  <div id="login-area" class="login">
+<div id="login-area" class="login">
 
-    <h2>🔐 Painel Administrativo</h2>
+  <h2>🔐 Painel Administrativo</h2>
 
-    <div class="form-group">
-      <label>E-mail</label>
-      <input
-        type="email"
-        id="email"
-        placeholder="Seu e-mail"
-      >
-    </div>
+  <div class="form-group">
+    <label>E-mail</label>
+    <input
+      type="email"
+      id="email"
+      placeholder="Seu e-mail"
+    >
+  </div>
 
-    <div class="form-group">
-      <label>Senha</label>
-      <input
-        type="password"
-        id="senha"
-        placeholder="Sua senha"
-      >
-    </div>
+  <div class="form-group">
+    <label>Senha</label>
+    <input
+      type="password"
+      id="senha"
+      placeholder="Sua senha"
+    >
+  </div>
+
+  <button
+    class="btn-primary"
+    onclick="entrar()"
+  >
+    Entrar
+  </button>
+
+  <div id="erro-login" class="erro"></div>
+
+</div>
+
+
+<!-- =========================
+     PAINEL
+========================= -->
+
+<div id="painel-area" class="painel">
+
+  <header>
+
+    <h1>
+      <span class="vermelho">COUTO</span>
+      &
+      <span class="azul">CORTES</span>
+      <small> | Administração</small>
+    </h1>
 
     <button
-      class="btn-primary"
-      onclick="entrar()"
+      class="btn-danger"
+      onclick="sair()"
     >
-      Entrar
+      Sair
     </button>
 
-    <div id="erro-login" class="erro"></div>
-
-  </div>
+  </header>
 
 
-  <!-- PAINEL -->
+  <div class="container">
 
-  <div id="painel-area" class="painel">
+    <div class="topo-painel">
 
-    <header>
-
-      <h1>
-        <span>COUTO</span> &
-        <span>CORTES</span>
-        <small> | Administração</small>
-      </h1>
+      <div>
+        <h2>Gerenciar produtos</h2>
+        <p>Cadastre e gerencie os produtos da loja.</p>
+      </div>
 
       <button
-        class="btn-danger"
-        onclick="sair()"
+        class="btn-secondary"
+        onclick="novoProduto()"
       >
-        Sair
+        + Novo produto
       </button>
 
-    </header>
+    </div>
 
 
-    <div class="container">
+    <div id="mensagem" class="mensagem"></div>
 
-      <div class="topo-painel">
 
-        <div>
-          <h2>Gerenciar produtos</h2>
-          <p>Cadastre e gerencie os produtos da loja.</p>
+    <!-- =========================
+         FORMULÁRIO
+    ========================= -->
+
+    <div class="card">
+
+      <h2 id="titulo-formulario">
+        ➕ Cadastrar produto
+      </h2>
+
+      <input
+        type="hidden"
+        id="produto-id"
+      >
+
+
+      <div class="grid">
+
+        <!-- NOME -->
+
+        <div class="form-group">
+
+          <label>Nome do produto *</label>
+
+          <input
+            type="text"
+            id="nome"
+            placeholder="Ex.: Elefante decorativo"
+          >
+
         </div>
 
-        <button
-          class="btn-secondary"
-          onclick="novoProduto()"
-        >
-          + Novo produto
-        </button>
+
+        <!-- PREÇO -->
+
+        <div class="form-group">
+
+          <label>Preço *</label>
+
+          <input
+            type="number"
+            id="preco"
+            step="0.01"
+            min="0"
+            placeholder="29.90"
+          >
+
+        </div>
+
+
+        <!-- DESCRIÇÃO -->
+
+        <div class="form-group grid-full">
+
+          <label>Descrição *</label>
+
+          <textarea
+            id="descricao"
+            placeholder="Descreva o produto..."
+          ></textarea>
+
+        </div>
+
+
+        <!-- CATEGORIA -->
+
+        <div class="form-group">
+
+          <label>Categoria *</label>
+
+          <select id="categoria">
+
+            <option value="">
+              Carregando categorias...
+            </option>
+
+          </select>
+
+          <div
+            id="categoria-status"
+            class="categoria-status"
+          ></div>
+
+        </div>
+
+
+        <!-- MATERIAL -->
+
+        <div class="form-group">
+
+          <label>Material *</label>
+
+          <input
+            type="text"
+            id="material"
+            placeholder="PLA"
+          >
+
+        </div>
+
+
+        <!-- DIMENSÕES -->
+
+        <div class="form-group">
+
+          <label>Dimensões *</label>
+
+          <input
+            type="text"
+            id="dimensoes"
+            placeholder="10 x 10 x 15 cm"
+          >
+
+        </div>
+
+
+        <!-- CORES -->
+
+        <div class="form-group">
+
+          <label>Cores *</label>
+
+          <input
+            type="text"
+            id="cores"
+            placeholder="Preto, branco, vermelho..."
+          >
+
+        </div>
+
+
+        <!-- FOTO -->
+
+        <div class="form-group grid-full">
+
+          <label>Foto do produto</label>
+
+          <input
+            type="file"
+            id="foto"
+            accept="image/*"
+            onchange="previewFoto()"
+          >
+
+          <img
+            id="preview"
+            class="foto-preview"
+          >
+
+        </div>
 
       </div>
 
 
-      <div id="mensagem" class="mensagem"></div>
+      <!-- OPÇÕES -->
+
+      <div class="checks">
+
+        <label>
+
+          <input
+            type="checkbox"
+            id="disponivel"
+            checked
+          >
+
+          Produto disponível
+
+        </label>
 
 
-      <!-- FORMULÁRIO -->
+        <label>
 
-      <div class="card">
+          <input
+            type="checkbox"
+            id="destaque"
+          >
 
-        <h2 id="titulo-formulario">
-          ➕ Cadastrar produto
-        </h2>
+          Produto em destaque ⭐
 
-        <input
-          type="hidden"
-          id="produto-id"
-        >
-
-        <div class="grid">
-
-          <div class="form-group">
-            <label>Nome do produto *</label>
-
-            <input
-              type="text"
-              id="nome"
-              placeholder="Ex.: Elefante decorativo"
-            >
-          </div>
-
-
-          <div class="form-group">
-
-            <label>Preço *</label>
-
-            <input
-              type="number"
-              id="preco"
-              step="0.01"
-              min="0"
-              placeholder="29.90"
-            >
-
-          </div>
-
-
-          <div class="form-group grid-full">
-
-            <label>Descrição *</label>
-
-            <textarea
-              id="descricao"
-              placeholder="Descreva o produto..."
-            ></textarea>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>Categoria *</label>
-
-            <select id="categoria">
-
-              <option value="">
-                Selecione uma categoria
-              </option>
-
-            </select>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>Material *</label>
-
-            <input
-              type="text"
-              id="material"
-              placeholder="PLA"
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>Dimensões *</label>
-
-            <input
-              type="text"
-              id="dimensoes"
-              placeholder="10 x 10 x 15 cm"
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>Cores *</label>
-
-            <input
-              type="text"
-              id="cores"
-              placeholder="Preto, branco, vermelho..."
-            >
-
-          </div>
-
-
-          <div class="form-group grid-full">
-
-            <label>Foto do produto</label>
-
-            <input
-              type="file"
-              id="foto"
-              accept="image/*"
-              onchange="previewFoto()"
-            >
-
-            <img
-              id="preview"
-              class="foto-preview"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="checks">
-
-          <label>
-            <input
-              type="checkbox"
-              id="disponivel"
-              checked
-            >
-            Produto disponível
-          </label>
-
-
-          <label>
-            <input
-              type="checkbox"
-              id="destaque"
-            >
-            Produto em destaque ⭐
-          </label>
-
-        </div>
-
-
-        <br>
-
-        <button
-          class="btn-primary"
-          onclick="salvarProduto()"
-        >
-          💾 Salvar produto
-        </button>
-
-        <button
-          class="btn-secondary"
-          onclick="novoProduto()"
-          style="margin-left:8px;"
-        >
-          Cancelar
-        </button>
+        </label>
 
       </div>
 
 
-      <!-- LISTA -->
+      <br>
 
-      <div class="card">
 
-        <h2>📦 Produtos cadastrados</h2>
+      <button
+        class="btn-primary"
+        onclick="salvarProduto()"
+      >
+        💾 Salvar produto
+      </button>
 
-        <div
-          id="lista-produtos"
-          class="produtos"
-        >
-          Carregando...
-        </div>
 
+      <button
+        class="btn-secondary"
+        onclick="novoProduto()"
+        style="margin-left:8px;"
+      >
+        Cancelar
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         PRODUTOS
+    ========================= -->
+
+    <div class="card">
+
+      <h2>📦 Produtos cadastrados</h2>
+
+      <div
+        id="lista-produtos"
+        class="produtos"
+      >
+        Carregando produtos...
       </div>
 
     </div>
 
   </div>
+
+</div>
 
 
 <script>
 
-  /* =========================
-     SUPABASE
-  ========================= */
+/* =====================================================
+   SUPABASE
+===================================================== */
 
-  const SUPABASE_URL =
-    "https://sixuzdcsafbqgkijhrkn.supabase.co";
+const SUPABASE_URL =
+  "https://sixuzdcsafbqgkijhrkn.supabase.co";
 
-  const SUPABASE_KEY =
-    "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
+const SUPABASE_KEY =
+  "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
 
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
-  /* =========================
-     LOGIN
-  ========================= */
+/* =====================================================
+   LOGIN
+===================================================== */
 
-  async function entrar() {
+async function entrar() {
 
-    const email =
-      document.getElementById("email").value.trim();
+  const email =
+    document.getElementById("email").value.trim();
 
-    const senha =
-      document.getElementById("senha").value;
+  const senha =
+    document.getElementById("senha").value;
 
-    const erro =
-      document.getElementById("erro-login");
+  const erro =
+    document.getElementById("erro-login");
 
-    erro.textContent = "";
+  erro.textContent = "";
 
-    if (!email || !senha) {
+  if (!email || !senha) {
 
-      erro.textContent =
-        "Digite o e-mail e a senha.";
+    erro.textContent =
+      "Digite o e-mail e a senha.";
 
-      return;
-    }
+    return;
+  }
 
-    const { data, error } =
-      await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: senha
-      });
 
-    if (error) {
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
 
-      erro.textContent =
-        "E-mail ou senha incorretos.";
+      email: email,
 
-      console.error(error);
+      password: senha
 
-      return;
-    }
+    });
+
+
+  if (error) {
+
+    console.error(error);
+
+    erro.textContent =
+      "E-mail ou senha incorretos.";
+
+    return;
+  }
+
+
+  mostrarPainel();
+
+}
+
+
+async function sair() {
+
+  await supabaseClient.auth.signOut();
+
+  location.reload();
+
+}
+
+
+/* =====================================================
+   VERIFICAR LOGIN
+===================================================== */
+
+async function verificarLogin() {
+
+  const { data } =
+    await supabaseClient.auth.getSession();
+
+
+  if (data.session) {
 
     mostrarPainel();
 
-  }
-
-
-  async function sair() {
-
-    await supabaseClient.auth.signOut();
-
-    location.reload();
-
-  }
-
-
-  async function verificarLogin() {
-
-    const { data } =
-      await supabaseClient.auth.getSession();
-
-    if (data.session) {
-
-      mostrarPainel();
-
-    } else {
-
-      document.getElementById("login-area")
-        .style.display = "block";
-
-    }
-
-  }
-
-
-  function mostrarPainel() {
+  } else {
 
     document.getElementById("login-area")
-      .style.display = "none";
-
-    document.getElementById("painel-area")
       .style.display = "block";
-
-    carregarCategorias();
-    carregarProdutos();
 
   }
 
+}
 
-  /* =========================
-     CATEGORIAS
-  ========================= */
 
-  async function carregarCategorias() {
+/* =====================================================
+   MOSTRAR PAINEL
+===================================================== */
 
-    const select =
-      document.getElementById("categoria");
+function mostrarPainel() {
+
+  document.getElementById("login-area")
+    .style.display = "none";
+
+  document.getElementById("painel-area")
+    .style.display = "block";
+
+
+  carregarCategorias();
+
+  carregarProdutos();
+
+}
+
+
+/* =====================================================
+   CATEGORIAS
+===================================================== */
+
+async function carregarCategorias() {
+
+  const select =
+    document.getElementById("categoria");
+
+  const status =
+    document.getElementById("categoria-status");
+
+
+  select.innerHTML =
+    '<option value="">Carregando categorias...</option>';
+
+  status.textContent = "";
+
+
+  try {
 
     const { data, error } =
       await supabaseClient
         .from("categorias")
         .select("*")
-        .order("id", { ascending: true });
-
-    if (error) {
-
-      console.error(error);
-
-      return;
-    }
-
-    select.innerHTML =
-      '<option value="">Selecione uma categoria</option>';
-
-    data.forEach(categoria => {
-
-      const option =
-        document.createElement("option");
-
-      option.value =
-        categoria.id;
-
-      option.textContent =
-        categoria.Nome;
-
-      select.appendChild(option);
-
-    });
-
-  }
-
-
-  /* =========================
-     PREVIEW DA FOTO
-  ========================= */
-
-  function previewFoto() {
-
-    const arquivo =
-      document.getElementById("foto").files[0];
-
-    const preview =
-      document.getElementById("preview");
-
-    if (!arquivo) {
-
-      preview.style.display = "none";
-
-      return;
-    }
-
-    preview.src =
-      URL.createObjectURL(arquivo);
-
-    preview.style.display =
-      "block";
-
-  }
-
-
-  /* =========================
-     UPLOAD FOTO
-  ========================= */
-
-  async function enviarFoto(arquivo, nomeProduto) {
-
-    if (!arquivo) {
-      return null;
-    }
-
-    const extensao =
-      arquivo.name.split(".").pop();
-
-    const nomeArquivo =
-      Date.now() +
-      "-" +
-      nomeProduto
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-") +
-      "." +
-      extensao;
-
-    const caminho =
-      "Casa-decoracao/" +
-      nomeArquivo;
-
-    const { error } =
-      await supabaseClient.storage
-        .from("produtos")
-        .upload(
-          caminho,
-          arquivo,
-          {
-            cacheControl: "3600",
-            upsert: true
-          }
-        );
-
-    if (error) {
-
-      console.error(error);
-
-      throw new Error(
-        "Erro ao enviar a foto."
-      );
-
-    }
-
-    const { data } =
-      supabaseClient.storage
-        .from("produtos")
-        .getPublicUrl(caminho);
-
-    return data.publicUrl;
-
-  }
-
-
-  /* =========================
-     SALVAR PRODUTO
-  ========================= */
-
-  async function salvarProduto() {
-
-    const id =
-      document.getElementById("produto-id").value;
-
-    const nome =
-      document.getElementById("nome").value.trim();
-
-    const descricao =
-      document.getElementById("descricao").value.trim();
-
-    const preco =
-      document.getElementById("preco").value;
-
-    const categoria =
-      document.getElementById("categoria").value;
-
-    const material =
-      document.getElementById("material").value.trim();
-
-    const dimensoes =
-      document.getElementById("dimensoes").value.trim();
-
-    const cores =
-      document.getElementById("cores").value.trim();
-
-    const disponivel =
-      document.getElementById("disponivel").checked;
-
-    const destaque =
-      document.getElementById("destaque").checked;
-
-    const arquivo =
-      document.getElementById("foto").files[0];
-
-
-    if (
-      !nome ||
-      !descricao ||
-      !preco ||
-      !categoria ||
-      !material ||
-      !dimensoes ||
-      !cores
-    ) {
-
-      mostrarMensagem(
-        "Preencha todos os campos obrigatórios.",
-        false
-      );
-
-      return;
-    }
-
-
-    try {
-
-      let imagemUrl = null;
-
-
-      if (arquivo) {
-
-        imagemUrl =
-          await enviarFoto(
-            arquivo,
-            nome
-          );
-
-      }
-
-
-      const dados = {
-
-        "Nome": nome,
-
-        "Descrição": descricao,
-
-        "Preço": Number(preco),
-
-        "Categoria": Number(categoria),
-
-        "Material": material,
-
-        "Dimensões": dimensoes,
-
-        "Cores": cores,
-
-        "Disponível": disponivel,
-
-        "Destaque": destaque
-
-      };
-
-
-      if (imagemUrl) {
-
-        dados.imagem_url =
-          imagemUrl;
-
-      }
-
-
-      let resultado;
-
-
-      if (id) {
-
-        resultado =
-          await supabaseClient
-            .from("produtos")
-            .update(dados)
-            .eq("id", id);
-
-      } else {
-
-        resultado =
-          await supabaseClient
-            .from("produtos")
-            .insert([dados]);
-
-      }
-
-
-      if (resultado.error) {
-
-        console.error(
-          resultado.error
-        );
-
-        throw resultado.error;
-
-      }
-
-
-      mostrarMensagem(
-        id
-          ? "Produto atualizado com sucesso! ✅"
-          : "Produto cadastrado com sucesso! ✅",
-        true
-      );
-
-
-      novoProduto();
-
-      carregarProdutos();
-
-    } catch (erro) {
-
-      console.error(erro);
-
-      mostrarMensagem(
-        erro.message ||
-        "Não foi possível salvar o produto.",
-        false
-      );
-
-    }
-
-  }
-
-
-  /* =========================
-     CARREGAR PRODUTOS
-  ========================= */
-
-  async function carregarProdutos() {
-
-    const lista =
-      document.getElementById("lista-produtos");
-
-    lista.innerHTML =
-      "Carregando produtos...";
-
-
-    const { data, error } =
-      await supabaseClient
-        .from("produtos")
-        .select("*")
-        .order("created_at", {
-          ascending: false
+        .order("id", {
+          ascending: true
         });
 
 
     if (error) {
 
-      console.error(error);
+      console.error(
+        "Erro categorias:",
+        error
+      );
 
-      lista.innerHTML =
-        "<p>Erro ao carregar produtos.</p>";
+      select.innerHTML =
+        '<option value="">Erro ao carregar categorias</option>';
+
+      status.textContent =
+        "Erro ao consultar as categorias.";
 
       return;
     }
@@ -1001,318 +787,935 @@
 
     if (!data || data.length === 0) {
 
-      lista.innerHTML =
-        "<p>Nenhum produto cadastrado.</p>";
+      select.innerHTML =
+        '<option value="">Nenhuma categoria encontrada</option>';
+
+      status.textContent =
+        "A tabela está vazia.";
 
       return;
     }
 
 
-    lista.innerHTML = "";
+    select.innerHTML =
+      '<option value="">Selecione uma categoria</option>';
 
 
-    data.forEach(produto => {
+    data.forEach(categoria => {
 
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "produto";
+      const option =
+        document.createElement("option");
 
 
-      const imagem =
-        produto.imagem_url
-          ? produto.imagem_url
-          : "";
+      option.value =
+        categoria.id;
 
 
-      const preco =
-        Number(produto["Preço"] || 0)
-          .toLocaleString(
-            "pt-BR",
-            {
-              style: "currency",
-              currency: "BRL"
-            }
-          );
+      /*
+        Sua tabela possui a coluna "Nome".
+        Mantemos também alternativas para evitar
+        problemas caso o nome da coluna seja alterado.
+      */
+
+      const nomeCategoria =
+        categoria["Nome"] ||
+        categoria["nome"] ||
+        categoria.nome_categoria ||
+        "Categoria";
 
 
-      item.innerHTML = `
-
-        ${
-          imagem
-            ? `<img src="${imagem}">`
-            : `<img src="" alt="Sem foto">`
-        }
-
-        <div class="produto-info">
-
-          <h3>
-            ${produto["Nome"] || "Produto"}
-          </h3>
-
-          <p>
-            ${preco}
-          </p>
-
-          <span class="status ${
-            produto["Disponível"]
-              ? "ativo"
-              : "inativo"
-          }">
-
-            ${
-              produto["Disponível"]
-                ? "Disponível"
-                : "Indisponível"
-            }
-
-          </span>
-
-          ${
-            produto["Destaque"]
-              ? `<span class="status ativo">
-                   ⭐ Destaque
-                 </span>`
-              : ""
-          }
-
-        </div>
+      option.textContent =
+        nomeCategoria;
 
 
-        <div class="acoes">
-
-          <button
-            class="btn-primary"
-            onclick="editarProduto(${produto.id})"
-          >
-            ✏️ Editar
-          </button>
-
-          <button
-            class="btn-danger"
-            onclick="excluirProduto(${produto.id})"
-          >
-            🗑️ Excluir
-          </button>
-
-        </div>
-
-      `;
-
-
-      lista.appendChild(item);
+      select.appendChild(option);
 
     });
+
+
+    status.textContent =
+      data.length +
+      " categorias disponíveis.";
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    select.innerHTML =
+      '<option value="">Erro ao carregar categorias</option>';
+
+    status.textContent =
+      "Não foi possível carregar as categorias.";
+
+  }
+
+}
+
+
+/* =====================================================
+   PREVIEW DA FOTO
+===================================================== */
+
+function previewFoto() {
+
+  const arquivo =
+    document.getElementById("foto").files[0];
+
+  const preview =
+    document.getElementById("preview");
+
+
+  if (!arquivo) {
+
+    preview.style.display = "none";
+
+    return;
 
   }
 
 
+  preview.src =
+    URL.createObjectURL(arquivo);
+
+  preview.style.display =
+    "block";
+
+}
+
+
+/* =====================================================
+   NOME DE ARQUIVO
+===================================================== */
+
+function limparNomeArquivo(texto) {
+
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+}
+
+
+/* =====================================================
+   PASTA DA CATEGORIA
+===================================================== */
+
+function pastaCategoria(nome) {
+
+  const nomeLimpo =
+    limparNomeArquivo(nome);
+
+
+  const pastas = {
+
+    "casa-e-decoracao":
+      "Casa-decoracao",
+
+    "organizacao":
+      "Organizacao",
+
+    "games":
+      "Games",
+
+    "automotivo":
+      "Automotivo",
+
+    "educacional":
+      "Educacional",
+
+    "corporativo":
+      "Corporativo",
+
+    "presentes":
+      "Presentes",
+
+    "utilidades":
+      "Utilidades"
+
+  };
+
+
+  return pastas[nomeLimpo] || "Outros";
+
+}
+
+
+/* =====================================================
+   UPLOAD FOTO
+===================================================== */
+
+async function enviarFoto(
+  arquivo,
+  nomeProduto,
+  nomeCategoria
+) {
+
+  if (!arquivo) {
+
+    return null;
+
+  }
+
+
+  const extensao =
+    arquivo.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+
+  const nomeArquivo =
+    Date.now() +
+    "-" +
+    limparNomeArquivo(nomeProduto) +
+    "." +
+    extensao;
+
+
+  const pasta =
+    pastaCategoria(nomeCategoria);
+
+
+  const caminho =
+    pasta + "/" + nomeArquivo;
+
+
+  const { error } =
+    await supabaseClient.storage
+      .from("produtos")
+      .upload(
+        caminho,
+        arquivo,
+        {
+          cacheControl: "3600",
+          upsert: true
+        }
+      );
+
+
+  if (error) {
+
+    console.error(
+      "Erro no upload:",
+      error
+    );
+
+    throw new Error(
+      "Erro ao enviar a foto."
+    );
+
+  }
+
+
+  const { data } =
+    supabaseClient.storage
+      .from("produtos")
+      .getPublicUrl(caminho);
+
+
+  return data.publicUrl;
+
+}
+
+
+/* =====================================================
+   SALVAR PRODUTO
+===================================================== */
+
+async function salvarProduto() {
+
+  const id =
+    document.getElementById("produto-id").value;
+
+
+  const nome =
+    document.getElementById("nome")
+      .value.trim();
+
+
+  const descricao =
+    document.getElementById("descricao")
+      .value.trim();
+
+
+  const preco =
+    document.getElementById("preco")
+      .value;
+
+
+  const categoriaId =
+    document.getElementById("categoria")
+      .value;
+
+
+  const material =
+    document.getElementById("material")
+      .value.trim();
+
+
+  const dimensoes =
+    document.getElementById("dimensoes")
+      .value.trim();
+
+
+  const cores =
+    document.getElementById("cores")
+      .value.trim();
+
+
+  const disponivel =
+    document.getElementById("disponivel")
+      .checked;
+
+
+  const destaque =
+    document.getElementById("destaque")
+      .checked;
+
+
+  const arquivo =
+    document.getElementById("foto")
+      .files[0];
+
+
   /* =========================
-     EDITAR PRODUTO
+     VALIDAÇÃO
   ========================= */
 
-  async function editarProduto(id) {
+  if (
+    !nome ||
+    !descricao ||
+    !preco ||
+    !categoriaId ||
+    !material ||
+    !dimensoes ||
+    !cores
+  ) {
 
-    const { data, error } =
+    mostrarMensagem(
+      "Preencha todos os campos obrigatórios.",
+      false
+    );
+
+    return;
+
+  }
+
+
+  try {
+
+    /* =========================
+       DESCOBRIR CATEGORIA
+    ========================= */
+
+    const { data: categoriaData, error: categoriaError } =
       await supabaseClient
-        .from("produtos")
+        .from("categorias")
         .select("*")
-        .eq("id", id)
+        .eq("id", categoriaId)
         .single();
 
 
-    if (error) {
+    if (categoriaError) {
 
-      console.error(error);
+      console.error(categoriaError);
 
-      return;
-    }
-
-
-    document.getElementById("produto-id")
-      .value = data.id;
-
-    document.getElementById("nome")
-      .value = data["Nome"] || "";
-
-    document.getElementById("descricao")
-      .value = data["Descrição"] || "";
-
-    document.getElementById("preco")
-      .value = data["Preço"] || "";
-
-    document.getElementById("categoria")
-      .value = data["Categoria"] || "";
-
-    document.getElementById("material")
-      .value = data["Material"] || "";
-
-    document.getElementById("dimensoes")
-      .value = data["Dimensões"] || "";
-
-    document.getElementById("cores")
-      .value = data["Cores"] || "";
-
-    document.getElementById("disponivel")
-      .checked = data["Disponível"] !== false;
-
-    document.getElementById("destaque")
-      .checked = data["Destaque"] === true;
-
-
-    document.getElementById(
-      "titulo-formulario"
-    ).textContent =
-      "✏️ Editar produto";
-
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  }
-
-
-  /* =========================
-     EXCLUIR
-  ========================= */
-
-  async function excluirProduto(id) {
-
-    const confirmar =
-      confirm(
-        "Tem certeza que deseja excluir este produto?"
+      throw new Error(
+        "Não foi possível identificar a categoria."
       );
 
-
-    if (!confirmar) {
-      return;
     }
 
 
-    const { error } =
-      await supabaseClient
-        .from("produtos")
-        .delete()
-        .eq("id", id);
+    const nomeCategoria =
+      categoriaData["Nome"] ||
+      categoriaData["nome"] ||
+      categoriaData.nome_categoria ||
+      "Outros";
 
 
-    if (error) {
+    /* =========================
+       FOTO
+    ========================= */
 
-      console.error(error);
+    let imagemUrl = null;
 
-      mostrarMensagem(
-        "Não foi possível excluir o produto.",
-        false
+
+    if (arquivo) {
+
+      imagemUrl =
+        await enviarFoto(
+          arquivo,
+          nome,
+          nomeCategoria
+        );
+
+    }
+
+
+    /* =========================
+       DADOS
+    ========================= */
+
+    const dados = {
+
+      "Nome":
+        nome,
+
+      "Descrição":
+        descricao,
+
+      "Preço":
+        Number(preco),
+
+      "Categoria":
+        Number(categoriaId),
+
+      "Material":
+        material,
+
+      "Dimensões":
+        dimensoes,
+
+      "Cores":
+        cores,
+
+      "Disponível":
+        disponivel,
+
+      "Destaque":
+        destaque
+
+    };
+
+
+    if (imagemUrl) {
+
+      dados["imagem_url"] =
+        imagemUrl;
+
+    }
+
+
+    /* =========================
+       UPDATE
+    ========================= */
+
+    let resultado;
+
+
+    if (id) {
+
+      resultado =
+        await supabaseClient
+          .from("produtos")
+          .update(dados)
+          .eq("id", id);
+
+    }
+
+
+    /* =========================
+       INSERT
+    ========================= */
+
+    else {
+
+      resultado =
+        await supabaseClient
+          .from("produtos")
+          .insert([dados]);
+
+    }
+
+
+    if (resultado.error) {
+
+      console.error(
+        resultado.error
       );
 
-      return;
+      throw resultado.error;
+
     }
 
+
+    /* =========================
+       SUCESSO
+    ========================= */
 
     mostrarMensagem(
-      "Produto excluído com sucesso! 🗑️",
+
+      id
+        ? "Produto atualizado com sucesso! ✅"
+        : "Produto cadastrado com sucesso! ✅",
+
       true
+
     );
 
+
+    novoProduto();
 
     carregarProdutos();
 
   }
 
+  catch (erro) {
 
-  /* =========================
-     NOVO PRODUTO
-  ========================= */
+    console.error(erro);
 
-  function novoProduto() {
+    mostrarMensagem(
 
-    document.getElementById("produto-id")
-      .value = "";
+      erro.message ||
+      "Não foi possível salvar o produto.",
 
-    document.getElementById("nome")
-      .value = "";
+      false
 
-    document.getElementById("descricao")
-      .value = "";
+    );
 
-    document.getElementById("preco")
-      .value = "";
+  }
 
-    document.getElementById("categoria")
-      .value = "";
-
-    document.getElementById("material")
-      .value = "";
-
-    document.getElementById("dimensoes")
-      .value = "";
-
-    document.getElementById("cores")
-      .value = "";
-
-    document.getElementById("disponivel")
-      .checked = true;
-
-    document.getElementById("destaque")
-      .checked = false;
-
-    document.getElementById("foto")
-      .value = "";
-
-    document.getElementById("preview")
-      .style.display = "none";
+}
 
 
+/* =====================================================
+   CARREGAR PRODUTOS
+===================================================== */
+
+async function carregarProdutos() {
+
+  const lista =
     document.getElementById(
-      "titulo-formulario"
-    ).textContent =
-      "➕ Cadastrar produto";
+      "lista-produtos"
+    );
+
+
+  lista.innerHTML =
+    "Carregando produtos...";
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("produtos")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      });
+
+
+  if (error) {
+
+    console.error(error);
+
+    lista.innerHTML =
+      "<p>Erro ao carregar produtos.</p>";
+
+    return;
 
   }
 
 
-  /* =========================
-     MENSAGENS
-  ========================= */
+  if (!data || data.length === 0) {
 
-  function mostrarMensagem(
-    texto,
+    lista.innerHTML =
+      "<p>Nenhum produto cadastrado.</p>";
+
+    return;
+
+  }
+
+
+  lista.innerHTML = "";
+
+
+  data.forEach(produto => {
+
+    const item =
+      document.createElement("div");
+
+
+    item.className =
+      "produto";
+
+
+    const imagem =
+      produto.imagem_url ||
+      "";
+
+
+    const preco =
+      Number(
+        produto["Preço"] || 0
+      ).toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
+        }
+      );
+
+
+    item.innerHTML = `
+
+      ${
+        imagem
+
+        ? `<img
+             src="${imagem}"
+             alt="${produto["Nome"] || "Produto"}"
+           >`
+
+        : `<img
+             src=""
+             alt="Sem foto"
+           >`
+      }
+
+
+      <div class="produto-info">
+
+        <h3>
+          ${produto["Nome"] || "Produto"}
+        </h3>
+
+        <p>
+          ${preco}
+        </p>
+
+
+        <span
+          class="status ${
+            produto["Disponível"]
+              ? "ativo"
+              : "inativo"
+          }"
+        >
+
+          ${
+            produto["Disponível"]
+              ? "Disponível"
+              : "Indisponível"
+          }
+
+        </span>
+
+
+        ${
+          produto["Destaque"]
+
+            ? `<span class="status ativo">
+                 ⭐ Destaque
+               </span>`
+
+            : ""
+        }
+
+      </div>
+
+
+      <div class="acoes">
+
+        <button
+          class="btn-primary"
+          onclick="editarProduto(${produto.id})"
+        >
+          ✏️ Editar
+        </button>
+
+
+        <button
+          class="btn-danger"
+          onclick="excluirProduto(${produto.id})"
+        >
+          🗑️ Excluir
+        </button>
+
+      </div>
+
+    `;
+
+
+    lista.appendChild(item);
+
+  });
+
+}
+
+
+/* =====================================================
+   EDITAR PRODUTO
+===================================================== */
+
+async function editarProduto(id) {
+
+  const { data, error } =
+    await supabaseClient
+      .from("produtos")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+
+  if (error) {
+
+    console.error(error);
+
+    mostrarMensagem(
+      "Não foi possível carregar o produto.",
+      false
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "produto-id"
+  ).value = data.id;
+
+
+  document.getElementById(
+    "nome"
+  ).value =
+    data["Nome"] || "";
+
+
+  document.getElementById(
+    "descricao"
+  ).value =
+    data["Descrição"] || "";
+
+
+  document.getElementById(
+    "preco"
+  ).value =
+    data["Preço"] || "";
+
+
+  document.getElementById(
+    "categoria"
+  ).value =
+    data["Categoria"] || "";
+
+
+  document.getElementById(
+    "material"
+  ).value =
+    data["Material"] || "";
+
+
+  document.getElementById(
+    "dimensoes"
+  ).value =
+    data["Dimensões"] || "";
+
+
+  document.getElementById(
+    "cores"
+  ).value =
+    data["Cores"] || "";
+
+
+  document.getElementById(
+    "disponivel"
+  ).checked =
+    data["Disponível"] !== false;
+
+
+  document.getElementById(
+    "destaque"
+  ).checked =
+    data["Destaque"] === true;
+
+
+  document.getElementById(
+    "titulo-formulario"
+  ).textContent =
+    "✏️ Editar produto";
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =====================================================
+   EXCLUIR PRODUTO
+===================================================== */
+
+async function excluirProduto(id) {
+
+  const confirmar =
+    confirm(
+      "Tem certeza que deseja excluir este produto?"
+    );
+
+
+  if (!confirmar) {
+
+    return;
+
+  }
+
+
+  const { error } =
+    await supabaseClient
+      .from("produtos")
+      .delete()
+      .eq("id", id);
+
+
+  if (error) {
+
+    console.error(error);
+
+    mostrarMensagem(
+      "Não foi possível excluir o produto.",
+      false
+    );
+
+    return;
+
+  }
+
+
+  mostrarMensagem(
+    "Produto excluído com sucesso! 🗑️",
+    true
+  );
+
+
+  carregarProdutos();
+
+}
+
+
+/* =====================================================
+   NOVO PRODUTO
+===================================================== */
+
+function novoProduto() {
+
+  document.getElementById(
+    "produto-id"
+  ).value = "";
+
+
+  document.getElementById(
+    "nome"
+  ).value = "";
+
+
+  document.getElementById(
+    "descricao"
+  ).value = "";
+
+
+  document.getElementById(
+    "preco"
+  ).value = "";
+
+
+  document.getElementById(
+    "categoria"
+  ).value = "";
+
+
+  document.getElementById(
+    "material"
+  ).value = "";
+
+
+  document.getElementById(
+    "dimensoes"
+  ).value = "";
+
+
+  document.getElementById(
+    "cores"
+  ).value = "";
+
+
+  document.getElementById(
+    "disponivel"
+  ).checked = true;
+
+
+  document.getElementById(
+    "destaque"
+  ).checked = false;
+
+
+  document.getElementById(
+    "foto"
+  ).value = "";
+
+
+  document.getElementById(
+    "preview"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "titulo-formulario"
+  ).textContent =
+    "➕ Cadastrar produto";
+
+}
+
+
+/* =====================================================
+   MENSAGENS
+===================================================== */
+
+function mostrarMensagem(
+  texto,
+  sucesso
+) {
+
+  const elemento =
+    document.getElementById(
+      "mensagem"
+    );
+
+
+  elemento.textContent =
+    texto;
+
+
+  elemento.className =
     sucesso
-  ) {
+      ? "mensagem sucesso"
+      : "mensagem erro-msg";
 
-    const elemento =
-      document.getElementById("mensagem");
 
-    elemento.textContent =
-      texto;
+  elemento.style.display =
+    "block";
 
-    elemento.className =
-      sucesso
-        ? "mensagem sucesso"
-        : "mensagem erro-msg";
+
+  setTimeout(() => {
 
     elemento.style.display =
-      "block";
+      "none";
+
+  }, 5000);
+
+}
 
 
-    setTimeout(() => {
+/* =====================================================
+   INICIAR
+===================================================== */
 
-      elemento.style.display =
-        "none";
-
-    }, 5000);
-
-  }
-
-
-  /* =========================
-     INICIAR
-  ========================= */
-
-  verificarLogin();
+verificarLogin();
 
 </script>
 
