@@ -2,13 +2,8 @@
 <html lang="pt-BR">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Couto & Cortes Soluções 3D</title>
 
@@ -26,26 +21,33 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: #f5f7fa;
       color: #172033;
     }
 
+    /* CABEÇALHO */
+
     header {
       background: #ffffff;
-      padding: 18px 20px;
+      padding: 18px 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 100;
     }
 
     .logo {
-      font-size: 20px;
-      font-weight: bold;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     .logo span:first-child {
@@ -59,14 +61,21 @@
     nav a {
       text-decoration: none;
       color: #172033;
-      margin-left: 15px;
+      margin-left: 20px;
       font-size: 14px;
       font-weight: bold;
+      transition: 0.2s;
     }
 
+    nav a:hover {
+      color: #1976d2;
+    }
+
+    /* HERO */
+
     .hero {
-      min-height: 480px;
-      padding: 60px 25px;
+      min-height: 500px;
+      padding: 70px 25px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -74,41 +83,48 @@
 
       background:
         linear-gradient(
-          rgba(10, 25, 47, 0.88),
-          rgba(10, 25, 47, 0.88)
+          rgba(8, 25, 48, 0.90),
+          rgba(8, 25, 48, 0.90)
         ),
         #123456;
     }
 
     .hero-content {
-      max-width: 700px;
+      max-width: 760px;
       color: white;
     }
 
     .hero h1 {
-      font-size: 42px;
+      font-size: 48px;
       margin-bottom: 20px;
+      line-height: 1.15;
     }
 
     .hero p {
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 30px;
+      font-size: 19px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      color: #e6edf5;
     }
 
     .buttons {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
     .button {
       display: inline-block;
-      padding: 14px 22px;
-      border-radius: 8px;
+      padding: 14px 24px;
+      border-radius: 9px;
       text-decoration: none;
       font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
     }
 
     .primary {
@@ -121,24 +137,28 @@
       color: #172033;
     }
 
+    /* SEÇÕES */
+
     section {
-      padding: 55px 20px;
-      max-width: 1100px;
+      padding: 65px 20px;
+      max-width: 1150px;
       margin: auto;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 38px;
     }
 
     .section-title h2 {
-      font-size: 30px;
+      font-size: 32px;
       margin-bottom: 10px;
+      color: #172033;
     }
 
     .section-title p {
       color: #667085;
+      font-size: 15px;
     }
 
     /* CATEGORIAS */
@@ -146,29 +166,32 @@
     .categories {
       display: grid;
       grid-template-columns:
-        repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
+        repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
     }
 
     .category {
       background: white;
-      padding: 25px 15px;
-      border-radius: 12px;
+      padding: 24px 15px;
+      border-radius: 14px;
       text-align: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      box-shadow: 0 3px 14px rgba(0,0,0,0.07);
       font-weight: bold;
       cursor: pointer;
       transition: 0.2s;
+      border: 2px solid transparent;
     }
 
     .category:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      transform: translateY(-4px);
+      border-color: #1976d2;
+      box-shadow: 0 7px 20px rgba(0,0,0,0.12);
     }
 
     .category.active {
       background: #1976d2;
       color: white;
+      border-color: #1976d2;
     }
 
     /* PRODUTOS */
@@ -176,68 +199,80 @@
     .products {
       display: grid;
       grid-template-columns:
-        repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
+        repeat(auto-fill, minmax(250px, 1fr));
+      gap: 24px;
     }
 
     .product {
       background: white;
-      border-radius: 12px;
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-      transition: 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      transition: 0.25s;
+      border: 1px solid #edf0f4;
     }
 
     .product:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 7px 20px rgba(0,0,0,0.13);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.13);
     }
+
+    /* FOTO DO PRODUTO */
 
     .product-image {
       width: 100%;
-      height: 220px;
-      background: #e9edf2;
+      height: 240px;
+      background: #f1f3f6;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #667085;
-      font-size: 14px;
       overflow: hidden;
     }
 
     .product-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      padding: 10px;
       display: block;
     }
 
+    .no-image {
+      color: #98a2b3;
+      font-size: 14px;
+    }
+
+    /* INFORMAÇÕES */
+
     .product-info {
-      padding: 18px;
+      padding: 20px;
     }
 
     .product-info h3 {
-      margin-bottom: 8px;
       font-size: 20px;
+      margin-bottom: 9px;
+      color: #172033;
     }
 
-    .product-info p {
+    .product-description {
       color: #667085;
       font-size: 14px;
-      margin-bottom: 12px;
       line-height: 1.5;
+      margin-bottom: 13px;
     }
 
     .details {
       color: #667085;
       font-size: 13px;
-      line-height: 1.7;
-      margin-bottom: 12px;
+      line-height: 1.8;
+      padding-top: 10px;
+      border-top: 1px solid #eef0f3;
+      margin-bottom: 14px;
     }
 
     .price {
-      font-size: 20px;
-      font-weight: bold;
+      font-size: 23px;
+      font-weight: 800;
       color: #1976d2;
       margin-bottom: 15px;
     }
@@ -247,55 +282,142 @@
       text-align: center;
       background: #25D366;
       color: white;
-      padding: 11px;
-      border-radius: 7px;
+      padding: 12px;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .whatsapp:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     .loading {
       grid-column: 1 / -1;
       text-align: center;
       color: #667085;
-      padding: 30px;
+      padding: 40px 20px;
     }
 
+    /* CONTATO */
+
     .contact {
-      background: #ffffff;
+      background: white;
       text-align: center;
-      border-radius: 15px;
-      margin-bottom: 50px;
+      border-radius: 18px;
+      padding: 45px 25px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
     }
+
+    /* RODAPÉ */
 
     footer {
       background: #101828;
       color: white;
       text-align: center;
-      padding: 30px 20px;
+      padding: 35px 20px;
     }
 
     footer p {
-      margin: 6px;
+      margin: 7px;
       font-size: 14px;
+      color: #d0d5dd;
     }
+
+    footer strong {
+      color: white;
+    }
+
+    /* CELULAR */
 
     @media (max-width: 650px) {
 
       header {
         flex-direction: column;
-        gap: 12px;
+        gap: 14px;
+        padding: 16px;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
       }
 
       nav a {
-        margin: 0 6px;
+        margin: 0 5px;
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: 450px;
+        padding: 55px 20px;
       }
 
       .hero h1 {
-        font-size: 32px;
+        font-size: 34px;
       }
 
       .hero p {
         font-size: 16px;
+      }
+
+      section {
+        padding: 50px 15px;
+      }
+
+      .section-title h2 {
+        font-size: 28px;
+      }
+
+      .products {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .product-image {
+        height: 180px;
+      }
+
+      .product-info {
+        padding: 14px;
+      }
+
+      .product-info h3 {
+        font-size: 17px;
+      }
+
+      .product-description {
+        font-size: 13px;
+      }
+
+      .details {
+        font-size: 12px;
+      }
+
+      .price {
+        font-size: 19px;
+      }
+
+    }
+
+    @media (max-width: 420px) {
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image {
+        height: 230px;
       }
 
     }
@@ -313,32 +435,19 @@
   <header>
 
     <div class="logo">
-
-      <span>COUTO</span>
-      &
-
+      <span>COUTO</span> &
       <span>CORTES</span>
-
     </div>
-
 
     <nav>
 
-      <a href="#inicio">
-        Início
-      </a>
+      <a href="#inicio">Início</a>
 
-      <a href="#categorias">
-        Categorias
-      </a>
+      <a href="#categorias">Categorias</a>
 
-      <a href="#produtos">
-        Produtos
-      </a>
+      <a href="#produtos">Produtos</a>
 
-      <a href="#contato">
-        Contato
-      </a>
+      <a href="#contato">Contato</a>
 
     </nav>
 
@@ -348,7 +457,7 @@
   <main>
 
 
-    <!-- INÍCIO -->
+    <!-- HERO -->
 
     <section
       class="hero"
@@ -366,7 +475,6 @@
           empresa, projetos e ideias.
         </p>
 
-
         <div class="buttons">
 
           <a
@@ -375,7 +483,6 @@
           >
             Ver catálogo
           </a>
-
 
           <a
             href="https://wa.me/5511999999999"
@@ -409,7 +516,6 @@
 
       </div>
 
-
       <div
         class="categories"
         id="categories-container"
@@ -435,12 +541,10 @@
         </h2>
 
         <p id="product-description">
-          Alguns dos produtos disponíveis
-          na Couto & Cortes.
+          Confira nossos produtos disponíveis.
         </p>
 
       </div>
-
 
       <div
         class="products"
@@ -475,7 +579,6 @@
 
         </div>
 
-
         <div class="buttons">
 
           <a
@@ -491,6 +594,7 @@
       </div>
 
     </section>
+
 
   </main>
 
@@ -517,21 +621,15 @@
   </footer>
 
 
-
   <!-- SUPABASE -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
   <script>
 
-
-    /* CONFIGURAÇÃO SUPABASE */
-
     const SUPABASE_URL =
       "https://sixuzdcsafbqgkijhrkn.supabase.co";
-
 
     const SUPABASE_KEY =
       "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
@@ -543,9 +641,6 @@
         SUPABASE_KEY
       );
 
-
-
-    /* ELEMENTOS */
 
     const categoriesContainer =
       document.getElementById(
@@ -565,21 +660,14 @@
       );
 
 
-
-    /* VARIÁVEIS */
-
     let todosProdutos = [];
 
-    let categoriaSelecionada = null;
 
-
-
-    /* =========================
-       CARREGAR CATEGORIAS
-       ========================= */
+    /* ============================
+       CATEGORIAS
+       ============================ */
 
     async function carregarCategorias() {
-
 
       const {
         data,
@@ -612,7 +700,6 @@
         `;
 
         return;
-
       }
 
 
@@ -625,22 +712,19 @@
         `;
 
         return;
-
       }
 
 
       categoriesContainer.innerHTML = "";
 
 
-      /* BOTÃO TODAS */
+      /* TODOS */
 
       const todas =
         document.createElement("div");
 
-
       todas.className =
         "category active";
-
 
       todas.textContent =
         "🛍️ Todos os produtos";
@@ -650,16 +734,10 @@
         "click",
         () => {
 
-          categoriaSelecionada = null;
-
           document
             .querySelectorAll(".category")
             .forEach(item => {
-
-              item.classList.remove(
-                "active"
-              );
-
+              item.classList.remove("active");
             });
 
 
@@ -674,6 +752,13 @@
             todosProdutos
           );
 
+
+          document
+            .getElementById("produtos")
+            .scrollIntoView({
+              behavior: "smooth"
+            });
+
         }
       );
 
@@ -683,95 +768,86 @@
       );
 
 
+      /* CATEGORIAS DO BANCO */
 
-      /* CATEGORIAS DO SUPABASE */
+      data.forEach(
+        categoria => {
 
-      data.forEach(categoria => {
-
-
-        const item =
-          document.createElement("div");
-
-
-        item.className =
-          "category";
+          const item =
+            document.createElement("div");
 
 
-        item.textContent =
-          categoria.Nome || "Categoria";
+          item.className =
+            "category";
 
 
-        item.addEventListener(
-          "click",
-          () => {
-
-            categoriaSelecionada =
-              categoria.id;
+          item.textContent =
+            categoria.Nome ||
+            "Categoria";
 
 
-            document
-              .querySelectorAll(".category")
-              .forEach(elemento => {
+          item.addEventListener(
+            "click",
+            () => {
 
-                elemento.classList.remove(
-                  "active"
-                );
-
-              });
-
-
-            item.classList.add(
-              "active"
-            );
+              document
+                .querySelectorAll(".category")
+                .forEach(elemento => {
+                  elemento.classList.remove("active");
+                });
 
 
-            const produtosFiltrados =
-              todosProdutos.filter(
-                produto =>
-                  Number(
-                    produto.Categoria
-                  ) === Number(
-                    categoria.id
-                  )
+              item.classList.add(
+                "active"
               );
 
 
-            productDescription.textContent =
-              "Produtos da categoria: " +
-              categoria.Nome;
+              const produtosFiltrados =
+                todosProdutos.filter(
+                  produto =>
+                    Number(
+                      produto["Categoria"]
+                    ) === Number(
+                      categoria.id
+                    )
+                );
 
 
-            mostrarProdutos(
-              produtosFiltrados
-            );
+              productDescription.textContent =
+                "Produtos da categoria: " +
+                categoria.Nome;
 
 
-            document
-              .getElementById("produtos")
-              .scrollIntoView({
-                behavior: "smooth"
-              });
-
-          }
-        );
+              mostrarProdutos(
+                produtosFiltrados
+              );
 
 
-        categoriesContainer.appendChild(
-          item
-        );
+              document
+                .getElementById("produtos")
+                .scrollIntoView({
+                  behavior: "smooth"
+                });
 
-      });
+            }
+          );
+
+
+          categoriesContainer.appendChild(
+            item
+          );
+
+        }
+      );
 
     }
 
 
-
-    /* =========================
-       CARREGAR PRODUTOS
-       ========================= */
+    /* ============================
+       PRODUTOS
+       ============================ */
 
     async function carregarProdutos() {
-
 
       const {
         data,
@@ -810,7 +886,6 @@
         `;
 
         return;
-
       }
 
 
@@ -818,12 +893,10 @@
         data || [];
 
 
-      /* MOSTRA DESTAQUES PRIMEIRO */
-
       const destaques =
         todosProdutos.filter(
           produto =>
-            produto.Destaque === true
+            produto["Destaque"] === true
         );
 
 
@@ -844,15 +917,13 @@
     }
 
 
-
-    /* =========================
+    /* ============================
        MOSTRAR PRODUTOS
-       ========================= */
+       ============================ */
 
     function mostrarProdutos(
       produtos
     ) {
-
 
       productsContainer.innerHTML =
         "";
@@ -870,13 +941,11 @@
         `;
 
         return;
-
       }
 
 
       produtos.forEach(
         produto => {
-
 
           const card =
             document.createElement(
@@ -887,8 +956,6 @@
           card.className =
             "product";
 
-
-          /* PREÇO */
 
           const preco =
             Number(
@@ -902,14 +969,11 @@
             );
 
 
-          /* IMAGEM */
-
-          let imagemHTML =
-            `
-              <div>
-                Foto do produto
-              </div>
-            `;
+          let imagemHTML = `
+            <div class="no-image">
+              Foto do produto
+            </div>
+          `;
 
 
           if (
@@ -927,25 +991,21 @@
           }
 
 
-          /* WHATSAPP */
-
           const mensagem =
             encodeURIComponent(
               "Olá! Tenho interesse no produto: " +
-              (produto["Nome"] || "Produto")
+              (
+                produto["Nome"] ||
+                "Produto"
+              )
             );
 
-
-          /* CARD */
 
           card.innerHTML = `
 
             <div class="product-image">
-
               ${imagemHTML}
-
             </div>
-
 
             <div class="product-info">
 
@@ -953,17 +1013,15 @@
                 ${produto["Nome"] || "Produto"}
               </h3>
 
-
-              <p>
+              <div class="product-description">
                 ${produto["Descrição"] || ""}
-              </p>
-
+              </div>
 
               <div class="details">
 
                 ${
                   produto["Material"]
-                    ? "Material: " +
+                    ? "🧵 Material: " +
                       produto["Material"] +
                       "<br>"
                     : ""
@@ -971,7 +1029,7 @@
 
                 ${
                   produto["Dimensões"]
-                    ? "Dimensões: " +
+                    ? "📐 Dimensões: " +
                       produto["Dimensões"] +
                       "<br>"
                     : ""
@@ -979,29 +1037,23 @@
 
                 ${
                   produto["Cores"]
-                    ? "Cores: " +
+                    ? "🎨 Cores: " +
                       produto["Cores"]
                     : ""
                 }
 
               </div>
 
-
               <div class="price">
-
                 ${preco}
-
               </div>
-
 
               <a
                 class="whatsapp"
                 href="https://wa.me/5511999999999?text=${mensagem}"
                 target="_blank"
               >
-
                 💬 Tenho interesse
-
               </a>
 
             </div>
@@ -1019,10 +1071,9 @@
     }
 
 
-
-    /* =========================
-       INICIAR SITE
-       ========================= */
+    /* ============================
+       INICIAR
+       ============================ */
 
     async function iniciarSite() {
 
@@ -1034,7 +1085,6 @@
 
 
     iniciarSite();
-
 
   </script>
 
