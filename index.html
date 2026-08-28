@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Couto & Cortes Soluções 3D</title>
 
@@ -12,6 +18,7 @@
   >
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -64,6 +71,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+
       background:
         linear-gradient(
           rgba(10, 25, 47, 0.88),
@@ -133,9 +141,12 @@
       color: #667085;
     }
 
+    /* CATEGORIAS */
+
     .categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(150px, 1fr));
       gap: 15px;
     }
 
@@ -146,11 +157,26 @@
       text-align: center;
       box-shadow: 0 3px 12px rgba(0,0,0,0.07);
       font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
     }
+
+    .category:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .category.active {
+      background: #1976d2;
+      color: white;
+    }
+
+    /* PRODUTOS */
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
       gap: 20px;
     }
 
@@ -159,11 +185,17 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      transition: 0.2s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 7px 20px rgba(0,0,0,0.13);
     }
 
     .product-image {
       width: 100%;
-      height: 190px;
+      height: 220px;
       background: #e9edf2;
       display: flex;
       align-items: center;
@@ -186,11 +218,20 @@
 
     .product-info h3 {
       margin-bottom: 8px;
+      font-size: 20px;
     }
 
     .product-info p {
       color: #667085;
       font-size: 14px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .details {
+      color: #667085;
+      font-size: 13px;
+      line-height: 1.7;
       margin-bottom: 12px;
     }
 
@@ -198,6 +239,18 @@
       font-size: 20px;
       font-weight: bold;
       color: #1976d2;
+      margin-bottom: 15px;
+    }
+
+    .whatsapp {
+      display: block;
+      text-align: center;
+      background: #25D366;
+      color: white;
+      padding: 11px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     .loading {
@@ -227,6 +280,7 @@
     }
 
     @media (max-width: 650px) {
+
       header {
         flex-direction: column;
         gap: 12px;
@@ -243,295 +297,748 @@
       .hero p {
         font-size: 16px;
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-<header>
 
-  <div class="logo">
-    <span>COUTO</span> &
-    <span>CORTES</span>
-  </div>
+  <!-- CABEÇALHO -->
 
-  <nav>
-    <a href="#inicio">Início</a>
-    <a href="#categorias">Categorias</a>
-    <a href="#produtos">Produtos</a>
-    <a href="#contato">Contato</a>
-  </nav>
+  <header>
 
-</header>
+    <div class="logo">
 
-<main>
+      <span>COUTO</span>
+      &
 
-  <section class="hero" id="inicio">
+      <span>CORTES</span>
 
-    <div class="hero-content">
+    </div>
 
-      <h1>Impressão 3D de alta precisão</h1>
 
-      <p>
-        Soluções em impressão 3D para sua casa,
-        empresa, projetos e ideias.
-      </p>
+    <nav>
 
-      <div class="buttons">
+      <a href="#inicio">
+        Início
+      </a>
 
-        <a href="#produtos" class="button primary">
-          Ver catálogo
-        </a>
+      <a href="#categorias">
+        Categorias
+      </a>
 
-        <a
-          href="https://wa.me/5511999999999"
-          class="button secondary"
-        >
-          Solicitar orçamento
-        </a>
+      <a href="#produtos">
+        Produtos
+      </a>
+
+      <a href="#contato">
+        Contato
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+
+    <!-- INÍCIO -->
+
+    <section
+      class="hero"
+      id="inicio"
+    >
+
+      <div class="hero-content">
+
+        <h1>
+          Impressão 3D de alta precisão
+        </h1>
+
+        <p>
+          Soluções em impressão 3D para sua casa,
+          empresa, projetos e ideias.
+        </p>
+
+
+        <div class="buttons">
+
+          <a
+            href="#produtos"
+            class="button primary"
+          >
+            Ver catálogo
+          </a>
+
+
+          <a
+            href="https://wa.me/5511999999999"
+            class="button secondary"
+            target="_blank"
+          >
+            Solicitar orçamento
+          </a>
+
+        </div>
 
       </div>
 
-    </div>
+    </section>
 
-  </section>
 
-  <section id="categorias">
+    <!-- CATEGORIAS -->
 
-    <div class="section-title">
-
-      <h2>Categorias</h2>
-
-      <p>
-        Encontre produtos para diferentes necessidades.
-      </p>
-
-    </div>
-
-    <div class="categories">
-
-      <div class="category">🏠 Casa e Decoração</div>
-      <div class="category">📦 Organização</div>
-      <div class="category">🎮 Games</div>
-      <div class="category">🚗 Automotivo</div>
-      <div class="category">📚 Educacional</div>
-      <div class="category">🏢 Corporativo</div>
-      <div class="category">🎁 Presentes</div>
-      <div class="category">🛠️ Utilidades</div>
-
-    </div>
-
-  </section>
-
-  <section id="produtos">
-
-    <div class="section-title">
-
-      <h2>Produtos em destaque</h2>
-
-      <p>
-        Alguns dos produtos disponíveis na Couto & Cortes.
-      </p>
-
-    </div>
-
-    <div class="products" id="products-container">
-
-      <div class="loading">
-        Carregando produtos...
-      </div>
-
-    </div>
-
-  </section>
-
-  <section id="contato">
-
-    <div class="contact">
+    <section id="categorias">
 
       <div class="section-title">
 
-        <h2>Tem uma ideia?</h2>
+        <h2>
+          Categorias
+        </h2>
 
         <p>
-          Nós podemos transformar sua ideia em uma peça 3D.
+          Escolha uma categoria para encontrar
+          nossos produtos.
         </p>
 
       </div>
 
-      <div class="buttons">
 
-        <a
-          href="https://wa.me/5511999999999"
-          class="button primary"
-        >
-          Falar pelo WhatsApp
-        </a>
+      <div
+        class="categories"
+        id="categories-container"
+      >
+
+        <div class="loading">
+          Carregando categorias...
+        </div>
 
       </div>
 
-    </div>
-
-  </section>
-
-</main>
-
-<footer>
-
-  <p>
-    <strong>Couto & Cortes Soluções 3D</strong>
-  </p>
-
-  <p>
-    Impressão 3D de alta precisão.
-  </p>
-
-  <p>
-    Instagram: @coutoecortessolucoes3d
-  </p>
-
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-  const SUPABASE_URL =
-    "https://sixuzdcsafbqgkijhrkn.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    </section>
 
 
-  async function carregarProdutos() {
+    <!-- PRODUTOS -->
 
-    const container =
-      document.getElementById("products-container");
+    <section id="produtos">
+
+      <div class="section-title">
+
+        <h2>
+          Produtos em destaque
+        </h2>
+
+        <p id="product-description">
+          Alguns dos produtos disponíveis
+          na Couto & Cortes.
+        </p>
+
+      </div>
 
 
-    const resultado =
-      await supabaseClient
-        .from("produtos")
-        .select("*");
+      <div
+        class="products"
+        id="products-container"
+      >
 
-
-    if (resultado.error) {
-
-      console.error(
-        "Erro ao carregar produtos:",
-        resultado.error
-      );
-
-      container.innerHTML = `
         <div class="loading">
-          Erro ao carregar produtos.
+          Carregando produtos...
         </div>
-      `;
 
-      return;
-    }
+      </div>
 
-
-    const produtos =
-      resultado.data || [];
+    </section>
 
 
-    const produtosDestaque =
-      produtos.filter(produto =>
-        produto["Disponível"] === true &&
-        produto["Destaque"] === true
-      );
+    <!-- CONTATO -->
 
+    <section id="contato">
 
-    if (produtosDestaque.length === 0) {
+      <div class="contact">
 
-      container.innerHTML = `
-        <div class="loading">
-          Nenhum produto em destaque no momento.
+        <div class="section-title">
+
+          <h2>
+            Tem uma ideia?
+          </h2>
+
+          <p>
+            Nós podemos transformar sua ideia
+            em uma peça 3D.
+          </p>
+
         </div>
-      `;
-
-      return;
-    }
 
 
-    container.innerHTML = "";
+        <div class="buttons">
 
-
-    produtosDestaque.forEach(produto => {
-
-      const card =
-        document.createElement("div");
-
-      card.className = "product";
-
-
-      const preco =
-        Number(produto["Preço"] || 0)
-          .toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-          });
-
-
-      let imagem = "Foto do produto";
-
-
-      if (produto.imagem_url) {
-
-        imagem = `
-          <img
-            src="${produto.imagem_url}"
-            alt="${produto["Nome"] || "Produto"}"
-            loading="lazy"
+          <a
+            href="https://wa.me/5511999999999"
+            class="button primary"
+            target="_blank"
           >
+            Falar pelo WhatsApp
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- RODAPÉ -->
+
+  <footer>
+
+    <p>
+      <strong>
+        Couto & Cortes Soluções 3D
+      </strong>
+    </p>
+
+    <p>
+      Impressão 3D de alta precisão.
+    </p>
+
+    <p>
+      Instagram:
+      @coutoecortessolucoes3d
+    </p>
+
+  </footer>
+
+
+
+  <!-- SUPABASE -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+
+
+  <script>
+
+
+    /* CONFIGURAÇÃO SUPABASE */
+
+    const SUPABASE_URL =
+      "https://sixuzdcsafbqgkijhrkn.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+
+    /* ELEMENTOS */
+
+    const categoriesContainer =
+      document.getElementById(
+        "categories-container"
+      );
+
+
+    const productsContainer =
+      document.getElementById(
+        "products-container"
+      );
+
+
+    const productDescription =
+      document.getElementById(
+        "product-description"
+      );
+
+
+
+    /* VARIÁVEIS */
+
+    let todosProdutos = [];
+
+    let categoriaSelecionada = null;
+
+
+
+    /* =========================
+       CARREGAR CATEGORIAS
+       ========================= */
+
+    async function carregarCategorias() {
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+
+        .from("categorias")
+
+        .select("*")
+
+        .order(
+          "id",
+          {
+            ascending: true
+          }
+        );
+
+
+      if (error) {
+
+        console.error(
+          "Erro ao carregar categorias:",
+          error
+        );
+
+        categoriesContainer.innerHTML = `
+          <div class="loading">
+            Não foi possível carregar as categorias.
+          </div>
         `;
+
+        return;
 
       }
 
 
-      card.innerHTML = `
+      if (!data || data.length === 0) {
 
-        <div class="product-image">
-          ${imagem}
-        </div>
-
-        <div class="product-info">
-
-          <h3>
-            ${produto["Nome"] || "Produto"}
-          </h3>
-
-          <p>
-            ${produto["Descrição"] || ""}
-          </p>
-
-          <div class="price">
-            ${preco}
+        categoriesContainer.innerHTML = `
+          <div class="loading">
+            Nenhuma categoria cadastrada.
           </div>
+        `;
 
-        </div>
+        return;
 
-      `;
-
-
-      container.appendChild(card);
-
-    });
-
-  }
+      }
 
 
-  carregarProdutos();
+      categoriesContainer.innerHTML = "";
 
-</script>
+
+      /* BOTÃO TODAS */
+
+      const todas =
+        document.createElement("div");
+
+
+      todas.className =
+        "category active";
+
+
+      todas.textContent =
+        "🛍️ Todos os produtos";
+
+
+      todas.addEventListener(
+        "click",
+        () => {
+
+          categoriaSelecionada = null;
+
+          document
+            .querySelectorAll(".category")
+            .forEach(item => {
+
+              item.classList.remove(
+                "active"
+              );
+
+            });
+
+
+          todas.classList.add("active");
+
+
+          productDescription.textContent =
+            "Todos os produtos disponíveis na Couto & Cortes.";
+
+
+          mostrarProdutos(
+            todosProdutos
+          );
+
+        }
+      );
+
+
+      categoriesContainer.appendChild(
+        todas
+      );
+
+
+
+      /* CATEGORIAS DO SUPABASE */
+
+      data.forEach(categoria => {
+
+
+        const item =
+          document.createElement("div");
+
+
+        item.className =
+          "category";
+
+
+        item.textContent =
+          categoria.Nome || "Categoria";
+
+
+        item.addEventListener(
+          "click",
+          () => {
+
+            categoriaSelecionada =
+              categoria.id;
+
+
+            document
+              .querySelectorAll(".category")
+              .forEach(elemento => {
+
+                elemento.classList.remove(
+                  "active"
+                );
+
+              });
+
+
+            item.classList.add(
+              "active"
+            );
+
+
+            const produtosFiltrados =
+              todosProdutos.filter(
+                produto =>
+                  Number(
+                    produto.Categoria
+                  ) === Number(
+                    categoria.id
+                  )
+              );
+
+
+            productDescription.textContent =
+              "Produtos da categoria: " +
+              categoria.Nome;
+
+
+            mostrarProdutos(
+              produtosFiltrados
+            );
+
+
+            document
+              .getElementById("produtos")
+              .scrollIntoView({
+                behavior: "smooth"
+              });
+
+          }
+        );
+
+
+        categoriesContainer.appendChild(
+          item
+        );
+
+      });
+
+    }
+
+
+
+    /* =========================
+       CARREGAR PRODUTOS
+       ========================= */
+
+    async function carregarProdutos() {
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+
+        .from("produtos")
+
+        .select("*")
+
+        .eq(
+          "Disponível",
+          true
+        )
+
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+      if (error) {
+
+        console.error(
+          "Erro ao carregar produtos:",
+          error
+        );
+
+
+        productsContainer.innerHTML = `
+          <div class="loading">
+            Não foi possível carregar os produtos.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      todosProdutos =
+        data || [];
+
+
+      /* MOSTRA DESTAQUES PRIMEIRO */
+
+      const destaques =
+        todosProdutos.filter(
+          produto =>
+            produto.Destaque === true
+        );
+
+
+      if (destaques.length > 0) {
+
+        mostrarProdutos(
+          destaques
+        );
+
+      } else {
+
+        mostrarProdutos(
+          todosProdutos
+        );
+
+      }
+
+    }
+
+
+
+    /* =========================
+       MOSTRAR PRODUTOS
+       ========================= */
+
+    function mostrarProdutos(
+      produtos
+    ) {
+
+
+      productsContainer.innerHTML =
+        "";
+
+
+      if (
+        !produtos ||
+        produtos.length === 0
+      ) {
+
+        productsContainer.innerHTML = `
+          <div class="loading">
+            Nenhum produto encontrado.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      produtos.forEach(
+        produto => {
+
+
+          const card =
+            document.createElement(
+              "div"
+            );
+
+
+          card.className =
+            "product";
+
+
+          /* PREÇO */
+
+          const preco =
+            Number(
+              produto["Preço"] || 0
+            ).toLocaleString(
+              "pt-BR",
+              {
+                style: "currency",
+                currency: "BRL"
+              }
+            );
+
+
+          /* IMAGEM */
+
+          let imagemHTML =
+            `
+              <div>
+                Foto do produto
+              </div>
+            `;
+
+
+          if (
+            produto.imagem_url
+          ) {
+
+            imagemHTML = `
+              <img
+                src="${produto.imagem_url}"
+                alt="${produto["Nome"] || "Produto"}"
+                loading="lazy"
+              >
+            `;
+
+          }
+
+
+          /* WHATSAPP */
+
+          const mensagem =
+            encodeURIComponent(
+              "Olá! Tenho interesse no produto: " +
+              (produto["Nome"] || "Produto")
+            );
+
+
+          /* CARD */
+
+          card.innerHTML = `
+
+            <div class="product-image">
+
+              ${imagemHTML}
+
+            </div>
+
+
+            <div class="product-info">
+
+              <h3>
+                ${produto["Nome"] || "Produto"}
+              </h3>
+
+
+              <p>
+                ${produto["Descrição"] || ""}
+              </p>
+
+
+              <div class="details">
+
+                ${
+                  produto["Material"]
+                    ? "Material: " +
+                      produto["Material"] +
+                      "<br>"
+                    : ""
+                }
+
+                ${
+                  produto["Dimensões"]
+                    ? "Dimensões: " +
+                      produto["Dimensões"] +
+                      "<br>"
+                    : ""
+                }
+
+                ${
+                  produto["Cores"]
+                    ? "Cores: " +
+                      produto["Cores"]
+                    : ""
+                }
+
+              </div>
+
+
+              <div class="price">
+
+                ${preco}
+
+              </div>
+
+
+              <a
+                class="whatsapp"
+                href="https://wa.me/5511999999999?text=${mensagem}"
+                target="_blank"
+              >
+
+                💬 Tenho interesse
+
+              </a>
+
+            </div>
+
+          `;
+
+
+          productsContainer.appendChild(
+            card
+          );
+
+        }
+      );
+
+    }
+
+
+
+    /* =========================
+       INICIAR SITE
+       ========================= */
+
+    async function iniciarSite() {
+
+      await carregarCategorias();
+
+      await carregarProdutos();
+
+    }
+
+
+    iniciarSite();
+
+
+  </script>
+
 
 </body>
+
 </html>
