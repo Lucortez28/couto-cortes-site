@@ -30,15 +30,13 @@
       color: #172033;
     }
 
-    /* CABEÇALHO */
-
     header {
-      background: #ffffff;
+      background: #fff;
       padding: 18px 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -47,7 +45,6 @@
     .logo {
       font-size: 22px;
       font-weight: 800;
-      letter-spacing: -0.5px;
     }
 
     .logo span:first-child {
@@ -64,14 +61,11 @@
       margin-left: 20px;
       font-size: 14px;
       font-weight: bold;
-      transition: 0.2s;
     }
 
     nav a:hover {
       color: #1976d2;
     }
-
-    /* HERO */
 
     .hero {
       min-height: 500px;
@@ -83,8 +77,8 @@
 
       background:
         linear-gradient(
-          rgba(8, 25, 48, 0.90),
-          rgba(8, 25, 48, 0.90)
+          rgba(8,25,48,.90),
+          rgba(8,25,48,.90)
         ),
         #123456;
     }
@@ -120,7 +114,7 @@
       border-radius: 9px;
       text-decoration: none;
       font-weight: bold;
-      transition: 0.2s;
+      transition: .2s;
     }
 
     .button:hover {
@@ -137,8 +131,6 @@
       color: #172033;
     }
 
-    /* SEÇÕES */
-
     section {
       padding: 65px 20px;
       max-width: 1150px;
@@ -153,7 +145,6 @@
     .section-title h2 {
       font-size: 32px;
       margin-bottom: 10px;
-      color: #172033;
     }
 
     .section-title p {
@@ -161,12 +152,10 @@
       font-size: 15px;
     }
 
-    /* CATEGORIAS */
-
     .categories {
       display: grid;
       grid-template-columns:
-        repeat(auto-fit, minmax(160px, 1fr));
+        repeat(auto-fit,minmax(160px,1fr));
       gap: 16px;
     }
 
@@ -175,17 +164,16 @@
       padding: 24px 15px;
       border-radius: 14px;
       text-align: center;
-      box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+      box-shadow: 0 3px 14px rgba(0,0,0,.07);
       font-weight: bold;
       cursor: pointer;
-      transition: 0.2s;
+      transition: .2s;
       border: 2px solid transparent;
     }
 
     .category:hover {
       transform: translateY(-4px);
       border-color: #1976d2;
-      box-shadow: 0 7px 20px rgba(0,0,0,0.12);
     }
 
     .category.active {
@@ -194,12 +182,10 @@
       border-color: #1976d2;
     }
 
-    /* PRODUTOS */
-
     .products {
       display: grid;
       grid-template-columns:
-        repeat(auto-fill, minmax(250px, 1fr));
+        repeat(auto-fill,minmax(250px,1fr));
       gap: 24px;
     }
 
@@ -207,17 +193,16 @@
       background: white;
       border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      transition: 0.25s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
       border: 1px solid #edf0f4;
+      transition: .25s;
+      cursor: pointer;
     }
 
     .product:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.13);
+      box-shadow: 0 10px 25px rgba(0,0,0,.13);
     }
-
-    /* FOTO DO PRODUTO */
 
     .product-image {
       width: 100%;
@@ -242,8 +227,6 @@
       font-size: 14px;
     }
 
-    /* INFORMAÇÕES */
-
     .product-info {
       padding: 20px;
     }
@@ -251,7 +234,6 @@
     .product-info h3 {
       font-size: 20px;
       margin-bottom: 9px;
-      color: #172033;
     }
 
     .product-description {
@@ -286,12 +268,11 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      transition: 0.2s;
+      transition: .2s;
     }
 
     .whatsapp:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
+      opacity: .9;
     }
 
     .loading {
@@ -301,18 +282,14 @@
       padding: 40px 20px;
     }
 
-    /* CONTATO */
-
     .contact {
       background: white;
       text-align: center;
       border-radius: 18px;
       padding: 45px 25px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 18px rgba(0,0,0,.06);
       margin-bottom: 20px;
     }
-
-    /* RODAPÉ */
 
     footer {
       background: #101828;
@@ -331,35 +308,122 @@
       color: white;
     }
 
-    /* CELULAR */
+    /* MODAL DO PRODUTO */
 
-    @media (max-width: 650px) {
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 850px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 15px 50px rgba(0,0,0,.3);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0,0,0,.65);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .modal-image {
+      min-height: 400px;
+      background: #f1f3f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      padding: 25px;
+    }
+
+    .modal-info {
+      padding: 35px;
+    }
+
+    .modal-info h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .modal-info .modal-description {
+      color: #667085;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .modal-details {
+      color: #667085;
+      line-height: 2;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+      margin-bottom: 20px;
+    }
+
+    .modal-price {
+      color: #1976d2;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .modal-whatsapp {
+      display: block;
+      text-align: center;
+      background: #25D366;
+      color: white;
+      padding: 15px;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    @media (max-width: 700px) {
 
       header {
         flex-direction: column;
         gap: 14px;
-        padding: 16px;
-      }
-
-      .logo {
-        font-size: 20px;
-      }
-
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
       }
 
       nav a {
-        margin: 0 5px;
-        font-size: 13px;
-      }
-
-      .hero {
-        min-height: 450px;
-        padding: 55px 20px;
+        margin: 0 6px;
       }
 
       .hero h1 {
@@ -370,17 +434,9 @@
         font-size: 16px;
       }
 
-      section {
-        padding: 50px 15px;
-      }
-
-      .section-title h2 {
-        font-size: 28px;
-      }
-
       .products {
         grid-template-columns:
-          repeat(2, minmax(0, 1fr));
+          repeat(2,minmax(0,1fr));
         gap: 14px;
       }
 
@@ -396,16 +452,24 @@
         font-size: 17px;
       }
 
-      .product-description {
-        font-size: 13px;
-      }
-
-      .details {
-        font-size: 12px;
-      }
-
       .price {
         font-size: 19px;
+      }
+
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-image {
+        min-height: 280px;
+      }
+
+      .modal-info {
+        padding: 25px;
+      }
+
+      .modal-info h2 {
+        font-size: 25px;
       }
 
     }
@@ -430,8 +494,6 @@
 <body>
 
 
-  <!-- CABEÇALHO -->
-
   <header>
 
     <div class="logo">
@@ -440,15 +502,10 @@
     </div>
 
     <nav>
-
       <a href="#inicio">Início</a>
-
       <a href="#categorias">Categorias</a>
-
       <a href="#produtos">Produtos</a>
-
       <a href="#contato">Contato</a>
-
     </nav>
 
   </header>
@@ -456,8 +513,6 @@
 
   <main>
 
-
-    <!-- HERO -->
 
     <section
       class="hero"
@@ -499,15 +554,11 @@
     </section>
 
 
-    <!-- CATEGORIAS -->
-
     <section id="categorias">
 
       <div class="section-title">
 
-        <h2>
-          Categorias
-        </h2>
+        <h2>Categorias</h2>
 
         <p>
           Escolha uma categoria para encontrar
@@ -530,15 +581,11 @@
     </section>
 
 
-    <!-- PRODUTOS -->
-
     <section id="produtos">
 
       <div class="section-title">
 
-        <h2>
-          Produtos em destaque
-        </h2>
+        <h2>Produtos em destaque</h2>
 
         <p id="product-description">
           Confira nossos produtos disponíveis.
@@ -560,17 +607,13 @@
     </section>
 
 
-    <!-- CONTATO -->
-
     <section id="contato">
 
       <div class="contact">
 
         <div class="section-title">
 
-          <h2>
-            Tem uma ideia?
-          </h2>
+          <h2>Tem uma ideia?</h2>
 
           <p>
             Nós podemos transformar sua ideia
@@ -599,8 +642,6 @@
   </main>
 
 
-  <!-- RODAPÉ -->
-
   <footer>
 
     <p>
@@ -621,6 +662,43 @@
   </footer>
 
 
+  <!-- MODAL -->
+
+  <div
+    class="modal"
+    id="product-modal"
+  >
+
+    <div class="modal-content">
+
+      <button
+        class="modal-close"
+        id="modal-close"
+      >
+        ×
+      </button>
+
+      <div class="modal-body">
+
+        <div
+          class="modal-image"
+          id="modal-image"
+        >
+        </div>
+
+        <div
+          class="modal-info"
+          id="modal-info"
+        >
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
   <!-- SUPABASE -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -634,7 +712,6 @@
     const SUPABASE_KEY =
       "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
 
-
     const supabaseClient =
       window.supabase.createClient(
         SUPABASE_URL,
@@ -647,16 +724,34 @@
         "categories-container"
       );
 
-
     const productsContainer =
       document.getElementById(
         "products-container"
       );
 
-
     const productDescription =
       document.getElementById(
         "product-description"
+      );
+
+    const modal =
+      document.getElementById(
+        "product-modal"
+      );
+
+    const modalClose =
+      document.getElementById(
+        "modal-close"
+      );
+
+    const modalImage =
+      document.getElementById(
+        "modal-image"
+      );
+
+    const modalInfo =
+      document.getElementById(
+        "modal-info"
       );
 
 
@@ -673,11 +768,8 @@
         data,
         error
       } = await supabaseClient
-
         .from("categorias")
-
         .select("*")
-
         .order(
           "id",
           {
@@ -718,8 +810,6 @@
       categoriesContainer.innerHTML = "";
 
 
-      /* TODOS */
-
       const todas =
         document.createElement("div");
 
@@ -740,18 +830,14 @@
               item.classList.remove("active");
             });
 
-
           todas.classList.add("active");
-
 
           productDescription.textContent =
             "Todos os produtos disponíveis na Couto & Cortes.";
 
-
           mostrarProdutos(
             todosProdutos
           );
-
 
           document
             .getElementById("produtos")
@@ -768,18 +854,14 @@
       );
 
 
-      /* CATEGORIAS DO BANCO */
-
       data.forEach(
         categoria => {
 
           const item =
             document.createElement("div");
 
-
           item.className =
             "category";
-
 
           item.textContent =
             categoria.Nome ||
@@ -796,10 +878,7 @@
                   elemento.classList.remove("active");
                 });
 
-
-              item.classList.add(
-                "active"
-              );
+              item.classList.add("active");
 
 
               const produtosFiltrados =
@@ -853,16 +932,12 @@
         data,
         error
       } = await supabaseClient
-
         .from("produtos")
-
         .select("*")
-
         .eq(
           "Disponível",
           true
         )
-
         .order(
           "created_at",
           {
@@ -877,7 +952,6 @@
           "Erro ao carregar produtos:",
           error
         );
-
 
         productsContainer.innerHTML = `
           <div class="loading">
@@ -900,19 +974,11 @@
         );
 
 
-      if (destaques.length > 0) {
-
-        mostrarProdutos(
-          destaques
-        );
-
-      } else {
-
-        mostrarProdutos(
-          todosProdutos
-        );
-
-      }
+      mostrarProdutos(
+        destaques.length > 0
+          ? destaques
+          : todosProdutos
+      );
 
     }
 
@@ -952,7 +1018,6 @@
               "div"
             );
 
-
           card.className =
             "product";
 
@@ -989,16 +1054,6 @@
             `;
 
           }
-
-
-          const mensagem =
-            encodeURIComponent(
-              "Olá! Tenho interesse no produto: " +
-              (
-                produto["Nome"] ||
-                "Produto"
-              )
-            );
 
 
           card.innerHTML = `
@@ -1050,8 +1105,7 @@
 
               <a
                 class="whatsapp"
-                href="https://wa.me/5511999999999?text=${mensagem}"
-                target="_blank"
+                href="#"
               >
                 💬 Tenho interesse
               </a>
@@ -1059,6 +1113,40 @@
             </div>
 
           `;
+
+
+          /* CLIQUE NO CARD */
+
+          card.addEventListener(
+            "click",
+            () => {
+              abrirProduto(produto);
+            }
+          );
+
+
+          /* BOTÃO WHATSAPP */
+
+          const whatsapp =
+            card.querySelector(
+              ".whatsapp"
+            );
+
+
+          whatsapp.addEventListener(
+            "click",
+            event => {
+
+              event.preventDefault();
+
+              event.stopPropagation();
+
+              abrirWhatsApp(
+                produto
+              );
+
+            }
+          );
 
 
           productsContainer.appendChild(
@@ -1072,7 +1160,210 @@
 
 
     /* ============================
-       INICIAR
+       ABRIR PRODUTO
+       ============================ */
+
+    function abrirProduto(
+      produto
+    ) {
+
+      if (
+        produto.imagem_url
+      ) {
+
+        modalImage.innerHTML = `
+          <img
+            src="${produto.imagem_url}"
+            alt="${produto["Nome"] || "Produto"}"
+          >
+        `;
+
+      } else {
+
+        modalImage.innerHTML = `
+          <div class="no-image">
+            Foto do produto
+          </div>
+        `;
+
+      }
+
+
+      const preco =
+        Number(
+          produto["Preço"] || 0
+        ).toLocaleString(
+          "pt-BR",
+          {
+            style: "currency",
+            currency: "BRL"
+          }
+        );
+
+
+      modalInfo.innerHTML = `
+
+        <h2>
+          ${produto["Nome"] || "Produto"}
+        </h2>
+
+        <div class="modal-description">
+          ${produto["Descrição"] || ""}
+        </div>
+
+        <div class="modal-details">
+
+          ${
+            produto["Material"]
+              ? "🧵 <strong>Material:</strong> " +
+                produto["Material"] +
+                "<br>"
+              : ""
+          }
+
+          ${
+            produto["Dimensões"]
+              ? "📐 <strong>Dimensões:</strong> " +
+                produto["Dimensões"] +
+                "<br>"
+              : ""
+          }
+
+          ${
+            produto["Cores"]
+              ? "🎨 <strong>Cores:</strong> " +
+                produto["Cores"]
+              : ""
+          }
+
+        </div>
+
+        <div class="modal-price">
+          ${preco}
+        </div>
+
+        <a
+          href="#"
+          class="modal-whatsapp"
+          id="modal-whatsapp"
+        >
+          💬 Pedir pelo WhatsApp
+        </a>
+
+      `;
+
+
+      document
+        .getElementById(
+          "modal-whatsapp"
+        )
+        .addEventListener(
+          "click",
+          event => {
+
+            event.preventDefault();
+
+            abrirWhatsApp(
+              produto
+            );
+
+          }
+        );
+
+
+      modal.classList.add(
+        "active"
+      );
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    /* ============================
+       WHATSAPP
+       ============================ */
+
+    function abrirWhatsApp(
+      produto
+    ) {
+
+      const mensagem =
+        encodeURIComponent(
+          "Olá! Tenho interesse no produto: " +
+          (
+            produto["Nome"] ||
+            "Produto"
+          )
+        );
+
+
+      window.open(
+        "https://wa.me/5511999999999?text=" +
+        mensagem,
+        "_blank"
+      );
+
+    }
+
+
+    /* ============================
+       FECHAR MODAL
+       ============================ */
+
+    function fecharModal() {
+
+      modal.classList.remove(
+        "active"
+      );
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    modalClose.addEventListener(
+      "click",
+      fecharModal
+    );
+
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target === modal
+        ) {
+
+          fecharModal();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          fecharModal();
+
+        }
+
+      }
+    );
+
+
+    /* ============================
+       INICIAR SITE
        ============================ */
 
     async function iniciarSite() {
@@ -1087,7 +1378,6 @@
     iniciarSite();
 
   </script>
-
 
 </body>
 
