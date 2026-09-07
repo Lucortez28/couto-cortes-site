@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -28,6 +30,8 @@
       justify-content: space-between;
       align-items: center;
       box-shadow: 0 2px 10px rgba(0,0,0,.08);
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
     header h1 {
@@ -50,6 +54,11 @@
       font-weight: bold;
     }
 
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
     .btn-primary {
       background: #1976d2;
       color: white;
@@ -62,6 +71,11 @@
 
     .btn-secondary {
       background: #667085;
+      color: white;
+    }
+
+    .btn-success {
+      background: #027a48;
       color: white;
     }
 
@@ -233,6 +247,7 @@
       border-radius: 6px;
       display: inline-block;
       margin-top: 5px;
+      margin-right: 5px;
     }
 
     .ativo {
@@ -268,7 +283,43 @@
       color: #667085;
     }
 
+    .usuario-atual {
+      background: #f2f4f7;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      color: #475467;
+    }
+
+    .usuario-atual strong {
+      color: #172033;
+    }
+
+    .aviso-email {
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fed7aa;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .separador {
+      border: 0;
+      border-top: 1px solid #e4e7ec;
+      margin: 25px 0;
+    }
+
+    .botoes-form {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     @media (max-width: 700px) {
+
       .grid {
         grid-template-columns: 1fr;
       }
@@ -294,63 +345,90 @@
       .acoes button {
         flex: 1;
       }
+
     }
+
   </style>
+
 </head>
 
 <body>
 
-<!-- =========================
+
+<!-- =====================================================
      LOGIN
-========================= -->
+===================================================== -->
 
 <div id="login-area" class="login">
 
   <h2>🔐 Painel Administrativo</h2>
 
   <div class="form-group">
+
     <label>E-mail</label>
+
     <input
       type="email"
       id="email"
       placeholder="Seu e-mail"
+      autocomplete="username"
     >
+
   </div>
 
   <div class="form-group">
+
     <label>Senha</label>
+
     <input
       type="password"
       id="senha"
       placeholder="Sua senha"
+      autocomplete="current-password"
     >
+
   </div>
 
   <button
+    id="btn-entrar"
     class="btn-primary"
     onclick="entrar()"
   >
     Entrar
   </button>
 
-  <div id="erro-login" class="erro"></div>
+  <div
+    id="erro-login"
+    class="erro"
+  ></div>
 
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      PAINEL
-========================= -->
+===================================================== -->
 
 <div id="painel-area" class="painel">
 
   <header>
 
     <h1>
-      <span class="vermelho">COUTO</span>
+
+      <span class="vermelho">
+        COUTO
+      </span>
+
       &
-      <span class="azul">CORTES</span>
-      <small> | Administração</small>
+
+      <span class="azul">
+        CORTES
+      </span>
+
+      <small>
+        | Administração
+      </small>
+
     </h1>
 
     <button
@@ -365,12 +443,21 @@
 
   <div class="container">
 
+
     <div class="topo-painel">
 
       <div>
-        <h2>Gerenciar produtos</h2>
-        <p>Cadastre e gerencie os produtos da loja.</p>
+
+        <h2>
+          Gerenciar produtos
+        </h2>
+
+        <p>
+          Cadastre e gerencie os produtos da loja.
+        </p>
+
       </div>
+
 
       <button
         class="btn-secondary"
@@ -382,18 +469,123 @@
     </div>
 
 
-    <div id="mensagem" class="mensagem"></div>
+    <div
+      id="mensagem"
+      class="mensagem"
+    ></div>
 
 
-    <!-- =========================
-         FORMULÁRIO
-    ========================= -->
+    <!-- =================================================
+         CONTA
+    ================================================== -->
+
+    <div class="card">
+
+      <h2>
+        ⚙️ Minha conta
+      </h2>
+
+
+      <div class="usuario-atual">
+
+        Usuário conectado:
+
+        <strong id="usuario-atual">
+          Carregando...
+        </strong>
+
+      </div>
+
+
+      <div class="aviso-email">
+
+        <strong>Importante:</strong>
+
+        Ao alterar o e-mail, o Supabase pode enviar
+        uma mensagem de confirmação para o novo endereço.
+        Confirme o e-mail recebido para concluir a alteração.
+
+      </div>
+
+
+      <div class="grid">
+
+
+        <div class="form-group">
+
+          <label>
+            Novo e-mail
+          </label>
+
+          <input
+            type="email"
+            id="novo-email"
+            placeholder="Lucortez2872@gmail.com"
+            autocomplete="email"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Nova senha
+          </label>
+
+          <input
+            type="password"
+            id="nova-senha"
+            placeholder="Digite a nova senha"
+            autocomplete="new-password"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Confirmar nova senha
+          </label>
+
+          <input
+            type="password"
+            id="confirmar-senha"
+            placeholder="Repita a nova senha"
+            autocomplete="new-password"
+          >
+
+        </div>
+
+
+      </div>
+
+
+      <div class="botoes-form">
+
+        <button
+          class="btn-primary"
+          onclick="atualizarConta()"
+        >
+          🔐 Atualizar conta
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FORMULÁRIO PRODUTO
+    ================================================== -->
 
     <div class="card">
 
       <h2 id="titulo-formulario">
         ➕ Cadastrar produto
       </h2>
+
 
       <input
         type="hidden"
@@ -403,11 +595,14 @@
 
       <div class="grid">
 
+
         <!-- NOME -->
 
         <div class="form-group">
 
-          <label>Nome do produto *</label>
+          <label>
+            Nome do produto *
+          </label>
 
           <input
             type="text"
@@ -422,7 +617,9 @@
 
         <div class="form-group">
 
-          <label>Preço *</label>
+          <label>
+            Preço *
+          </label>
 
           <input
             type="number"
@@ -439,7 +636,9 @@
 
         <div class="form-group grid-full">
 
-          <label>Descrição *</label>
+          <label>
+            Descrição *
+          </label>
 
           <textarea
             id="descricao"
@@ -453,7 +652,9 @@
 
         <div class="form-group">
 
-          <label>Categoria *</label>
+          <label>
+            Categoria *
+          </label>
 
           <select id="categoria">
 
@@ -475,7 +676,9 @@
 
         <div class="form-group">
 
-          <label>Material *</label>
+          <label>
+            Material *
+          </label>
 
           <input
             type="text"
@@ -490,7 +693,9 @@
 
         <div class="form-group">
 
-          <label>Dimensões *</label>
+          <label>
+            Dimensões *
+          </label>
 
           <input
             type="text"
@@ -505,7 +710,9 @@
 
         <div class="form-group">
 
-          <label>Cores *</label>
+          <label>
+            Cores *
+          </label>
 
           <input
             type="text"
@@ -520,18 +727,21 @@
 
         <div class="form-group grid-full">
 
-          <label>Foto do produto</label>
+          <label>
+            Foto do produto
+          </label>
 
           <input
             type="file"
             id="foto"
-            accept="image/*"
+            accept="image/jpeg,image/png,image/webp,image/gif"
             onchange="previewFoto()"
           >
 
           <img
             id="preview"
             class="foto-preview"
+            alt="Pré-visualização"
           >
 
         </div>
@@ -573,32 +783,38 @@
       <br>
 
 
-      <button
-        class="btn-primary"
-        onclick="salvarProduto()"
-      >
-        💾 Salvar produto
-      </button>
+      <div class="botoes-form">
+
+        <button
+          id="btn-salvar"
+          class="btn-primary"
+          onclick="salvarProduto()"
+        >
+          💾 Salvar produto
+        </button>
 
 
-      <button
-        class="btn-secondary"
-        onclick="novoProduto()"
-        style="margin-left:8px;"
-      >
-        Cancelar
-      </button>
+        <button
+          class="btn-secondary"
+          onclick="novoProduto()"
+        >
+          Cancelar
+        </button>
+
+      </div>
 
     </div>
 
 
-    <!-- =========================
+    <!-- =================================================
          PRODUTOS
-    ========================= -->
+    ================================================== -->
 
     <div class="card">
 
-      <h2>📦 Produtos cadastrados</h2>
+      <h2>
+        📦 Produtos cadastrados
+      </h2>
 
       <div
         id="lista-produtos"
@@ -640,15 +856,25 @@ const supabaseClient =
 async function entrar() {
 
   const email =
-    document.getElementById("email").value.trim();
+    document
+      .getElementById("email")
+      .value
+      .trim();
 
   const senha =
-    document.getElementById("senha").value;
+    document
+      .getElementById("senha")
+      .value;
 
   const erro =
     document.getElementById("erro-login");
 
+  const botao =
+    document.getElementById("btn-entrar");
+
+
   erro.textContent = "";
+
 
   if (!email || !senha) {
 
@@ -656,34 +882,79 @@ async function entrar() {
       "Digite o e-mail e a senha.";
 
     return;
+
   }
 
 
-  const { data, error } =
-    await supabaseClient.auth.signInWithPassword({
-
-      email: email,
-
-      password: senha
-
-    });
+  botao.disabled = true;
+  botao.textContent = "Entrando...";
 
 
-  if (error) {
+  try {
 
-    console.error(error);
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+
+        email: email,
+
+        password: senha
+
+      });
+
+
+    if (error) {
+
+      console.error(
+        "Erro login:",
+        error
+      );
+
+      erro.textContent =
+        "E-mail ou senha incorretos.";
+
+      return;
+
+    }
+
+
+    if (!data.session) {
+
+      erro.textContent =
+        "Login realizado, mas a sessão não foi criada.";
+
+      return;
+
+    }
+
+
+    mostrarPainel();
+
+  }
+
+  catch (erroInterno) {
+
+    console.error(
+      erroInterno
+    );
 
     erro.textContent =
-      "E-mail ou senha incorretos.";
+      "Não foi possível realizar o login.";
 
-    return;
   }
 
+  finally {
 
-  mostrarPainel();
+    botao.disabled = false;
+    botao.textContent = "Entrar";
+
+  }
 
 }
 
+
+/* =====================================================
+   SAIR
+===================================================== */
 
 async function sair() {
 
@@ -700,18 +971,34 @@ async function sair() {
 
 async function verificarLogin() {
 
-  const { data } =
-    await supabaseClient.auth.getSession();
+  try {
+
+    const { data } =
+      await supabaseClient.auth.getSession();
 
 
-  if (data.session) {
+    if (data.session) {
 
-    mostrarPainel();
+      mostrarPainel();
 
-  } else {
+    }
 
-    document.getElementById("login-area")
-      .style.display = "block";
+    else {
+
+      document
+        .getElementById("login-area")
+        .style.display = "block";
+
+    }
+
+  }
+
+  catch (erro) {
+
+    console.error(
+      "Erro ao verificar sessão:",
+      erro
+    );
 
   }
 
@@ -722,18 +1009,224 @@ async function verificarLogin() {
    MOSTRAR PAINEL
 ===================================================== */
 
-function mostrarPainel() {
+async function mostrarPainel() {
 
-  document.getElementById("login-area")
+  document
+    .getElementById("login-area")
     .style.display = "none";
 
-  document.getElementById("painel-area")
+
+  document
+    .getElementById("painel-area")
     .style.display = "block";
 
+
+  carregarUsuarioAtual();
 
   carregarCategorias();
 
   carregarProdutos();
+
+}
+
+
+/* =====================================================
+   USUÁRIO ATUAL
+===================================================== */
+
+async function carregarUsuarioAtual() {
+
+  const elemento =
+    document.getElementById(
+      "usuario-atual"
+    );
+
+
+  const { data, error } =
+    await supabaseClient.auth.getUser();
+
+
+  if (error || !data.user) {
+
+    elemento.textContent =
+      "Não identificado";
+
+    return;
+
+  }
+
+
+  elemento.textContent =
+    data.user.email || "Sem e-mail";
+
+}
+
+
+/* =====================================================
+   ATUALIZAR E-MAIL E SENHA
+===================================================== */
+
+async function atualizarConta() {
+
+  const novoEmail =
+    document
+      .getElementById("novo-email")
+      .value
+      .trim();
+
+  const novaSenha =
+    document
+      .getElementById("nova-senha")
+      .value;
+
+  const confirmarSenha =
+    document
+      .getElementById("confirmar-senha")
+      .value;
+
+
+  if (!novoEmail && !novaSenha) {
+
+    mostrarMensagem(
+      "Digite um novo e-mail ou uma nova senha.",
+      false
+    );
+
+    return;
+
+  }
+
+
+  if (novaSenha) {
+
+    if (novaSenha.length < 6) {
+
+      mostrarMensagem(
+        "A nova senha deve ter pelo menos 6 caracteres.",
+        false
+      );
+
+      return;
+
+    }
+
+
+    if (novaSenha !== confirmarSenha) {
+
+      mostrarMensagem(
+        "As senhas não são iguais.",
+        false
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  try {
+
+    const alteracoes = {};
+
+
+    if (novoEmail) {
+
+      alteracoes.email =
+        novoEmail;
+
+    }
+
+
+    if (novaSenha) {
+
+      alteracoes.password =
+        novaSenha;
+
+    }
+
+
+    const { data, error } =
+      await supabaseClient.auth.updateUser(
+        alteracoes
+      );
+
+
+    if (error) {
+
+      console.error(
+        "Erro ao atualizar conta:",
+        error
+      );
+
+      mostrarMensagem(
+        error.message ||
+        "Não foi possível atualizar a conta.",
+        false
+      );
+
+      return;
+
+    }
+
+
+    document
+      .getElementById("novo-email")
+      .value = "";
+
+    document
+      .getElementById("nova-senha")
+      .value = "";
+
+    document
+      .getElementById("confirmar-senha")
+      .value = "";
+
+
+    if (novoEmail && novaSenha) {
+
+      mostrarMensagem(
+        "Dados atualizados! Se a confirmação de e-mail estiver ativada, confirme o novo e-mail recebido.",
+        true
+      );
+
+    }
+
+    else if (novoEmail) {
+
+      mostrarMensagem(
+        "E-mail atualizado! Verifique sua caixa de entrada caso o Supabase solicite confirmação.",
+        true
+      );
+
+    }
+
+    else {
+
+      mostrarMensagem(
+        "Senha atualizada com sucesso! 🔐",
+        true
+      );
+
+    }
+
+
+    carregarUsuarioAtual();
+
+  }
+
+  catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    mostrarMensagem(
+      "Não foi possível atualizar a conta.",
+      false
+    );
+
+  }
 
 }
 
@@ -745,10 +1238,14 @@ function mostrarPainel() {
 async function carregarCategorias() {
 
   const select =
-    document.getElementById("categoria");
+    document.getElementById(
+      "categoria"
+    );
 
   const status =
-    document.getElementById("categoria-status");
+    document.getElementById(
+      "categoria-status"
+    );
 
 
   select.innerHTML =
@@ -782,6 +1279,7 @@ async function carregarCategorias() {
         "Erro ao consultar as categorias.";
 
       return;
+
     }
 
 
@@ -794,6 +1292,7 @@ async function carregarCategorias() {
         "A tabela está vazia.";
 
       return;
+
     }
 
 
@@ -804,18 +1303,14 @@ async function carregarCategorias() {
     data.forEach(categoria => {
 
       const option =
-        document.createElement("option");
+        document.createElement(
+          "option"
+        );
 
 
       option.value =
         categoria.id;
 
-
-      /*
-        Sua tabela possui a coluna "Nome".
-        Mantemos também alternativas para evitar
-        problemas caso o nome da coluna seja alterado.
-      */
 
       const nomeCategoria =
         categoria["Nome"] ||
@@ -828,7 +1323,9 @@ async function carregarCategorias() {
         nomeCategoria;
 
 
-      select.appendChild(option);
+      select.appendChild(
+        option
+      );
 
     });
 
@@ -837,9 +1334,13 @@ async function carregarCategorias() {
       data.length +
       " categorias disponíveis.";
 
-  } catch (erro) {
+  }
 
-    console.error(erro);
+  catch (erro) {
+
+    console.error(
+      erro
+    );
 
     select.innerHTML =
       '<option value="">Erro ao carregar categorias</option>';
@@ -853,21 +1354,47 @@ async function carregarCategorias() {
 
 
 /* =====================================================
-   PREVIEW DA FOTO
+   PREVIEW FOTO
 ===================================================== */
 
 function previewFoto() {
 
   const arquivo =
-    document.getElementById("foto").files[0];
+    document
+      .getElementById("foto")
+      .files[0];
 
   const preview =
-    document.getElementById("preview");
+    document.getElementById(
+      "preview"
+    );
 
 
   if (!arquivo) {
 
-    preview.style.display = "none";
+    preview.style.display =
+      "none";
+
+    preview.src = "";
+
+    return;
+
+  }
+
+
+  if (!arquivo.type.startsWith("image/")) {
+
+    mostrarMensagem(
+      "Selecione um arquivo de imagem válido.",
+      false
+    );
+
+    document
+      .getElementById("foto")
+      .value = "";
+
+    preview.style.display =
+      "none";
 
     return;
 
@@ -875,7 +1402,9 @@ function previewFoto() {
 
 
   preview.src =
-    URL.createObjectURL(arquivo);
+    URL.createObjectURL(
+      arquivo
+    );
 
   preview.style.display =
     "block";
@@ -884,17 +1413,25 @@ function previewFoto() {
 
 
 /* =====================================================
-   NOME DE ARQUIVO
+   LIMPAR NOME
 ===================================================== */
 
 function limparNomeArquivo(texto) {
 
   return texto
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      "");
 
 }
 
@@ -906,7 +1443,9 @@ function limparNomeArquivo(texto) {
 function pastaCategoria(nome) {
 
   const nomeLimpo =
-    limparNomeArquivo(nome);
+    limparNomeArquivo(
+      nome
+    );
 
 
   const pastas = {
@@ -933,18 +1472,25 @@ function pastaCategoria(nome) {
       "Presentes",
 
     "utilidades":
-      "Utilidades"
+      "Utilidades",
+
+    "presentes-e-utilidades":
+      "Presentes-e-utilidades"
 
   };
 
 
-  return pastas[nomeLimpo] || "Outros";
+  return (
+    pastas[nomeLimpo] ||
+    nomeLimpo ||
+    "Outros"
+  );
 
 }
 
 
 /* =====================================================
-   UPLOAD FOTO
+   ENVIAR FOTO
 ===================================================== */
 
 async function enviarFoto(
@@ -960,6 +1506,36 @@ async function enviarFoto(
   }
 
 
+  /* ---------------------------------------------
+     CONFIRMAR SESSÃO
+  --------------------------------------------- */
+
+  const { data: sessionData } =
+    await supabaseClient.auth.getSession();
+
+
+  if (!sessionData.session) {
+
+    throw new Error(
+      "Sua sessão expirou. Faça login novamente."
+    );
+
+  }
+
+
+  /* ---------------------------------------------
+     VALIDAR ARQUIVO
+  --------------------------------------------- */
+
+  if (!arquivo.type.startsWith("image/")) {
+
+    throw new Error(
+      "O arquivo selecionado não é uma imagem válida."
+    );
+
+  }
+
+
   const extensao =
     arquivo.name
       .split(".")
@@ -967,21 +1543,68 @@ async function enviarFoto(
       .toLowerCase();
 
 
+  const extensoesPermitidas = [
+    "jpg",
+    "jpeg",
+    "png",
+    "webp",
+    "gif"
+  ];
+
+
+  if (
+    !extensoesPermitidas.includes(
+      extensao
+    )
+  ) {
+
+    throw new Error(
+      "Formato de imagem não permitido."
+    );
+
+  }
+
+
+  /* ---------------------------------------------
+     NOME DO ARQUIVO
+  --------------------------------------------- */
+
+  const nomeSeguro =
+    limparNomeArquivo(
+      nomeProduto
+    ) ||
+    "produto";
+
+
   const nomeArquivo =
     Date.now() +
     "-" +
-    limparNomeArquivo(nomeProduto) +
+    nomeSeguro +
     "." +
     extensao;
 
 
   const pasta =
-    pastaCategoria(nomeCategoria);
+    pastaCategoria(
+      nomeCategoria
+    );
 
 
   const caminho =
-    pasta + "/" + nomeArquivo;
+    pasta +
+    "/" +
+    nomeArquivo;
 
+
+  console.log(
+    "Enviando foto:",
+    caminho
+  );
+
+
+  /* ---------------------------------------------
+     UPLOAD
+  --------------------------------------------- */
 
   const { error } =
     await supabaseClient.storage
@@ -991,7 +1614,8 @@ async function enviarFoto(
         arquivo,
         {
           cacheControl: "3600",
-          upsert: true
+          upsert: false,
+          contentType: arquivo.type
         }
       );
 
@@ -999,21 +1623,58 @@ async function enviarFoto(
   if (error) {
 
     console.error(
-      "Erro no upload:",
+      "Erro completo do Storage:",
       error
     );
 
+
+    if (
+      error.message &&
+      error.message
+        .toLowerCase()
+        .includes("row-level security")
+    ) {
+
+      throw new Error(
+        "O Storage bloqueou o upload por RLS. Precisamos ajustar a política do bucket produtos no Supabase."
+      );
+
+    }
+
+
     throw new Error(
+      error.message ||
       "Erro ao enviar a foto."
     );
 
   }
 
 
+  /* ---------------------------------------------
+     URL PÚBLICA
+  --------------------------------------------- */
+
   const { data } =
     supabaseClient.storage
       .from("produtos")
-      .getPublicUrl(caminho);
+      .getPublicUrl(
+        caminho
+      );
+
+
+  if (!data || !data.publicUrl) {
+
+    throw new Error(
+      "A foto foi enviada, mas não foi possível obter a URL."
+    );
+
+  }
+
+
+  console.log(
+    "Foto enviada:",
+    data.publicUrl
+  );
 
 
   return data.publicUrl;
@@ -1027,63 +1688,86 @@ async function enviarFoto(
 
 async function salvarProduto() {
 
+  const botao =
+    document.getElementById(
+      "btn-salvar"
+    );
+
+
   const id =
-    document.getElementById("produto-id").value;
+    document
+      .getElementById("produto-id")
+      .value;
 
 
   const nome =
-    document.getElementById("nome")
-      .value.trim();
+    document
+      .getElementById("nome")
+      .value
+      .trim();
 
 
   const descricao =
-    document.getElementById("descricao")
-      .value.trim();
+    document
+      .getElementById("descricao")
+      .value
+      .trim();
 
 
   const preco =
-    document.getElementById("preco")
+    document
+      .getElementById("preco")
       .value;
 
 
   const categoriaId =
-    document.getElementById("categoria")
+    document
+      .getElementById("categoria")
       .value;
 
 
   const material =
-    document.getElementById("material")
-      .value.trim();
+    document
+      .getElementById("material")
+      .value
+      .trim();
 
 
   const dimensoes =
-    document.getElementById("dimensoes")
-      .value.trim();
+    document
+      .getElementById("dimensoes")
+      .value
+      .trim();
 
 
   const cores =
-    document.getElementById("cores")
-      .value.trim();
+    document
+      .getElementById("cores")
+      .value
+      .trim();
 
 
   const disponivel =
-    document.getElementById("disponivel")
+    document
+      .getElementById("disponivel")
       .checked;
 
 
   const destaque =
-    document.getElementById("destaque")
+    document
+      .getElementById("destaque")
       .checked;
 
 
   const arquivo =
-    document.getElementById("foto")
+    document
+      .getElementById("foto")
       .files[0];
 
 
-  /* =========================
+  /* ---------------------------------------------
      VALIDAÇÃO
-  ========================= */
+  --------------------------------------------- */
 
   if (
     !nome ||
@@ -1105,23 +1789,39 @@ async function salvarProduto() {
   }
 
 
+  botao.disabled = true;
+
+  botao.textContent =
+    arquivo
+      ? "⏳ Enviando foto..."
+      : "⏳ Salvando...";
+
+
   try {
 
-    /* =========================
-       DESCOBRIR CATEGORIA
-    ========================= */
+    /* ---------------------------------------------
+       CATEGORIA
+    --------------------------------------------- */
 
-    const { data: categoriaData, error: categoriaError } =
+    const {
+      data: categoriaData,
+      error: categoriaError
+    } =
       await supabaseClient
         .from("categorias")
         .select("*")
-        .eq("id", categoriaId)
+        .eq(
+          "id",
+          categoriaId
+        )
         .single();
 
 
     if (categoriaError) {
 
-      console.error(categoriaError);
+      console.error(
+        categoriaError
+      );
 
       throw new Error(
         "Não foi possível identificar a categoria."
@@ -1137,9 +1837,9 @@ async function salvarProduto() {
       "Outros";
 
 
-    /* =========================
+    /* ---------------------------------------------
        FOTO
-    ========================= */
+    --------------------------------------------- */
 
     let imagemUrl = null;
 
@@ -1156,9 +1856,9 @@ async function salvarProduto() {
     }
 
 
-    /* =========================
+    /* ---------------------------------------------
        DADOS
-    ========================= */
+    --------------------------------------------- */
 
     const dados = {
 
@@ -1200,9 +1900,9 @@ async function salvarProduto() {
     }
 
 
-    /* =========================
+    /* ---------------------------------------------
        UPDATE
-    ========================= */
+    --------------------------------------------- */
 
     let resultado;
 
@@ -1212,22 +1912,29 @@ async function salvarProduto() {
       resultado =
         await supabaseClient
           .from("produtos")
-          .update(dados)
-          .eq("id", id);
+          .update(
+            dados
+          )
+          .eq(
+            "id",
+            id
+          );
 
     }
 
 
-    /* =========================
+    /* ---------------------------------------------
        INSERT
-    ========================= */
+    --------------------------------------------- */
 
     else {
 
       resultado =
         await supabaseClient
           .from("produtos")
-          .insert([dados]);
+          .insert([
+            dados
+          ]);
 
     }
 
@@ -1235,17 +1942,21 @@ async function salvarProduto() {
     if (resultado.error) {
 
       console.error(
+        "Erro banco:",
         resultado.error
       );
 
-      throw resultado.error;
+      throw new Error(
+        resultado.error.message ||
+        "Não foi possível salvar o produto."
+      );
 
     }
 
 
-    /* =========================
+    /* ---------------------------------------------
        SUCESSO
-    ========================= */
+    --------------------------------------------- */
 
     mostrarMensagem(
 
@@ -1266,7 +1977,11 @@ async function salvarProduto() {
 
   catch (erro) {
 
-    console.error(erro);
+    console.error(
+      "Erro salvarProduto:",
+      erro
+    );
+
 
     mostrarMensagem(
 
@@ -1276,6 +1991,15 @@ async function salvarProduto() {
       false
 
     );
+
+  }
+
+  finally {
+
+    botao.disabled = false;
+
+    botao.textContent =
+      "💾 Salvar produto";
 
   }
 
@@ -1302,14 +2026,19 @@ async function carregarProdutos() {
     await supabaseClient
       .from("produtos")
       .select("*")
-      .order("created_at", {
-        ascending: false
-      });
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
 
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     lista.innerHTML =
       "<p>Erro ao carregar produtos.</p>";
@@ -1335,7 +2064,9 @@ async function carregarProdutos() {
   data.forEach(produto => {
 
     const item =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
     item.className =
@@ -1349,7 +2080,8 @@ async function carregarProdutos() {
 
     const preco =
       Number(
-        produto["Preço"] || 0
+        produto["Preço"] ||
+        0
       ).toLocaleString(
         "pt-BR",
         {
@@ -1366,7 +2098,7 @@ async function carregarProdutos() {
 
         ? `<img
              src="${imagem}"
-             alt="${produto["Nome"] || "Produto"}"
+             alt="Foto do produto"
            >`
 
         : `<img
@@ -1379,8 +2111,12 @@ async function carregarProdutos() {
       <div class="produto-info">
 
         <h3>
-          ${produto["Nome"] || "Produto"}
+          ${escapeHtml(
+            produto["Nome"] ||
+            "Produto"
+          )}
         </h3>
+
 
         <p>
           ${preco}
@@ -1439,7 +2175,9 @@ async function carregarProdutos() {
     `;
 
 
-    lista.appendChild(item);
+    lista.appendChild(
+      item
+    );
 
   });
 
@@ -1456,13 +2194,18 @@ async function editarProduto(id) {
     await supabaseClient
       .from("produtos")
       .select("*")
-      .eq("id", id)
+      .eq(
+        "id",
+        id
+      )
       .single();
 
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     mostrarMensagem(
       "Não foi possível carregar o produto.",
@@ -1476,7 +2219,8 @@ async function editarProduto(id) {
 
   document.getElementById(
     "produto-id"
-  ).value = data.id;
+  ).value =
+    data.id;
 
 
   document.getElementById(
@@ -1540,8 +2284,11 @@ async function editarProduto(id) {
 
 
   window.scrollTo({
+
     top: 0,
+
     behavior: "smooth"
+
   });
 
 }
@@ -1570,12 +2317,17 @@ async function excluirProduto(id) {
     await supabaseClient
       .from("produtos")
       .delete()
-      .eq("id", id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     mostrarMensagem(
       "Não foi possível excluir o produto.",
@@ -1661,7 +2413,13 @@ function novoProduto() {
 
   document.getElementById(
     "preview"
-  ).style.display = "none";
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "preview"
+  ).src = "";
 
 
   document.getElementById(
@@ -1701,14 +2459,81 @@ function mostrarMensagem(
     "block";
 
 
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+
   setTimeout(() => {
 
     elemento.style.display =
       "none";
 
-  }, 5000);
+  }, 7000);
 
 }
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escapeHtml(valor) {
+
+  return String(valor)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   TECLA ENTER NO LOGIN
+===================================================== */
+
+document
+  .getElementById("senha")
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        entrar();
+
+      }
+
+    }
+  );
 
 
 /* =====================================================
