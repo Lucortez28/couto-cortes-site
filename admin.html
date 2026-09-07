@@ -1,887 +1,432 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Painel Administrativo - Cometa 3D</title>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-  <style>
-
-    :root {
-
-      --bg: #050711;
-      --bg2: #0a1022;
-
-      --surface: #ffffff;
-
-      --text: #172033;
-      --muted: #667085;
-
-      --cyan: #12e6ff;
-      --blue: #2f70ff;
-      --purple: #7047ff;
-      --magenta: #ed19d7;
-
-      --gradient:
-        linear-gradient(
-          135deg,
-          var(--cyan),
-          var(--blue) 45%,
-          var(--magenta)
-        );
-
-    }
-
-
-    * {
-
-      box-sizing: border-box;
-
-      margin: 0;
-      padding: 0;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    }
-
-
-    body {
-
-      background: #f4f6fb;
-
-      color: var(--text);
-
-    }
-
-
-    /* ============================
-       HEADER
-    ============================ */
-
-    header {
-
-      background:
-        linear-gradient(
-          135deg,
-          #050711,
-          #0a1022
-        );
-
-      color: white;
-
-      padding: 14px 25px;
-
-      display: flex;
-
-      justify-content:
-        space-between;
-
-      align-items: center;
-
-      box-shadow:
-        0 3px 18px rgba(0,0,0,.20);
-
-      gap: 15px;
-
-      flex-wrap: wrap;
-
-      border-bottom:
-        1px solid rgba(
-          18,
-          230,
-          255,
-          .20
-        );
-
-    }
-
-
-    .brand {
-
-      display: flex;
-
-      align-items: center;
-
-    }
-
-
-    .brand img {
-
-      width: 180px;
-
-      height: 55px;
-
-      object-fit: contain;
-
-    }
-
-
-    header small {
-
-      color: #aeb8d0;
-
-      font-size: 14px;
-
-      margin-left: 8px;
-
-    }
-
-
-    /* ============================
-       BOTÕES
-    ============================ */
-
-    button {
-
-      border: none;
-
-      cursor: pointer;
-
-      border-radius: 8px;
-
-      padding: 11px 16px;
-
-      font-weight: bold;
-
-      transition: .2s;
-
-    }
-
-
-    button:hover:not(:disabled) {
-
-      transform:
-        translateY(-1px);
-
-    }
-
-
-    button:disabled {
-
-      opacity: .6;
-
-      cursor:
-        not-allowed;
-
-    }
-
-
-    .btn-primary {
-
-      background:
-        var(--gradient);
-
-      color: white;
-
-    }
-
-
-    .btn-danger {
-
-      background:
-        #e53935;
-
-      color: white;
-
-    }
-
-
-    .btn-secondary {
-
-      background:
-        #667085;
-
-      color: white;
-
-    }
-
-
-    .btn-success {
-
-      background:
-        #027a48;
-
-      color: white;
-
-    }
-
-
-    /* ============================
-       CONTAINER
-    ============================ */
-
-    .container {
-
-      max-width: 1100px;
-
-      margin:
-        30px auto;
-
-      padding:
-        0 20px;
-
-    }
-
-
-    /* ============================
-       LOGIN
-    ============================ */
-
-    .login {
-
-      max-width: 420px;
-
-      margin:
-        80px auto;
-
-      background: white;
-
-      padding: 30px;
-
-      border-radius: 15px;
-
-      box-shadow:
-        0 4px 25px
-        rgba(0,0,0,.08);
-
-    }
-
-
-    .login h2 {
-
-      text-align: center;
-
-      margin-bottom: 25px;
-
-    }
-
-
-    .login h2::first-letter {
-
-      color:
-        var(--blue);
-
-    }
-
-
-    .form-group {
-
-      margin-bottom: 16px;
-
-    }
-
-
-    label {
-
-      display: block;
-
-      font-weight: bold;
-
-      margin-bottom: 6px;
-
-    }
-
-
-    input,
-    textarea,
-    select {
-
-      width: 100%;
-
-      padding: 12px;
-
-      border:
-        1px solid #d0d5dd;
-
-      border-radius: 8px;
-
-      font-size: 15px;
-
-      background: white;
-
-      color: var(--text);
-
-    }
-
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-
-      outline: none;
-
-      border-color:
-        var(--blue);
-
-      box-shadow:
-        0 0 0 3px
-        rgba(
-          47,
-          112,
-          255,
-          .10
-        );
-
-    }
-
-
-    textarea {
-
-      min-height: 100px;
-
-      resize: vertical;
-
-    }
-
-
-    .login button {
-
-      width: 100%;
-
-      margin-top: 10px;
-
-    }
-
-
-    .erro {
-
-      color:
-        #e53935;
-
-      margin-top: 15px;
-
-      text-align: center;
-
-      font-size: 14px;
-
-    }
-
-
-    .painel {
-
-      display: none;
-
-    }
-
-
-    /* ============================
-       TOPO DO PAINEL
-    ============================ */
-
-    .topo-painel {
-
-      display: flex;
-
-      justify-content:
-        space-between;
-
-      align-items: center;
-
-      margin-bottom: 25px;
-
-      gap: 15px;
-
-      flex-wrap: wrap;
-
-    }
-
-
-    .topo-painel h2 {
-
-      margin-bottom: 5px;
-
-    }
-
-
-    .topo-painel p {
-
-      color:
-        var(--muted);
-
-    }
-
-
-    /* ============================
-       CARDS
-    ============================ */
-
-    .card {
-
-      background: white;
-
-      border-radius: 15px;
-
-      padding: 25px;
-
-      margin-bottom: 25px;
-
-      box-shadow:
-        0 3px 15px
-        rgba(0,0,0,.07);
-
-    }
-
-
-    .card h2 {
-
-      margin-bottom: 20px;
-
-    }
-
-
-    /* ============================
-       FORM GRID
-    ============================ */
-
-    .grid {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 16px;
-
-    }
-
-
-    .grid-full {
-
-      grid-column:
-        1 / -1;
-
-    }
-
-
-    /* ============================
-       CHECKBOX
-    ============================ */
-
-    .checks {
-
-      display: flex;
-
-      gap: 25px;
-
-      flex-wrap: wrap;
-
-      margin:
-        10px 0;
-
-    }
-
-
-    .checks label {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-    }
-
-
-    .checks input {
-
-      width: auto;
-
-    }
-
-
-    /* ============================
-       FOTO
-    ============================ */
-
-    .foto-preview {
-
-      width: 150px;
-
-      height: 150px;
-
-      object-fit: cover;
-
-      border-radius: 10px;
-
-      border:
-        1px solid #ddd;
-
-      display: none;
-
-      margin-top: 10px;
-
-    }
-
-
-    /* ============================
-       PRODUTOS
-    ============================ */
-
-    .produtos {
-
-      display: grid;
-
-      gap: 12px;
-
-    }
-
-
-    .produto {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 15px;
-
-      border:
-        1px solid #e4e7ec;
-
-      padding: 12px;
-
-      border-radius: 10px;
-
-    }
-
-
-    .produto img {
-
-      width: 75px;
-
-      height: 75px;
-
-      object-fit: cover;
-
-      border-radius: 8px;
-
-      background: #eee;
-
-    }
-
-
-    .produto-info {
-
-      flex: 1;
-
-    }
-
-
-    .produto-info h3 {
-
-      margin-bottom: 5px;
-
-    }
-
-
-    .produto-info p {
-
-      color:
-        var(--muted);
-
-      font-size: 14px;
-
-    }
-
-
-    .acoes {
-
-      display: flex;
-
-      gap: 8px;
-
-      flex-wrap: wrap;
-
-    }
-
-
-    /* ============================
-       STATUS
-    ============================ */
-
-    .status {
-
-      font-size: 12px;
-
-      font-weight: bold;
-
-      padding:
-        5px 8px;
-
-      border-radius: 6px;
-
-      display: inline-block;
-
-      margin-top: 5px;
-
-      margin-right: 5px;
-
-    }
-
-
-    .ativo {
-
-      background:
-        #d1fadf;
-
-      color:
-        #027a48;
-
-    }
-
-
-    .inativo {
-
-      background:
-        #fee4e2;
-
-      color:
-        #b42318;
-
-    }
-
-
-    /* ============================
-       MENSAGENS
-    ============================ */
-
-    .mensagem {
-
-      margin-bottom: 15px;
-
-      padding: 12px;
-
-      border-radius: 8px;
-
-      display: none;
-
-    }
-
-
-    .sucesso {
-
-      background:
-        #d1fadf;
-
-      color:
-        #027a48;
-
-    }
-
-
-    .erro-msg {
-
-      background:
-        #fee4e2;
-
-      color:
-        #b42318;
-
-    }
-
-
-    .categoria-status {
-
-      margin-top: 7px;
-
-      font-size: 13px;
-
-      color:
-        var(--muted);
-
-    }
-
-
-    /* ============================
-       CONTA
-    ============================ */
-
-    .usuario-atual {
-
-      background:
-        #f2f4f7;
-
-      padding: 12px;
-
-      border-radius: 8px;
-
-      margin-bottom: 20px;
-
-      color:
-        #475467;
-
-    }
-
-
-    .usuario-atual strong {
-
-      color:
-        var(--text);
-
-    }
-
-
-    .aviso-email {
-
-      background:
-        #f0f9ff;
-
-      color:
-        #075985;
-
-      border:
-        1px solid #bae6fd;
-
-      padding: 12px;
-
-      border-radius: 8px;
-
-      margin-bottom: 15px;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-
-    }
-
-
-    .separador {
-
-      border: 0;
-
-      border-top:
-        1px solid #e4e7ec;
-
-      margin:
-        25px 0;
-
-    }
-
-
-    .botoes-form {
-
-      display: flex;
-
-      gap: 8px;
-
-      flex-wrap: wrap;
-
-    }
-
-
-    /* ============================
-       MOBILE
-    ============================ */
-
-    @media (max-width: 700px) {
-
-      .grid {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-
-      .grid-full {
-
-        grid-column: auto;
-
-      }
-
-
-      .produto {
-
-        flex-direction:
-          column;
-
-        align-items:
-          flex-start;
-
-      }
-
-
-      .produto img {
-
-        width: 100%;
-
-        height: 180px;
-
-      }
-
-
-      .acoes {
-
-        width: 100%;
-
-      }
-
-
-      .acoes button {
-
-        flex: 1;
-
-      }
-
-
-      .brand img {
-
-        width: 165px;
-
-        height: 52px;
-
-      }
-
-
-      header {
-
-        justify-content:
-          center;
-
-      }
-
-    }
-
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel Administrativo | Cometa 3D</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --bg:#050711;
+  --bg2:#0a1022;
+  --surface:#fff;
+  --surface2:#f5f7fb;
+  --text:#172033;
+  --muted:#667085;
+  --cyan:#12e6ff;
+  --blue:#2f70ff;
+  --purple:#7047ff;
+  --magenta:#ed19d7;
+  --gradient:linear-gradient(135deg,var(--cyan),var(--blue) 45%,var(--magenta));
+  --shadow:0 12px 35px rgba(20,35,80,.10);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#eef2fa 0%,#f8f9fc 100%);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:hover:not(:disabled){
+  transform:translateY(-1px);
+  filter:brightness(1.03);
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.btn-primary{
+  background:var(--gradient);
+  color:#fff;
+  box-shadow:0 7px 18px rgba(47,112,255,.22);
+}
+
+.btn-secondary{
+  background:#e8edf7;
+  color:#27334a;
+}
+
+.btn-danger{
+  background:#e53935;
+  color:#fff;
+}
+
+.container{
+  max-width:1120px;
+  margin:30px auto;
+  padding:0 20px;
+}
+
+header{
+  background:linear-gradient(135deg,var(--bg),var(--bg2));
+  color:#fff;
+  padding:13px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  border-bottom:1px solid rgba(18,230,255,.25);
+  box-shadow:0 5px 24px rgba(0,0,0,.2);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brand img{
+  width:185px;
+  height:58px;
+  object-fit:contain;
+}
+
+.brand small{
+  color:#aeb8d0;
+  font-size:14px;
+}
+
+.login{
+  max-width:430px;
+  margin:80px auto;
+  background:#fff;
+  padding:34px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  border:1px solid #e5e9f2;
+}
+
+.login-logo{
+  display:block;
+  width:210px;
+  height:80px;
+  object-fit:contain;
+  margin:0 auto 8px;
+}
+
+.login h2{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.form-group{
+  margin-bottom:16px;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:12px;
+  border:1px solid #d0d5dd;
+  border-radius:10px;
+  font-size:15px;
+  background:#fff;
+  color:var(--text);
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  outline:none;
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(47,112,255,.11);
+}
+
+textarea{
+  min-height:105px;
+  resize:vertical;
+}
+
+.login button{
+  width:100%;
+  margin-top:8px;
+}
+
+.erro{
+  color:#d92d20;
+  margin-top:14px;
+  text-align:center;
+  font-size:14px;
+}
+
+.painel{
+  display:none;
+}
+
+.topo-painel{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.topo-painel h2{
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.topo-painel p{
+  color:var(--muted);
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:26px;
+  margin-bottom:24px;
+  box-shadow:var(--shadow);
+  border:1px solid #e8ecf4;
+}
+
+.card h2{
+  margin-bottom:20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.grid-full{
+  grid-column:1/-1;
+}
+
+.checks{
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+  margin:10px 0;
+}
+
+.checks label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.checks input{
+  width:auto;
+}
+
+.botoes-form{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.foto-preview{
+  width:170px;
+  height:170px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid #d9deea;
+  display:none;
+  margin-top:10px;
+  background:#f2f4f7;
+}
+
+.mensagem{
+  margin-bottom:15px;
+  padding:13px;
+  border-radius:10px;
+  display:none;
+  font-weight:600;
+}
+
+.sucesso{
+  background:#d1fadf;
+  color:#027a48;
+}
+
+.erro-msg{
+  background:#fee4e2;
+  color:#b42318;
+}
+
+.usuario-atual{
+  background:#f2f4f7;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:18px;
+  color:#475467;
+}
+
+.usuario-atual strong{
+  color:var(--text);
+}
+
+.aviso-email{
+  background:#f0f9ff;
+  color:#075985;
+  border:1px solid #bae6fd;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:16px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.categoria-status{
+  margin-top:7px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.produtos{
+  display:grid;
+  gap:12px;
+}
+
+.produto{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  border:1px solid #e4e7ec;
+  padding:13px;
+  border-radius:12px;
+  background:#fff;
+}
+
+.produto img{
+  width:78px;
+  height:78px;
+  object-fit:cover;
+  border-radius:10px;
+  background:#eef1f6;
+}
+
+.produto-info{
+  flex:1;
+}
+
+.produto-info h3{
+  margin-bottom:5px;
+}
+
+.produto-info p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.acoes{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.status{
+  font-size:12px;
+  font-weight:700;
+  padding:5px 8px;
+  border-radius:6px;
+  display:inline-block;
+  margin-top:5px;
+  margin-right:5px;
+}
+
+.ativo{
+  background:#d1fadf;
+  color:#027a48;
+}
+
+.inativo{
+  background:#fee4e2;
+  color:#b42318;
+}
+
+@media(max-width:700px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .grid-full{
+    grid-column:auto;
+  }
+
+  .produto{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .produto img{
+    width:100%;
+    height:190px;
+  }
+
+  .acoes,
+  .acoes button{
+    width:100%;
+  }
+
+  .acoes button{
+    flex:1;
+  }
+
+  header{
+    justify-content:center;
+  }
+
+  .brand img{
+    width:165px;
+    height:52px;
+  }
+
+  .topo-painel h2{
+    font-size:23px;
+  }
+}
+</style>
 </head>
-
 
 <body>
 
+<!-- LOGIN -->
 
-<!-- =====================================================
-     LOGIN
-===================================================== -->
+<div id="login-area" class="login">
 
-<div
-  id="login-area"
-  class="login"
->
+  <img
+    src="cometa-logo.jpeg"
+    class="login-logo"
+    alt="Cometa 3D"
+  >
 
-  <h2>
-    ☄️ Painel Cometa 3D
-  </h2>
-
+  <h2>☄️ Painel Administrativo</h2>
 
   <div class="form-group">
-
-    <label>
-      E-mail
-    </label>
-
+    <label>E-mail</label>
 
     <input
       type="email"
@@ -889,16 +434,10 @@
       placeholder="Seu e-mail"
       autocomplete="username"
     >
-
   </div>
 
-
   <div class="form-group">
-
-    <label>
-      Senha
-    </label>
-
+    <label>Senha</label>
 
     <input
       type="password"
@@ -906,493 +445,398 @@
       placeholder="Sua senha"
       autocomplete="current-password"
     >
-
   </div>
-
 
   <button
     id="btn-entrar"
     class="btn-primary"
     onclick="entrar()"
   >
-
     Entrar
-
   </button>
 
-
-  <div
-    id="erro-login"
-    class="erro"
-  ></div>
+  <div id="erro-login" class="erro"></div>
 
 </div>
 
 
-<!-- =====================================================
-     PAINEL
-===================================================== -->
+<!-- PAINEL -->
 
-<div
-  id="painel-area"
-  class="painel"
->
+<div id="painel-area" class="painel">
+
+<header>
+
+  <div class="brand">
+
+    <img
+      src="cometa-logo.jpeg"
+      alt="Cometa 3D"
+    >
+
+    <small>
+      | Administração
+    </small>
+
+  </div>
+
+  <button
+    class="btn-danger"
+    onclick="sair()"
+  >
+    Sair
+  </button>
+
+</header>
 
 
-  <!-- HEADER -->
+<div class="container">
 
-  <header>
+  <div class="topo-painel">
 
-    <div class="brand">
+    <div>
 
-      <img
-        src="cometa-logo.jpeg"
-        alt="Cometa 3D"
-      >
+      <h2>
+        Gerenciar produtos
+      </h2>
 
-      <small>
-        | Administração
-      </small>
+      <p>
+        Cadastre e gerencie os produtos da Cometa 3D.
+      </p>
+
+    </div>
+
+    <button
+      class="btn-primary"
+      onclick="novoProduto()"
+    >
+      ＋ Novo produto
+    </button>
+
+  </div>
+
+
+  <div
+    id="mensagem"
+    class="mensagem"
+  ></div>
+
+
+  <!-- MINHA CONTA -->
+
+  <div class="card">
+
+    <h2>
+      ⚙️ Minha conta
+    </h2>
+
+    <div class="usuario-atual">
+
+      Usuário conectado:
+
+      <strong id="usuario-atual">
+        Carregando...
+      </strong>
+
+    </div>
+
+    <div class="aviso-email">
+
+      <strong>Importante:</strong>
+
+      ao alterar o e-mail, o Supabase pode solicitar
+      confirmação no novo endereço.
+
+    </div>
+
+
+    <div class="grid">
+
+      <div class="form-group">
+
+        <label>
+          Novo e-mail
+        </label>
+
+        <input
+          type="email"
+          id="novo-email"
+          placeholder="Novo e-mail"
+          autocomplete="email"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Nova senha
+        </label>
+
+        <input
+          type="password"
+          id="nova-senha"
+          placeholder="Digite a nova senha"
+          autocomplete="new-password"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Confirmar nova senha
+        </label>
+
+        <input
+          type="password"
+          id="confirmar-senha"
+          placeholder="Repita a nova senha"
+          autocomplete="new-password"
+        >
+
+      </div>
 
     </div>
 
 
     <button
-      class="btn-danger"
-      onclick="sair()"
+      class="btn-primary"
+      onclick="atualizarConta()"
     >
-
-      Sair
-
+      🔐 Atualizar conta
     </button>
 
-  </header>
+  </div>
 
 
-  <div class="container">
+  <!-- PRODUTO -->
+
+  <div class="card">
+
+    <h2 id="titulo-formulario">
+      ➕ Cadastrar produto
+    </h2>
+
+    <input
+      type="hidden"
+      id="produto-id"
+    >
 
 
-    <!-- TOPO -->
+    <div class="grid">
 
-    <div class="topo-painel">
+      <div class="form-group">
 
-      <div>
+        <label>
+          Nome do produto *
+        </label>
 
-        <h2>
-          Gerenciar produtos
-        </h2>
-
-        <p>
-          Cadastre e gerencie os produtos da Cometa 3D.
-        </p>
+        <input
+          id="nome"
+          placeholder="Ex.: Chaveiro personalizado"
+        >
 
       </div>
 
+
+      <div class="form-group">
+
+        <label>
+          Preço *
+        </label>
+
+        <input
+          type="number"
+          id="preco"
+          step="0.01"
+          min="0"
+          placeholder="29.90"
+        >
+
+      </div>
+
+
+      <div class="form-group grid-full">
+
+        <label>
+          Descrição *
+        </label>
+
+        <textarea
+          id="descricao"
+          placeholder="Descreva o produto..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Categoria *
+        </label>
+
+        <select id="categoria">
+
+          <option value="">
+            Carregando categorias...
+          </option>
+
+        </select>
+
+        <div
+          id="categoria-status"
+          class="categoria-status"
+        ></div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Material *
+        </label>
+
+        <input
+          id="material"
+          placeholder="PLA"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Dimensões *
+        </label>
+
+        <input
+          id="dimensoes"
+          placeholder="10 x 10 x 15 cm"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Cores *
+        </label>
+
+        <input
+          id="cores"
+          placeholder="Preto, branco, azul..."
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Foto do produto
+        </label>
+
+        <input
+          type="file"
+          id="foto"
+          accept="image/jpeg,image/png,image/webp,image/gif"
+          onchange="previewFoto()"
+        >
+
+        <img
+          id="preview"
+          class="foto-preview"
+          alt="Pré-visualização"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="checks">
+
+      <label>
+
+        <input
+          type="checkbox"
+          id="disponivel"
+          checked
+        >
+
+        Produto disponível
+
+      </label>
+
+
+      <label>
+
+        <input
+          type="checkbox"
+          id="destaque"
+        >
+
+        Produto em destaque ⭐
+
+      </label>
+
+    </div>
+
+
+    <div class="botoes-form">
+
+      <button
+        id="btn-salvar"
+        class="btn-primary"
+        onclick="salvarProduto()"
+      >
+        💾 Salvar produto
+      </button>
 
       <button
         class="btn-secondary"
         onclick="novoProduto()"
       >
-
-        + Novo produto
-
+        Cancelar
       </button>
 
     </div>
 
+  </div>
+
+
+  <!-- LISTA DE PRODUTOS -->
+
+  <div class="card">
+
+    <h2>
+      📦 Produtos cadastrados
+    </h2>
 
     <div
-      id="mensagem"
-      class="mensagem"
-    ></div>
-
-
-    <!-- =================================================
-         CONTA
-    ================================================== -->
-
-    <div class="card">
-
-      <h2>
-        ⚙️ Minha conta
-      </h2>
-
-
-      <div class="usuario-atual">
-
-        Usuário conectado:
-
-        <strong id="usuario-atual">
-          Carregando...
-        </strong>
-
-      </div>
-
-
-      <div class="aviso-email">
-
-        <strong>Importante:</strong>
-
-        Ao alterar o e-mail, o Supabase pode enviar
-        uma mensagem de confirmação para o novo endereço.
-        Confirme o e-mail recebido para concluir a alteração.
-
-      </div>
-
-
-      <div class="grid">
-
-
-        <div class="form-group">
-
-          <label>
-            Novo e-mail
-          </label>
-
-          <input
-            type="email"
-            id="novo-email"
-            placeholder="Novo e-mail"
-            autocomplete="email"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>
-            Nova senha
-          </label>
-
-          <input
-            type="password"
-            id="nova-senha"
-            placeholder="Digite a nova senha"
-            autocomplete="new-password"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>
-            Confirmar nova senha
-          </label>
-
-          <input
-            type="password"
-            id="confirmar-senha"
-            placeholder="Repita a nova senha"
-            autocomplete="new-password"
-          >
-
-        </div>
-
-
-      </div>
-
-
-      <div class="botoes-form">
-
-        <button
-          class="btn-primary"
-          onclick="atualizarConta()"
-        >
-
-          🔐 Atualizar conta
-
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- =================================================
-         PRODUTO
-    ================================================== -->
-
-    <div class="card">
-
-      <h2 id="titulo-formulario">
-
-        ➕ Cadastrar produto
-
-      </h2>
-
-
-      <input
-        type="hidden"
-        id="produto-id"
-      >
-
-
-      <div class="grid">
-
-
-        <!-- NOME -->
-
-        <div class="form-group">
-
-          <label>
-            Nome do produto *
-          </label>
-
-
-          <input
-            type="text"
-            id="nome"
-            placeholder="Ex.: Chaveiro personalizado"
-          >
-
-        </div>
-
-
-        <!-- PREÇO -->
-
-        <div class="form-group">
-
-          <label>
-            Preço *
-          </label>
-
-
-          <input
-            type="number"
-            id="preco"
-            step="0.01"
-            min="0"
-            placeholder="29.90"
-          >
-
-        </div>
-
-
-        <!-- DESCRIÇÃO -->
-
-        <div class="form-group grid-full">
-
-          <label>
-            Descrição *
-          </label>
-
-
-          <textarea
-            id="descricao"
-            placeholder="Descreva o produto..."
-          ></textarea>
-
-        </div>
-
-
-        <!-- CATEGORIA -->
-
-        <div class="form-group">
-
-          <label>
-            Categoria *
-          </label>
-
-
-          <select id="categoria">
-
-            <option value="">
-              Carregando categorias...
-            </option>
-
-          </select>
-
-
-          <div
-            id="categoria-status"
-            class="categoria-status"
-          ></div>
-
-        </div>
-
-
-        <!-- MATERIAL -->
-
-        <div class="form-group">
-
-          <label>
-            Material *
-          </label>
-
-
-          <input
-            type="text"
-            id="material"
-            placeholder="PLA"
-          >
-
-        </div>
-
-
-        <!-- DIMENSÕES -->
-
-        <div class="form-group">
-
-          <label>
-            Dimensões *
-          </label>
-
-
-          <input
-            type="text"
-            id="dimensoes"
-            placeholder="10 x 10 x 15 cm"
-          >
-
-        </div>
-
-
-        <!-- CORES -->
-
-        <div class="form-group">
-
-          <label>
-            Cores *
-          </label>
-
-
-          <input
-            type="text"
-            id="cores"
-            placeholder="Preto, branco, azul..."
-          >
-
-        </div>
-
-
-        <!-- FOTO -->
-
-        <div class="form-group grid-full">
-
-          <label>
-            Foto do produto
-          </label>
-
-
-          <input
-            type="file"
-            id="foto"
-            accept="image/jpeg,image/png,image/webp,image/gif"
-            onchange="previewFoto()"
-          >
-
-
-          <img
-            id="preview"
-            class="foto-preview"
-            alt="Pré-visualização"
-          >
-
-        </div>
-
-      </div>
-
-
-      <!-- OPÇÕES -->
-
-      <div class="checks">
-
-        <label>
-
-          <input
-            type="checkbox"
-            id="disponivel"
-            checked
-          >
-
-          Produto disponível
-
-        </label>
-
-
-        <label>
-
-          <input
-            type="checkbox"
-            id="destaque"
-          >
-
-          Produto em destaque ⭐
-
-        </label>
-
-      </div>
-
-
-      <br>
-
-
-      <div class="botoes-form">
-
-        <button
-          id="btn-salvar"
-          class="btn-primary"
-          onclick="salvarProduto()"
-        >
-
-          💾 Salvar produto
-
-        </button>
-
-
-        <button
-          class="btn-secondary"
-          onclick="novoProduto()"
-        >
-
-          Cancelar
-
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- =================================================
-         LISTA
-    ================================================== -->
-
-    <div class="card">
-
-      <h2>
-        📦 Produtos cadastrados
-      </h2>
-
-
-      <div
-        id="lista-produtos"
-        class="produtos"
-      >
-
-        Carregando produtos...
-
-      </div>
-
+      id="lista-produtos"
+      class="produtos"
+    >
+      Carregando produtos...
     </div>
 
   </div>
 
 </div>
 
+</div>
+
 
 <script>
 
-
-/* =====================================================
-   SUPABASE
-===================================================== */
-
 const SUPABASE_URL =
   "https://sixuzdcsafbqgkijhrkn.supabase.co";
-
 
 const SUPABASE_KEY =
   "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
@@ -1405,127 +849,86 @@ const supabaseClient =
   );
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* LOGIN */
 
-async function entrar() {
+async function entrar(){
 
   const email =
-    document
-      .getElementById("email")
-      .value
-      .trim();
-
+    document.getElementById("email").value.trim();
 
   const senha =
-    document
-      .getElementById("senha")
-      .value;
-
+    document.getElementById("senha").value;
 
   const erro =
-    document
-      .getElementById("erro-login");
-
+    document.getElementById("erro-login");
 
   const botao =
-    document
-      .getElementById("btn-entrar");
+    document.getElementById("btn-entrar");
 
 
   erro.textContent = "";
 
 
-  if (!email || !senha) {
+  if(!email || !senha){
 
     erro.textContent =
       "Digite o e-mail e a senha.";
 
     return;
-
   }
 
 
   botao.disabled = true;
-
-  botao.textContent =
-    "Entrando...";
+  botao.textContent = "Entrando...";
 
 
-  try {
+  try{
 
     const {
       data,
       error
     } =
-      await supabaseClient.auth
-        .signInWithPassword({
+      await supabaseClient.auth.signInWithPassword({
 
-          email: email,
+        email,
+        password: senha
 
-          password: senha
-
-        });
+      });
 
 
-    if (error) {
+    if(error || !data.session){
 
-      console.error(
-        "Erro login:",
+      erro.textContent =
         error
-      );
-
-      erro.textContent =
-        "E-mail ou senha incorretos.";
+          ? "E-mail ou senha incorretos."
+          : "Login realizado, mas a sessão não foi criada.";
 
       return;
-
-    }
-
-
-    if (!data.session) {
-
-      erro.textContent =
-        "Login realizado, mas a sessão não foi criada.";
-
-      return;
-
     }
 
 
     mostrarPainel();
 
-  }
+  }catch(e){
 
-  catch (erroInterno) {
-
-    console.error(
-      erroInterno
-    );
+    console.error(e);
 
     erro.textContent =
       "Não foi possível realizar o login.";
 
-  }
-
-  finally {
+  }finally{
 
     botao.disabled = false;
-
-    botao.textContent =
-      "Entrar";
+    botao.textContent = "Entrar";
 
   }
 
 }
 
 
-/* =====================================================
-   SAIR
-===================================================== */
+/* SAIR */
 
-async function sair() {
+async function sair(){
 
   await supabaseClient.auth.signOut();
 
@@ -1534,90 +937,55 @@ async function sair() {
 }
 
 
-/* =====================================================
-   VERIFICAR LOGIN
-===================================================== */
+/* VERIFICAR LOGIN */
 
-async function verificarLogin() {
+async function verificarLogin(){
 
-  try {
-
-    const {
-      data
-    } =
-      await supabaseClient.auth
-        .getSession();
+  const {data} =
+    await supabaseClient.auth.getSession();
 
 
-    if (data.session) {
+  if(data.session){
 
-      mostrarPainel();
+    mostrarPainel();
 
-    }
+  }else{
 
-    else {
-
-      document
-        .getElementById(
-          "login-area"
-        )
-        .style.display =
-        "block";
-
-    }
-
-  }
-
-  catch (erro) {
-
-    console.error(
-      "Erro ao verificar sessão:",
-      erro
-    );
+    document.getElementById(
+      "login-area"
+    ).style.display = "block";
 
   }
 
 }
 
 
-/* =====================================================
-   MOSTRAR PAINEL
-===================================================== */
+/* MOSTRAR PAINEL */
 
-async function mostrarPainel() {
+async function mostrarPainel(){
 
-  document
-    .getElementById(
-      "login-area"
-    )
-    .style.display =
-    "none";
+  document.getElementById(
+    "login-area"
+  ).style.display = "none";
 
 
-  document
-    .getElementById(
-      "painel-area"
-    )
-    .style.display =
-    "block";
+  document.getElementById(
+    "painel-area"
+  ).style.display = "block";
 
 
   carregarUsuarioAtual();
-
   carregarCategorias();
-
   carregarProdutos();
 
 }
 
 
-/* =====================================================
-   USUÁRIO
-===================================================== */
+/* USUÁRIO */
 
-async function carregarUsuarioAtual() {
+async function carregarUsuarioAtual(){
 
-  const elemento =
+  const el =
     document.getElementById(
       "usuario-atual"
     );
@@ -1627,65 +995,43 @@ async function carregarUsuarioAtual() {
     data,
     error
   } =
-    await supabaseClient.auth
-      .getUser();
+    await supabaseClient.auth.getUser();
 
 
-  if (
-    error ||
-    !data.user
-  ) {
-
-    elemento.textContent =
-      "Não identificado";
-
-    return;
-
-  }
-
-
-  elemento.textContent =
-    data.user.email ||
-    "Sem e-mail";
+  el.textContent =
+    error || !data.user
+      ? "Não identificado"
+      : (
+          data.user.email ||
+          "Sem e-mail"
+        );
 
 }
 
 
-/* =====================================================
-   CONTA
-===================================================== */
+/* ATUALIZAR CONTA */
 
-async function atualizarConta() {
+async function atualizarConta(){
 
   const novoEmail =
-    document
-      .getElementById(
-        "novo-email"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "novo-email"
+    ).value.trim();
 
 
   const novaSenha =
-    document
-      .getElementById(
-        "nova-senha"
-      )
-      .value;
+    document.getElementById(
+      "nova-senha"
+    ).value;
 
 
-  const confirmarSenha =
-    document
-      .getElementById(
-        "confirmar-senha"
-      )
-      .value;
+  const confirmar =
+    document.getElementById(
+      "confirmar-senha"
+    ).value;
 
 
-  if (
-    !novoEmail &&
-    !novaSenha
-  ) {
+  if(!novoEmail && !novaSenha){
 
     mostrarMensagem(
       "Digite um novo e-mail ou uma nova senha.",
@@ -1697,149 +1043,95 @@ async function atualizarConta() {
   }
 
 
-  if (novaSenha) {
+  if(
+    novaSenha &&
+    (
+      novaSenha.length < 6 ||
+      novaSenha !== confirmar
+    )
+  ){
 
-    if (
+    mostrarMensagem(
+
       novaSenha.length < 6
-    ) {
+        ? "A nova senha deve ter pelo menos 6 caracteres."
+        : "As senhas não são iguais.",
 
-      mostrarMensagem(
-        "A nova senha deve ter pelo menos 6 caracteres.",
-        false
-      );
+      false
 
-      return;
+    );
 
-    }
-
-
-    if (
-      novaSenha !==
-      confirmarSenha
-    ) {
-
-      mostrarMensagem(
-        "As senhas não são iguais.",
-        false
-      );
-
-      return;
-
-    }
+    return;
 
   }
 
 
-  try {
-
-    const alteracoes = {};
+  const alteracoes = {};
 
 
-    if (novoEmail) {
-
-      alteracoes.email =
-        novoEmail;
-
-    }
+  if(novoEmail)
+    alteracoes.email = novoEmail;
 
 
-    if (novaSenha) {
-
-      alteracoes.password =
-        novaSenha;
-
-    }
+  if(novaSenha)
+    alteracoes.password = novaSenha;
 
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth
-        .updateUser(
-          alteracoes
-        );
-
-
-    if (error) {
-
-      console.error(
-        "Erro conta:",
-        error
-      );
-
-      mostrarMensagem(
-        error.message ||
-        "Não foi possível atualizar a conta.",
-        false
-      );
-
-      return;
-
-    }
-
-
-    document
-      .getElementById(
-        "novo-email"
-      )
-      .value = "";
-
-
-    document
-      .getElementById(
-        "nova-senha"
-      )
-      .value = "";
-
-
-    document
-      .getElementById(
-        "confirmar-senha"
-      )
-      .value = "";
-
-
-    mostrarMensagem(
-      novoEmail && novaSenha
-
-        ? "Dados atualizados com sucesso! Confirme o novo e-mail caso o Supabase solicite."
-
-        : novoEmail
-
-          ? "E-mail atualizado! Verifique sua caixa de entrada caso seja solicitada confirmação."
-
-          : "Senha atualizada com sucesso! 🔐",
-
-      true
+  const {error} =
+    await supabaseClient.auth.updateUser(
+      alteracoes
     );
 
 
-    carregarUsuarioAtual();
-
-  }
-
-  catch (erro) {
-
-    console.error(
-      erro
-    );
+  if(error){
 
     mostrarMensagem(
+      error.message ||
       "Não foi possível atualizar a conta.",
       false
     );
 
+    return;
+
   }
+
+
+  document.getElementById(
+    "novo-email"
+  ).value = "";
+
+
+  document.getElementById(
+    "nova-senha"
+  ).value = "";
+
+
+  document.getElementById(
+    "confirmar-senha"
+  ).value = "";
+
+
+  mostrarMensagem(
+
+    novoEmail && novaSenha
+      ? "Dados atualizados com sucesso! Confirme o novo e-mail caso solicitado."
+      : novoEmail
+        ? "E-mail atualizado! Verifique sua caixa de entrada caso solicitado."
+        : "Senha atualizada com sucesso! 🔐",
+
+    true
+
+  );
+
+
+  carregarUsuarioAtual();
 
 }
 
 
-/* =====================================================
-   CATEGORIAS
-===================================================== */
+/* CATEGORIAS */
 
-async function carregarCategorias() {
+async function carregarCategorias(){
 
   const select =
     document.getElementById(
@@ -1856,137 +1148,89 @@ async function carregarCategorias() {
   select.innerHTML =
     '<option value="">Carregando categorias...</option>';
 
-
   status.textContent = "";
 
 
-  try {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("categorias")
-        .select("*")
-        .order(
-          "id",
-          {
-            ascending: true
-          }
-        );
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("categorias")
+      .select("*")
+      .order("id", {
+        ascending:true
+      });
 
 
-    if (error) {
-
-      console.error(
-        "Erro categorias:",
-        error
-      );
-
-
-      select.innerHTML =
-        '<option value="">Erro ao carregar categorias</option>';
-
-
-      status.textContent =
-        "Erro ao consultar as categorias.";
-
-      return;
-
-    }
-
-
-    if (
-      !data ||
-      data.length === 0
-    ) {
-
-      select.innerHTML =
-        '<option value="">Nenhuma categoria encontrada</option>';
-
-
-      status.textContent =
-        "A tabela de categorias está vazia.";
-
-      return;
-
-    }
-
-
-    select.innerHTML =
-      '<option value="">Selecione uma categoria</option>';
-
-
-    data.forEach(
-      categoria => {
-
-        const option =
-          document.createElement(
-            "option"
-          );
-
-
-        option.value =
-          categoria.id;
-
-
-        const nomeCategoria =
-          categoria["Nome"] ||
-          categoria["nome"] ||
-          categoria.nome_categoria ||
-          "Categoria";
-
-
-        option.textContent =
-          nomeCategoria;
-
-
-        select.appendChild(
-          option
-        );
-
-      }
-    );
-
-
-    status.textContent =
-      data.length +
-      " categorias disponíveis.";
-
-  }
-
-  catch (erro) {
-
-    console.error(
-      erro
-    );
-
+  if(error){
 
     select.innerHTML =
       '<option value="">Erro ao carregar categorias</option>';
 
-
     status.textContent =
-      "Não foi possível carregar as categorias.";
+      "Erro ao consultar as categorias.";
+
+    return;
 
   }
+
+
+  if(!data?.length){
+
+    select.innerHTML =
+      '<option value="">Nenhuma categoria encontrada</option>';
+
+    status.textContent =
+      "A tabela de categorias está vazia.";
+
+    return;
+
+  }
+
+
+  select.innerHTML =
+    '<option value="">Selecione uma categoria</option>';
+
+
+  data.forEach(c => {
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+
+    option.value = c.id;
+
+
+    option.textContent =
+      c["Nome"] ||
+      c["nome"] ||
+      c.nome_categoria ||
+      "Categoria";
+
+
+    select.appendChild(option);
+
+  });
+
+
+  status.textContent =
+    data.length +
+    " categorias disponíveis.";
 
 }
 
 
-/* =====================================================
-   PREVIEW
-===================================================== */
+/* PREVIEW FOTO */
 
-function previewFoto() {
+function previewFoto(){
 
   const arquivo =
-    document
-      .getElementById(
-        "foto"
-      )
-      .files[0];
+    document.getElementById(
+      "foto"
+    ).files[0];
 
 
   const preview =
@@ -1995,11 +1239,9 @@ function previewFoto() {
     );
 
 
-  if (!arquivo) {
+  if(!arquivo){
 
-    preview.style.display =
-      "none";
-
+    preview.style.display = "none";
     preview.src = "";
 
     return;
@@ -2007,27 +1249,18 @@ function previewFoto() {
   }
 
 
-  if (
-    !arquivo.type.startsWith(
-      "image/"
-    )
-  ) {
+  if(!arquivo.type.startsWith("image/")){
 
     mostrarMensagem(
       "Selecione uma imagem válida.",
       false
     );
 
+    document.getElementById(
+      "foto"
+    ).value = "";
 
-    document
-      .getElementById(
-        "foto"
-      )
-      .value = "";
-
-
-    preview.style.display =
-      "none";
+    preview.style.display = "none";
 
     return;
 
@@ -2046,49 +1279,35 @@ function previewFoto() {
 }
 
 
-/* =====================================================
-   LIMPAR NOME
-===================================================== */
+/* LIMPAR NOME */
 
-function limparNomeArquivo(
-  texto
-) {
+function limparNomeArquivo(texto){
 
-  return texto
-
+  return String(texto || "")
     .normalize("NFD")
-
     .replace(
       /[\u0300-\u036f]/g,
       ""
     )
-
     .toLowerCase()
-
     .replace(
       /[^a-z0-9]+/g,
       "-"
     )
-
     .replace(
       /^-+|-+$/g,
-      "");
+      ""
+    );
 
 }
 
 
-/* =====================================================
-   PASTA DA CATEGORIA
-===================================================== */
+/* PASTA DAS CATEGORIAS */
 
-function pastaCategoria(
-  nome
-) {
+function pastaCategoria(nome){
 
-  const nomeLimpo =
-    limparNomeArquivo(
-      nome
-    );
+  const slug =
+    limparNomeArquivo(nome);
 
 
   const pastas = {
@@ -2109,47 +1328,45 @@ function pastaCategoria(
       "Presenteie-com-sua-ideia",
 
     "chaveiros":
-      "Chaveiros"
+      "Chaveiros",
+
+    "games":
+      "Games",
+
+    "utilidades":
+      "Utilidades"
 
   };
 
 
   return (
-    pastas[nomeLimpo] ||
-    nomeLimpo ||
+    pastas[slug] ||
+    slug ||
     "Outros"
   );
 
 }
 
 
-/* =====================================================
-   ENVIAR FOTO
-===================================================== */
+/* UPLOAD */
 
 async function enviarFoto(
   arquivo,
   nomeProduto,
   nomeCategoria
-) {
+){
 
-  if (!arquivo) {
-
+  if(!arquivo)
     return null;
-
-  }
 
 
   const {
-    data: sessionData
+    data:sessionData
   } =
-    await supabaseClient.auth
-      .getSession();
+    await supabaseClient.auth.getSession();
 
 
-  if (
-    !sessionData.session
-  ) {
+  if(!sessionData.session){
 
     throw new Error(
       "Sua sessão expirou. Faça login novamente."
@@ -2158,42 +1375,22 @@ async function enviarFoto(
   }
 
 
-  if (
-    !arquivo.type.startsWith(
-      "image/"
-    )
-  ) {
-
-    throw new Error(
-      "O arquivo selecionado não é uma imagem válida."
-    );
-
-  }
-
-
-  const extensao =
+  const ext =
     arquivo.name
       .split(".")
       .pop()
       .toLowerCase();
 
 
-  const extensoesPermitidas = [
-
-    "jpg",
-    "jpeg",
-    "png",
-    "webp",
-    "gif"
-
-  ];
-
-
-  if (
-    !extensoesPermitidas.includes(
-      extensao
-    )
-  ) {
+  if(
+    ![
+      "jpg",
+      "jpeg",
+      "png",
+      "webp",
+      "gif"
+    ].includes(ext)
+  ){
 
     throw new Error(
       "Formato de imagem não permitido."
@@ -2209,71 +1406,47 @@ async function enviarFoto(
     "produto";
 
 
-  const nomeArquivo =
+  const caminho =
+    pastaCategoria(
+      nomeCategoria
+    ) +
+    "/" +
     Date.now() +
     "-" +
     nomeSeguro +
     "." +
-    extensao;
-
-
-  const pasta =
-    pastaCategoria(
-      nomeCategoria
-    );
-
-
-  const caminho =
-    pasta +
-    "/" +
-    nomeArquivo;
-
-
-  console.log(
-    "Enviando foto:",
-    caminho
-  );
+    ext;
 
 
   const {
     error
   } =
-    await supabaseClient.storage
+    await supabaseClient
+      .storage
       .from("produtos")
       .upload(
         caminho,
         arquivo,
         {
-
-          cacheControl:
-            "3600",
-
-          upsert:
-            false,
-
-          contentType:
-            arquivo.type
-
+          cacheControl:"3600",
+          upsert:false,
+          contentType:arquivo.type
         }
       );
 
 
-  if (error) {
+  if(error){
 
-    console.error(
-      "Erro Storage:",
-      error
-    );
-
-
-    if (
-      error.message &&
-      error.message
-        .toLowerCase()
-        .includes(
-          "row-level security"
-        )
-    ) {
+    if(
+      (
+        error.message ||
+        ""
+      )
+      .toLowerCase()
+      .includes(
+        "row-level security"
+      )
+    ){
 
       throw new Error(
         "O Storage bloqueou o upload por RLS. Precisamos ajustar a política do bucket produtos no Supabase."
@@ -2293,17 +1466,15 @@ async function enviarFoto(
   const {
     data
   } =
-    supabaseClient.storage
+    supabaseClient
+      .storage
       .from("produtos")
       .getPublicUrl(
         caminho
       );
 
 
-  if (
-    !data ||
-    !data.publicUrl
-  ) {
+  if(!data?.publicUrl){
 
     throw new Error(
       "A foto foi enviada, mas não foi possível obter a URL."
@@ -2317,11 +1488,9 @@ async function enviarFoto(
 }
 
 
-/* =====================================================
-   SALVAR PRODUTO
-===================================================== */
+/* SALVAR PRODUTO */
 
-async function salvarProduto() {
+async function salvarProduto(){
 
   const botao =
     document.getElementById(
@@ -2330,100 +1499,72 @@ async function salvarProduto() {
 
 
   const id =
-    document
-      .getElementById(
-        "produto-id"
-      )
-      .value;
+    document.getElementById(
+      "produto-id"
+    ).value;
 
 
   const nome =
-    document
-      .getElementById(
-        "nome"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "nome"
+    ).value.trim();
 
 
   const descricao =
-    document
-      .getElementById(
-        "descricao"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "descricao"
+    ).value.trim();
 
 
   const preco =
-    document
-      .getElementById(
-        "preco"
-      )
-      .value;
+    document.getElementById(
+      "preco"
+    ).value;
 
 
   const categoriaId =
-    document
-      .getElementById(
-        "categoria"
-      )
-      .value;
+    document.getElementById(
+      "categoria"
+    ).value;
 
 
   const material =
-    document
-      .getElementById(
-        "material"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "material"
+    ).value.trim();
 
 
   const dimensoes =
-    document
-      .getElementById(
-        "dimensoes"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "dimensoes"
+    ).value.trim();
 
 
   const cores =
-    document
-      .getElementById(
-        "cores"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "cores"
+    ).value.trim();
 
 
   const disponivel =
-    document
-      .getElementById(
-        "disponivel"
-      )
-      .checked;
+    document.getElementById(
+      "disponivel"
+    ).checked;
 
 
   const destaque =
-    document
-      .getElementById(
-        "destaque"
-      )
-      .checked;
+    document.getElementById(
+      "destaque"
+    ).checked;
 
 
   const arquivo =
-    document
-      .getElementById(
-        "foto"
-      )
-      .files[0];
+    document.getElementById(
+      "foto"
+    ).files[0];
 
 
-  if (
-
+  if(
     !nome ||
     !descricao ||
     !preco ||
@@ -2431,8 +1572,7 @@ async function salvarProduto() {
     !material ||
     !dimensoes ||
     !cores
-
-  ) {
+  ){
 
     mostrarMensagem(
       "Preencha todos os campos obrigatórios.",
@@ -2453,35 +1593,20 @@ async function salvarProduto() {
       : "⏳ Salvando...";
 
 
-  try {
-
-
-    /* CATEGORIA */
+  try{
 
     const {
-
-      data:
-        categoriaData,
-
-      error:
-        categoriaError
-
+      data:categoriaData,
+      error:categoriaError
     } =
       await supabaseClient
         .from("categorias")
         .select("*")
-        .eq(
-          "id",
-          categoriaId
-        )
+        .eq("id",categoriaId)
         .single();
 
 
-    if (categoriaError) {
-
-      console.error(
-        categoriaError
-      );
+    if(categoriaError){
 
       throw new Error(
         "Não foi possível identificar a categoria."
@@ -2497,114 +1622,57 @@ async function salvarProduto() {
       "Outros";
 
 
-    /* FOTO */
+    const dados = {
 
-    let imagemUrl =
-      null;
+      "Nome":nome,
+
+      "Descrição":descricao,
+
+      "Preço":Number(preco),
+
+      "Categoria":Number(categoriaId),
+
+      "Material":material,
+
+      "Dimensões":dimensoes,
+
+      "Cores":cores,
+
+      "Disponível":disponivel,
+
+      "Destaque":destaque
+
+    };
 
 
-    if (arquivo) {
+    if(arquivo){
 
-      imagemUrl =
+      dados.imagem_url =
         await enviarFoto(
-
           arquivo,
-
           nome,
-
           nomeCategoria
-
         );
 
     }
 
 
-    /* DADOS */
+    const resultado =
+      id
 
-    const dados = {
+        ? await supabaseClient
+            .from("produtos")
+            .update(dados)
+            .eq("id",id)
 
-      "Nome":
-        nome,
-
-      "Descrição":
-        descricao,
-
-      "Preço":
-        Number(preco),
-
-      "Categoria":
-        Number(categoriaId),
-
-      "Material":
-        material,
-
-      "Dimensões":
-        dimensoes,
-
-      "Cores":
-        cores,
-
-      "Disponível":
-        disponivel,
-
-      "Destaque":
-        destaque
-
-    };
+        : await supabaseClient
+            .from("produtos")
+            .insert([
+              dados
+            ]);
 
 
-    if (imagemUrl) {
-
-      dados["imagem_url"] =
-        imagemUrl;
-
-    }
-
-
-    /* UPDATE */
-
-    let resultado;
-
-
-    if (id) {
-
-      resultado =
-        await supabaseClient
-          .from("produtos")
-          .update(
-            dados
-          )
-          .eq(
-            "id",
-            id
-          );
-
-    }
-
-
-    /* INSERT */
-
-    else {
-
-      resultado =
-        await supabaseClient
-          .from("produtos")
-          .insert([
-            dados
-          ]);
-
-    }
-
-
-    if (
-      resultado.error
-    ) {
-
-      console.error(
-        "Erro banco:",
-        resultado.error
-      );
-
+    if(resultado.error){
 
       throw new Error(
         resultado.error.message ||
@@ -2617,9 +1685,7 @@ async function salvarProduto() {
     mostrarMensagem(
 
       id
-
         ? "Produto atualizado com sucesso! ✅"
-
         : "Produto cadastrado com sucesso! ✅",
 
       true
@@ -2631,28 +1697,18 @@ async function salvarProduto() {
 
     carregarProdutos();
 
-  }
 
-  catch (erro) {
+  }catch(e){
 
-    console.error(
-      "Erro salvarProduto:",
-      erro
-    );
-
+    console.error(e);
 
     mostrarMensagem(
-
-      erro.message ||
+      e.message ||
       "Não foi possível salvar o produto.",
-
       false
-
     );
 
-  }
-
-  finally {
+  }finally{
 
     botao.disabled = false;
 
@@ -2664,11 +1720,9 @@ async function salvarProduto() {
 }
 
 
-/* =====================================================
-   CARREGAR PRODUTOS
-===================================================== */
+/* CARREGAR PRODUTOS */
 
-async function carregarProdutos() {
+async function carregarProdutos(){
 
   const lista =
     document.getElementById(
@@ -2690,17 +1744,12 @@ async function carregarProdutos() {
       .order(
         "created_at",
         {
-          ascending: false
+          ascending:false
         }
       );
 
 
-  if (error) {
-
-    console.error(
-      error
-    );
-
+  if(error){
 
     lista.innerHTML =
       "<p>Erro ao carregar produtos.</p>";
@@ -2710,10 +1759,7 @@ async function carregarProdutos() {
   }
 
 
-  if (
-    !data ||
-    data.length === 0
-  ) {
+  if(!data?.length){
 
     lista.innerHTML =
       "<p>Nenhum produto cadastrado.</p>";
@@ -2726,149 +1772,147 @@ async function carregarProdutos() {
   lista.innerHTML = "";
 
 
-  data.forEach(
-    produto => {
+  data.forEach(p => {
 
-      const item =
-        document.createElement(
-          "div"
-        );
-
-
-      item.className =
-        "produto";
-
-
-      const imagem =
-        produto.imagem_url ||
-        "";
-
-
-      const preco =
-        Number(
-          produto["Preço"] ||
-          0
-        ).toLocaleString(
-          "pt-BR",
-          {
-
-            style:
-              "currency",
-
-            currency:
-              "BRL"
-
-          }
-        );
-
-
-      item.innerHTML = `
-
-        ${
-          imagem
-
-            ? `<img
-                 src="${escapeHtml(imagem)}"
-                 alt="Foto do produto"
-               >`
-
-            : `<img
-                 src=""
-                 alt="Sem foto"
-               >`
-        }
-
-
-        <div class="produto-info">
-
-          <h3>
-
-            ${escapeHtml(
-              produto["Nome"] ||
-              "Produto"
-            )}
-
-          </h3>
-
-
-          <p>
-            ${preco}
-          </p>
-
-
-          <span
-            class="status ${
-              produto["Disponível"]
-                ? "ativo"
-                : "inativo"
-            }"
-          >
-
-            ${
-              produto["Disponível"]
-                ? "Disponível"
-                : "Indisponível"
-            }
-
-          </span>
-
-
-          ${
-            produto["Destaque"]
-
-              ? `<span class="status ativo">
-                   ⭐ Destaque
-                 </span>`
-
-              : ""
-          }
-
-        </div>
-
-
-        <div class="acoes">
-
-          <button
-            class="btn-primary"
-            onclick="editarProduto(${produto.id})"
-          >
-
-            ✏️ Editar
-
-          </button>
-
-
-          <button
-            class="btn-danger"
-            onclick="excluirProduto(${produto.id})"
-          >
-
-            🗑️ Excluir
-
-          </button>
-
-        </div>
-
-      `;
-
-
-      lista.appendChild(
-        item
+    const item =
+      document.createElement(
+        "div"
       );
 
-    }
-  );
+
+    item.className =
+      "produto";
+
+
+    const imagem =
+      p.imagem_url || "";
+
+
+    const preco =
+      Number(
+        p["Preço"] || 0
+      ).toLocaleString(
+        "pt-BR",
+        {
+          style:"currency",
+          currency:"BRL"
+        }
+      );
+
+
+    item.innerHTML = `
+
+      ${
+        imagem
+
+        ?
+
+        `
+        <img
+          src="${escapeHtml(imagem)}"
+          alt="Foto do produto"
+        >
+        `
+
+        :
+
+        `
+        <div
+          style="
+            width:78px;
+            height:78px;
+            border-radius:10px;
+            background:#eef1f6;
+            display:grid;
+            place-items:center;
+          "
+        >
+          ☄️
+        </div>
+        `
+      }
+
+
+      <div class="produto-info">
+
+        <h3>
+          ${escapeHtml(
+            p["Nome"] ||
+            "Produto"
+          )}
+        </h3>
+
+        <p>
+          ${preco}
+        </p>
+
+
+        <span
+          class="status ${
+            p["Disponível"]
+              ? "ativo"
+              : "inativo"
+          }"
+        >
+          ${
+            p["Disponível"]
+              ? "Disponível"
+              : "Indisponível"
+          }
+        </span>
+
+
+        ${
+          p["Destaque"]
+
+            ?
+
+          `
+          <span class="status ativo">
+            ⭐ Destaque
+          </span>
+          `
+
+            :
+
+          ""
+        }
+
+      </div>
+
+
+      <div class="acoes">
+
+        <button
+          class="btn-primary"
+          onclick="editarProduto(${p.id})"
+        >
+          ✏️ Editar
+        </button>
+
+
+        <button
+          class="btn-danger"
+          onclick="excluirProduto(${p.id})"
+        >
+          🗑️ Excluir
+        </button>
+
+      </div>
+
+    `;
+
+
+    lista.appendChild(item);
+
+  });
 
 }
 
 
-/* =====================================================
-   EDITAR
-===================================================== */
+/* EDITAR */
 
-async function editarProduto(
-  id
-) {
+async function editarProduto(id){
 
   const {
     data,
@@ -2877,19 +1921,11 @@ async function editarProduto(
     await supabaseClient
       .from("produtos")
       .select("*")
-      .eq(
-        "id",
-        id
-      )
+      .eq("id",id)
       .single();
 
 
-  if (error) {
-
-    console.error(
-      error
-    );
-
+  if(error){
 
     mostrarMensagem(
       "Não foi possível carregar o produto.",
@@ -2962,42 +1998,40 @@ async function editarProduto(
 
 
   document.getElementById(
+    "foto"
+  ).value = "";
+
+
+  document.getElementById(
+    "preview"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
     "titulo-formulario"
   ).textContent =
     "✏️ Editar produto";
 
 
   window.scrollTo({
-
-    top: 0,
-
-    behavior:
-      "smooth"
-
+    top:0,
+    behavior:"smooth"
   });
 
 }
 
 
-/* =====================================================
-   EXCLUIR
-===================================================== */
+/* EXCLUIR */
 
-async function excluirProduto(
-  id
-) {
+async function excluirProduto(id){
 
-  const confirmar =
-    confirm(
+  if(
+    !confirm(
       "Tem certeza que deseja excluir este produto?"
-    );
-
-
-  if (!confirmar) {
-
+    )
+  )
     return;
-
-  }
 
 
   const {
@@ -3006,18 +2040,10 @@ async function excluirProduto(
     await supabaseClient
       .from("produtos")
       .delete()
-      .eq(
-        "id",
-        id
-      );
+      .eq("id",id);
 
 
-  if (error) {
-
-    console.error(
-      error
-    );
-
+  if(error){
 
     mostrarMensagem(
       "Não foi possível excluir o produto.",
@@ -3040,49 +2066,30 @@ async function excluirProduto(
 }
 
 
-/* =====================================================
-   NOVO PRODUTO
-===================================================== */
+/* NOVO PRODUTO */
 
-function novoProduto() {
+function novoProduto(){
 
-  document.getElementById(
-    "produto-id"
-  ).value = "";
+  [
+    "produto-id",
+    "nome",
+    "descricao",
+    "preco",
+    "material",
+    "dimensoes",
+    "cores"
+  ]
+  .forEach(id => {
 
+    document.getElementById(
+      id
+    ).value = "";
 
-  document.getElementById(
-    "nome"
-  ).value = "";
-
-
-  document.getElementById(
-    "descricao"
-  ).value = "";
-
-
-  document.getElementById(
-    "preco"
-  ).value = "";
+  });
 
 
   document.getElementById(
     "categoria"
-  ).value = "";
-
-
-  document.getElementById(
-    "material"
-  ).value = "";
-
-
-  document.getElementById(
-    "dimensoes"
-  ).value = "";
-
-
-  document.getElementById(
-    "cores"
   ).value = "";
 
 
@@ -3120,53 +2127,43 @@ function novoProduto() {
 }
 
 
-/* =====================================================
-   MENSAGEM
-===================================================== */
+/* MENSAGEM */
 
 function mostrarMensagem(
   texto,
   sucesso
-) {
+){
 
-  const elemento =
+  const el =
     document.getElementById(
       "mensagem"
     );
 
 
-  elemento.textContent =
+  el.textContent =
     texto;
 
 
-  elemento.className =
+  el.className =
     sucesso
-
       ? "mensagem sucesso"
-
       : "mensagem erro-msg";
 
 
-  elemento.style.display =
+  el.style.display =
     "block";
 
 
   window.scrollTo({
-
-    top: 0,
-
-    behavior:
-      "smooth"
-
+    top:0,
+    behavior:"smooth"
   });
 
 
   setTimeout(
     () => {
-
-      elemento.style.display =
+      el.style.display =
         "none";
-
     },
     7000
   );
@@ -3174,79 +2171,57 @@ function mostrarMensagem(
 }
 
 
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
+/* SEGURANÇA HTML */
 
-function escapeHtml(
-  valor
-) {
+function escapeHtml(valor){
 
   return String(
     valor ?? ""
   )
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
-/* =====================================================
-   ENTER NO LOGIN
-===================================================== */
+/* ENTER NO LOGIN */
 
 document
-  .getElementById(
-    "senha"
-  )
+  .getElementById("senha")
   .addEventListener(
     "keydown",
-    function(event) {
+    e => {
 
-      if (
-        event.key === "Enter"
-      ) {
-
+      if(e.key === "Enter")
         entrar();
-
-      }
 
     }
   );
 
 
-/* =====================================================
-   INICIAR
-===================================================== */
+/* INICIAR */
 
 verificarLogin();
 
 </script>
 
-
 </body>
-
 </html>
