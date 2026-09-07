@@ -2,17 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>
-    Cometa 3D | Impressão 3D de alta precisão
-  </title>
+  <title>Cometa 3D | Impressão 3D de alta precisão</title>
 
   <meta
     name="description"
@@ -22,16 +15,11 @@
   <style>
 
     :root {
-
       --bg: #050711;
       --bg2: #0a1022;
       --surface: #0d1428;
-
-      --text: #172033;
-      --muted: #667085;
-
-      --white: #ffffff;
-
+      --text: #f7f9ff;
+      --muted: #aeb8d0;
       --cyan: #12e6ff;
       --blue: #2f70ff;
       --purple: #7047ff;
@@ -44,151 +32,104 @@
           var(--blue) 45%,
           var(--magenta)
         );
-
     }
 
-
     * {
-
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+      font-family: Arial, Helvetica, sans-serif;
     }
-
 
     html {
-
       scroll-behavior: smooth;
-
     }
-
 
     body {
-
       background: #f4f6fb;
-      color: var(--text);
-
+      color: #172033;
     }
 
-
-    /* =========================
+    /* ============================
        CABEÇALHO
-    ========================= */
+    ============================ */
 
     header {
-
-      background:
-        rgba(5,7,17,.97);
-
-      padding:
-        12px 25px;
+      background: rgba(5, 7, 17, .97);
+      padding: 10px 25px;
 
       display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
-
-      gap: 18px;
-
-      flex-wrap: wrap;
+      box-shadow: 0 2px 18px rgba(0,0,0,.25);
 
       position: sticky;
-
       top: 0;
+      z-index: 100;
 
-      z-index: 1000;
-
-      box-shadow:
-        0 2px 18px
-        rgba(0,0,0,.25);
-
-      border-bottom:
-        1px solid
-        rgba(18,230,255,.18);
-
-    }
-
-
-    .brand {
-
-      display: flex;
-
-      align-items: center;
-
-      text-decoration: none;
-
-    }
-
-
-    .brand img {
-
-      width: 185px;
-      height: 58px;
-
-      object-fit: contain;
-
-    }
-
-
-    nav {
-
-      display: flex;
-
-      align-items: center;
-
+      gap: 18px;
       flex-wrap: wrap;
 
-      gap: 20px;
-
+      border-bottom: 1px solid rgba(18,230,255,.18);
     }
 
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      height: 70px;
+      overflow: hidden;
+    }
+
+    /*
+      LOGO AJUSTADO
+      A imagem original possui espaço preto ao redor.
+      O object-fit: cover permite que o logo fique maior.
+    */
+
+    .brand img {
+      width: 220px;
+      height: 65px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
     nav a {
-
       text-decoration: none;
-
       color: white;
 
-      font-size: 14px;
+      margin-left: 20px;
 
+      font-size: 14px;
       font-weight: bold;
 
       transition: .2s;
-
     }
-
 
     nav a:hover {
-
       color: var(--cyan);
-
     }
 
-
-    /* =========================
+    /* ============================
        HERO
-    ========================= */
+    ============================ */
 
     .hero {
-
       min-height: 560px;
 
-      padding:
-        70px 25px;
+      padding: 70px 25px;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
       text-align: center;
@@ -200,7 +141,6 @@
       overflow: hidden;
 
       background:
-
         radial-gradient(
           circle at 50% 50%,
           rgba(76,65,255,.18),
@@ -213,14 +153,9 @@
           #0a1022 55%,
           #050711
         );
-
     }
 
-
-    /* MASCOTE */
-
     .hero::before {
-
       content: "";
 
       position: absolute;
@@ -230,31 +165,24 @@
       background-image:
         url("cometa-mascote.jpeg");
 
-      background-repeat:
-        no-repeat;
+      background-repeat: no-repeat;
 
-      background-position:
-        center;
+      background-position: center;
 
-      background-size:
-        520px auto;
+      background-size: 520px auto;
 
-      opacity: .16;
+      opacity: .14;
 
-      pointer-events:
-        none;
-
+      pointer-events: none;
     }
 
-
     .hero::after {
-
       content: "";
 
       position: absolute;
 
-      width: 700px;
-      height: 700px;
+      width: 650px;
+      height: 650px;
 
       border-radius: 50%;
 
@@ -265,194 +193,121 @@
           transparent 65%
         );
 
-      top: -300px;
-
+      top: -260px;
       right: -180px;
 
-      pointer-events:
-        none;
-
+      pointer-events: none;
     }
-
 
     .hero-content {
+      max-width: 760px;
 
-      max-width:
-        760px;
+      position: relative;
 
-      position:
-        relative;
-
-      z-index:
-        2;
-
+      z-index: 2;
     }
-
 
     .hero h1 {
+      font-size: 40px;
 
-      font-size:
-        38px;
+      margin-bottom: 20px;
 
-      line-height:
-        1.15;
-
-      margin-bottom:
-        20px;
-
+      line-height: 1.15;
     }
-
 
     .hero p {
+      font-size: 19px;
 
-      font-size:
-        19px;
+      line-height: 1.7;
 
-      line-height:
-        1.7;
+      margin-bottom: 32px;
 
-      margin-bottom:
-        32px;
-
-      color:
-        #e6ebfa;
-
+      color: #e6ebfa;
     }
 
-
-    /* =========================
+    /* ============================
        BOTÕES
-    ========================= */
+    ============================ */
 
     .buttons {
-
       display: flex;
 
-      justify-content:
-        center;
+      justify-content: center;
 
       gap: 14px;
 
       flex-wrap: wrap;
-
     }
-
 
     .button {
-
       display: inline-block;
 
-      padding:
-        14px 24px;
+      padding: 14px 24px;
 
-      border-radius:
-        9px;
+      border-radius: 9px;
 
-      text-decoration:
-        none;
+      text-decoration: none;
 
-      font-weight:
-        bold;
+      font-weight: bold;
 
-      transition:
-        .2s;
-
+      transition: .2s;
     }
-
 
     .button:hover {
-
-      transform:
-        translateY(-2px);
-
+      transform: translateY(-2px);
     }
-
 
     .primary {
+      background: var(--gradient);
 
-      background:
-        var(--gradient);
-
-      color:
-        white;
+      color: white;
 
       box-shadow:
-        0 6px 22px
-        rgba(72,86,255,.28);
-
+        0 6px 22px rgba(72,86,255,.28);
     }
-
 
     .secondary {
+      background: white;
 
-      background:
-        white;
-
-      color:
-        #11172a;
-
+      color: #11172a;
     }
 
-
-    /* =========================
+    /* ============================
        SEÇÕES
-    ========================= */
+    ============================ */
 
     section {
+      padding: 65px 20px;
 
-      padding:
-        65px 20px;
+      max-width: 1150px;
 
-      max-width:
-        1150px;
-
-      margin:
-        auto;
-
+      margin: auto;
     }
-
 
     .section-title {
+      text-align: center;
 
-      text-align:
-        center;
-
-      margin-bottom:
-        38px;
-
+      margin-bottom: 38px;
     }
-
 
     .section-title h2 {
+      font-size: 32px;
 
-      font-size:
-        32px;
-
-      margin-bottom:
-        10px;
-
+      margin-bottom: 10px;
     }
-
 
     .section-title p {
+      color: #667085;
 
-      color:
-        var(--muted);
-
-      font-size:
-        15px;
-
+      font-size: 15px;
     }
 
-
-    /* =========================
+    /* ============================
        CATEGORIAS
-    ========================= */
+    ============================ */
 
     .categories {
-
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -460,59 +315,37 @@
           minmax(160px,1fr)
         );
 
-      gap:
-        16px;
-
+      gap: 16px;
     }
-
 
     .category {
+      background: white;
 
-      background:
-        white;
+      padding: 24px 15px;
 
-      padding:
-        24px 15px;
+      border-radius: 14px;
 
-      border-radius:
-        14px;
-
-      text-align:
-        center;
+      text-align: center;
 
       box-shadow:
-        0 3px 14px
-        rgba(0,0,0,.07);
+        0 3px 14px rgba(0,0,0,.07);
 
-      font-weight:
-        bold;
+      font-weight: bold;
 
-      cursor:
-        pointer;
+      cursor: pointer;
 
-      transition:
-        .2s;
+      transition: .2s;
 
-      border:
-        2px solid
-        transparent;
-
+      border: 2px solid transparent;
     }
-
 
     .category:hover {
+      transform: translateY(-4px);
 
-      transform:
-        translateY(-4px);
-
-      border-color:
-        var(--blue);
-
+      border-color: var(--blue);
     }
 
-
     .category.active {
-
       background:
         linear-gradient(
           135deg,
@@ -520,23 +353,17 @@
           var(--purple)
         );
 
-      color:
-        white;
+      color: white;
 
-      border-color:
-        transparent;
-
+      border-color: transparent;
     }
 
-
-    /* =========================
+    /* ============================
        PRODUTOS
-    ========================= */
+    ============================ */
 
     .products {
-
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(
@@ -544,221 +371,158 @@
           minmax(250px,1fr)
         );
 
-      gap:
-        24px;
-
+      gap: 24px;
     }
-
 
     .product {
+      background: white;
 
-      background:
-        white;
+      border-radius: 15px;
 
-      border-radius:
-        15px;
-
-      overflow:
-        hidden;
+      overflow: hidden;
 
       box-shadow:
-        0 4px 16px
-        rgba(0,0,0,.08);
+        0 4px 16px rgba(0,0,0,.08);
 
-      border:
-        1px solid
-        #edf0f4;
+      border: 1px solid #edf0f4;
 
-      transition:
-        .25s;
+      transition: .25s;
 
-      cursor:
-        pointer;
-
+      cursor: pointer;
     }
 
-
     .product:hover {
-
-      transform:
-        translateY(-5px);
+      transform: translateY(-5px);
 
       box-shadow:
-        0 10px 25px
-        rgba(0,0,0,.13);
+        0 10px 25px rgba(0,0,0,.13);
 
       border-color:
         rgba(47,112,255,.35);
-
     }
-
 
     .product-image {
+      width: 100%;
 
-      width:
-        100%;
+      height: 240px;
 
-      height:
-        240px;
+      background: #f1f3f8;
 
-      background:
-        #f1f3f8;
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
 
-      align-items:
-        center;
+      justify-content: center;
 
-      justify-content:
-        center;
-
-      overflow:
-        hidden;
-
+      overflow: hidden;
     }
-
 
     .product-image img {
+      width: 100%;
 
-      width:
-        100%;
+      height: 100%;
 
-      height:
-        100%;
+      object-fit: contain;
 
-      object-fit:
-        contain;
+      padding: 10px;
 
-      padding:
-        10px;
-
+      display: block;
     }
-
 
     .no-image {
+      color: #98a2b3;
 
-      color:
-        #98a2b3;
-
-      font-size:
-        14px;
-
+      font-size: 14px;
     }
-
 
     .product-info {
-
-      padding:
-        20px;
-
+      padding: 20px;
     }
-
 
     .product-info h3 {
+      font-size: 20px;
 
-      font-size:
-        20px;
-
-      margin-bottom:
-        9px;
-
+      margin-bottom: 9px;
     }
-
 
     .product-description {
+      color: #667085;
 
-      color:
-        var(--muted);
+      font-size: 14px;
 
-      font-size:
-        14px;
+      line-height: 1.5;
 
-      line-height:
-        1.5;
-
-      margin-bottom:
-        13px;
-
+      margin-bottom: 13px;
     }
-
 
     .details {
+      color: #667085;
 
-      color:
-        var(--muted);
+      font-size: 13px;
 
-      font-size:
-        13px;
+      line-height: 1.8;
 
-      line-height:
-        1.8;
-
-      padding-top:
-        10px;
+      padding-top: 10px;
 
       border-top:
-        1px solid
-        #eef0f3;
+        1px solid #eef0f3;
 
-      margin-bottom:
-        14px;
-
+      margin-bottom: 14px;
     }
-
 
     .price {
+      font-size: 23px;
 
-      font-size:
-        23px;
+      font-weight: 800;
 
-      font-weight:
-        800;
+      color: #315cf5;
 
-      color:
-        #315cf5;
-
-      margin-bottom:
-        15px;
-
+      margin-bottom: 15px;
     }
 
+    /* ============================
+       WHATSAPP
+    ============================ */
 
     .whatsapp {
+      display: block;
 
-      display:
-        block;
+      text-align: center;
 
-      text-align:
-        center;
+      background: #20c76a;
 
-      background:
-        #20c76a;
+      color: white;
 
-      color:
-        white;
+      padding: 12px;
 
-      padding:
-        12px;
+      border-radius: 8px;
 
-      border-radius:
-        8px;
+      text-decoration: none;
 
-      text-decoration:
-        none;
+      font-weight: bold;
 
-      font-weight:
-        bold;
-
+      transition: .2s;
     }
 
+    .whatsapp:hover {
+      opacity: .9;
+    }
 
-    /* =========================
+    .loading {
+      grid-column: 1 / -1;
+
+      text-align: center;
+
+      color: #667085;
+
+      padding: 40px 20px;
+    }
+
+    /* ============================
        CONTATO
-    ========================= */
+    ============================ */
 
     .contact {
-
       background:
         linear-gradient(
           135deg,
@@ -766,549 +530,331 @@
           #101936
         );
 
-      color:
-        white;
+      color: white;
 
-      text-align:
-        center;
+      text-align: center;
 
-      border-radius:
-        18px;
+      border-radius: 18px;
 
-      padding:
-        45px 25px;
+      padding: 45px 25px;
 
       box-shadow:
-        0 10px 35px
-        rgba(0,0,0,.28);
+        0 10px 35px rgba(0,0,0,.28);
 
+      margin-bottom: 20px;
     }
-
 
     .contact .section-title p {
-
-      color:
-        #c8d1e7;
-
+      color: #c8d1e7;
     }
 
-
-    /* =========================
+    /* ============================
        RODAPÉ
-    ========================= */
+    ============================ */
 
     footer {
+      background: #050711;
 
-      background:
-        #050711;
+      color: white;
 
-      color:
-        white;
+      text-align: center;
 
-      text-align:
-        center;
-
-      padding:
-        35px 20px;
+      padding: 35px 20px;
 
       border-top:
-        1px solid
-        rgba(18,230,255,.18);
-
+        1px solid rgba(18,230,255,.18);
     }
-
 
     footer p {
+      margin: 7px;
 
-      margin:
-        7px;
+      font-size: 14px;
 
-      font-size:
-        14px;
-
-      color:
-        #b8c1d6;
-
+      color: #b8c1d6;
     }
-
 
     footer strong {
-
-      color:
-        white;
-
+      color: white;
     }
-
 
     .social {
+      color: var(--cyan);
 
-      color:
-        var(--cyan);
+      font-weight: bold;
 
-      font-weight:
-        bold;
-
-      text-decoration:
-        none;
-
+      text-decoration: none;
     }
 
-
-    /* =========================
+    /* ============================
        MODAL
-    ========================= */
+    ============================ */
 
     .modal {
+      display: none;
 
-      display:
-        none;
+      position: fixed;
 
-      position:
-        fixed;
-
-      inset:
-        0;
+      inset: 0;
 
       background:
         rgba(0,0,0,.72);
 
-      z-index:
-        2000;
+      z-index: 1000;
 
-      padding:
-        20px;
+      padding: 20px;
 
-      overflow-y:
-        auto;
-
+      overflow-y: auto;
     }
-
 
     .modal.active {
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
 
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
+      justify-content: center;
     }
-
 
     .modal-content {
+      background: white;
 
-      background:
-        white;
+      width: 100%;
 
-      width:
-        100%;
+      max-width: 850px;
 
-      max-width:
-        850px;
+      border-radius: 18px;
 
-      border-radius:
-        18px;
+      overflow: hidden;
 
-      overflow:
-        hidden;
-
-      position:
-        relative;
+      position: relative;
 
       box-shadow:
-        0 15px 50px
-        rgba(0,0,0,.3);
-
+        0 15px 50px rgba(0,0,0,.3);
     }
 
-
     .modal-close {
+      position: absolute;
 
-      position:
-        absolute;
+      top: 12px;
 
-      top:
-        12px;
+      right: 15px;
 
-      right:
-        15px;
+      width: 38px;
 
-      width:
-        38px;
+      height: 38px;
 
-      height:
-        38px;
+      border: none;
 
-      border:
-        none;
-
-      border-radius:
-        50%;
+      border-radius: 50%;
 
       background:
         rgba(0,0,0,.65);
 
-      color:
-        white;
+      color: white;
 
-      font-size:
-        22px;
+      font-size: 22px;
 
-      cursor:
-        pointer;
+      cursor: pointer;
 
-      z-index:
-        5;
-
+      z-index: 5;
     }
 
-
     .modal-body {
-
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         1fr 1fr;
-
     }
-
 
     .modal-image {
+      min-height: 400px;
 
-      min-height:
-        400px;
+      background: #f1f3f6;
 
-      background:
-        #f1f3f6;
+      display: flex;
 
-      display:
-        flex;
+      align-items: center;
 
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
+      justify-content: center;
     }
-
 
     .modal-image img {
+      width: 100%;
 
-      width:
-        100%;
+      height: 100%;
 
-      height:
-        100%;
+      max-height: 500px;
 
-      max-height:
-        500px;
+      object-fit: contain;
 
-      object-fit:
-        contain;
-
-      padding:
-        25px;
-
+      padding: 25px;
     }
-
 
     .modal-info {
-
-      padding:
-        35px;
-
+      padding: 35px;
     }
-
 
     .modal-info h2 {
+      font-size: 30px;
 
-      font-size:
-        30px;
-
-      margin-bottom:
-        15px;
-
+      margin-bottom: 15px;
     }
 
+    .modal-info .modal-description {
+      color: #667085;
 
-    .modal-description {
+      line-height: 1.7;
 
-      color:
-        var(--muted);
-
-      line-height:
-        1.7;
-
-      margin-bottom:
-        20px;
-
+      margin-bottom: 20px;
     }
-
 
     .modal-details {
+      color: #667085;
 
-      color:
-        var(--muted);
-
-      line-height:
-        2;
+      line-height: 2;
 
       border-top:
-        1px solid
-        #eee;
+        1px solid #eee;
 
       border-bottom:
-        1px solid
-        #eee;
+        1px solid #eee;
 
-      padding:
-        15px 0;
+      padding: 15px 0;
 
-      margin-bottom:
-        20px;
-
+      margin-bottom: 20px;
     }
-
 
     .modal-price {
+      color: #315cf5;
 
-      color:
-        #315cf5;
+      font-size: 28px;
 
-      font-size:
-        28px;
+      font-weight: 800;
 
-      font-weight:
-        800;
-
-      margin-bottom:
-        20px;
-
+      margin-bottom: 20px;
     }
-
 
     .modal-whatsapp {
+      display: block;
 
-      display:
-        block;
+      text-align: center;
 
-      text-align:
-        center;
+      background: #20c76a;
 
-      background:
-        #20c76a;
+      color: white;
 
-      color:
-        white;
+      padding: 15px;
 
-      padding:
-        15px;
+      border-radius: 9px;
 
-      border-radius:
-        9px;
+      text-decoration: none;
 
-      text-decoration:
-        none;
+      font-weight: bold;
 
-      font-weight:
-        bold;
-
+      font-size: 16px;
     }
 
-
-    .loading {
-
-      grid-column:
-        1 / -1;
-
-      text-align:
-        center;
-
-      color:
-        var(--muted);
-
-      padding:
-        40px 20px;
-
-    }
-
-
-    /* =========================
+    /* ============================
        CELULAR
-    ========================= */
+    ============================ */
 
-    @media (max-width:700px) {
+    @media (max-width: 700px) {
 
       header {
+        flex-direction: column;
 
-        flex-direction:
-          column;
+        gap: 8px;
 
-        gap:
-          10px;
-
+        padding: 8px 15px;
       }
 
+      .brand {
+        height: 62px;
+      }
 
       .brand img {
+        width: 190px;
+        height: 58px;
 
-        width:
-          165px;
-
-        height:
-          52px;
-
+        object-fit: cover;
+        object-position: center;
       }
-
-
-      nav {
-
-        justify-content:
-          center;
-
-        gap:
-          12px;
-
-      }
-
 
       nav a {
+        margin: 0 6px;
 
-        font-size:
-          13px;
-
+        font-size: 13px;
       }
-
 
       .hero {
-
-        min-height:
-          530px;
-
+        min-height: 530px;
       }
-
 
       .hero::before {
+        background-size: 380px auto;
 
-        background-size:
-          380px auto;
-
-        opacity:
-          .14;
-
+        opacity: .13;
       }
-
 
       .hero h1 {
-
-        font-size:
-          30px;
-
+        font-size: 30px;
       }
-
 
       .hero p {
-
-        font-size:
-          16px;
-
+        font-size: 16px;
       }
 
-
       .products {
-
         grid-template-columns:
           repeat(
             2,
             minmax(0,1fr)
           );
 
-        gap:
-          14px;
-
+        gap: 14px;
       }
-
 
       .product-image {
-
-        height:
-          180px;
-
+        height: 180px;
       }
-
 
       .product-info {
-
-        padding:
-          14px;
-
+        padding: 14px;
       }
-
 
       .product-info h3 {
-
-        font-size:
-          17px;
-
+        font-size: 17px;
       }
-
 
       .price {
-
-        font-size:
-          19px;
-
+        font-size: 19px;
       }
-
 
       .modal-body {
-
-        grid-template-columns:
-          1fr;
-
+        grid-template-columns: 1fr;
       }
-
 
       .modal-image {
-
-        min-height:
-          280px;
-
+        min-height: 280px;
       }
-
 
       .modal-info {
-
-        padding:
-          25px;
-
+        padding: 25px;
       }
 
+      .modal-info h2 {
+        font-size: 25px;
+      }
     }
 
-
-    @media (max-width:420px) {
+    @media (max-width: 420px) {
 
       .products {
-
-        grid-template-columns:
-          1fr;
-
+        grid-template-columns: 1fr;
       }
-
 
       .product-image {
-
-        height:
-          230px;
-
+        height: 230px;
       }
-
     }
 
   </style>
@@ -1318,10 +864,9 @@
 
 <body>
 
-
-  <!-- =========================
+  <!-- ============================
        CABEÇALHO
-  ========================== -->
+  ============================ -->
 
   <header>
 
@@ -1362,14 +907,11 @@
   </header>
 
 
-  <!-- =========================
-       CONTEÚDO
-  ========================== -->
-
   <main>
 
-
-    <!-- HERO -->
+    <!-- ============================
+         INÍCIO
+    ============================ -->
 
     <section
       class="hero"
@@ -1382,12 +924,10 @@
           Impressão 3D de alta precisão
         </h1>
 
-
         <p>
           Soluções em impressão 3D para sua casa,
           empresa, projetos e ideias.
         </p>
-
 
         <div class="buttons">
 
@@ -1397,7 +937,6 @@
           >
             Ver catálogo
           </a>
-
 
           <a
             href="https://wa.me/5511920060315"
@@ -1415,7 +954,9 @@
     </section>
 
 
-    <!-- CATEGORIAS -->
+    <!-- ============================
+         CATEGORIAS
+    ============================ -->
 
     <section id="categorias">
 
@@ -1447,7 +988,9 @@
     </section>
 
 
-    <!-- PRODUTOS -->
+    <!-- ============================
+         PRODUTOS
+    ============================ -->
 
     <section id="produtos">
 
@@ -1478,7 +1021,9 @@
     </section>
 
 
-    <!-- CONTATO -->
+    <!-- ============================
+         CONTATO
+    ============================ -->
 
     <section id="contato">
 
@@ -1509,6 +1054,15 @@
             Falar pelo WhatsApp
           </a>
 
+          <a
+            href="https://instagram.com/cometa.3d"
+            class="button secondary"
+            target="_blank"
+            rel="noopener"
+          >
+            Instagram @cometa.3d
+          </a>
+
         </div>
 
       </div>
@@ -1518,25 +1072,21 @@
   </main>
 
 
-  <!-- =========================
+  <!-- ============================
        RODAPÉ
-  ========================== -->
+  ============================ -->
 
   <footer>
 
     <p>
-
       <strong>
         Cometa 3D
       </strong>
-
     </p>
-
 
     <p>
       Impressão 3D de alta precisão.
     </p>
-
 
     <p>
 
@@ -1553,28 +1103,16 @@
 
     </p>
 
-
     <p>
-
-      WhatsApp:
-
-      <a
-        class="social"
-        href="https://wa.me/5511920060315"
-        target="_blank"
-        rel="noopener"
-      >
-        (11) 92006-0315
-      </a>
-
+      WhatsApp: (11) 92006-0315
     </p>
 
   </footer>
 
 
-  <!-- =========================
-       MODAL
-  ========================== -->
+  <!-- ============================
+       MODAL DO PRODUTO
+  ============================ -->
 
   <div
     class="modal"
@@ -1586,7 +1124,6 @@
       <button
         class="modal-close"
         id="modal-close"
-        aria-label="Fechar"
       >
         ×
       </button>
@@ -1597,13 +1134,15 @@
         <div
           class="modal-image"
           id="modal-image"
-        ></div>
+        >
+        </div>
 
 
         <div
           class="modal-info"
           id="modal-info"
-        ></div>
+        >
+        </div>
 
       </div>
 
@@ -1612,9 +1151,9 @@
   </div>
 
 
-  <!-- =========================
+  <!-- ============================
        SUPABASE
-  ========================== -->
+  ============================ -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1623,7 +1162,6 @@
 
     const SUPABASE_URL =
       "https://sixuzdcsafbqgkijhrkn.supabase.co";
-
 
     const SUPABASE_KEY =
       "sb_publishable_4AlGd1mK7FkmykVh921ahQ_IP317l53";
@@ -1681,45 +1219,9 @@
     let todosProdutos = [];
 
 
-    /* =========================
-       ESCAPAR HTML
-    ========================== */
-
-    function escapeHtml(valor) {
-
-      return String(valor ?? "")
-
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-
-        .replace(
-          /</g,
-          "&lt;"
-        )
-
-        .replace(
-          />/g,
-          "&gt;"
-        )
-
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
-
-
-    /* =========================
+    /* ============================
        CATEGORIAS
-    ========================== */
+    ============================ */
 
     async function carregarCategorias() {
 
@@ -1728,11 +1230,8 @@
         error
       } =
         await supabaseClient
-
           .from("categorias")
-
           .select("*")
-
           .order(
             "id",
             {
@@ -1752,16 +1251,13 @@
         categoriesContainer.innerHTML = `
 
           <div class="loading">
-
             Não foi possível carregar
             as categorias.
-
           </div>
 
         `;
 
         return;
-
       }
 
 
@@ -1773,20 +1269,16 @@
         categoriesContainer.innerHTML = `
 
           <div class="loading">
-
             Nenhuma categoria cadastrada.
-
           </div>
 
         `;
 
         return;
-
       }
 
 
-      categoriesContainer.innerHTML =
-        "";
+      categoriesContainer.innerHTML = "";
 
 
       /* TODOS */
@@ -1843,8 +1335,7 @@
               "produtos"
             )
             .scrollIntoView({
-              behavior:
-                "smooth"
+              behavior: "smooth"
             });
 
         }
@@ -1861,13 +1352,6 @@
       data.forEach(
         categoria => {
 
-          const nome =
-            categoria["Nome"] ||
-            categoria["nome"] ||
-            categoria.nome_categoria ||
-            "Categoria";
-
-
           const item =
             document.createElement(
               "div"
@@ -1879,7 +1363,9 @@
 
 
           item.textContent =
-            nome;
+            categoria.Nome ||
+            categoria.nome ||
+            "Categoria";
 
 
           item.addEventListener(
@@ -1922,7 +1408,11 @@
 
               productDescription.textContent =
                 "Produtos da categoria: " +
-                nome;
+                (
+                  categoria.Nome ||
+                  categoria.nome ||
+                  ""
+                );
 
 
               mostrarProdutos(
@@ -1935,8 +1425,7 @@
                   "produtos"
                 )
                 .scrollIntoView({
-                  behavior:
-                    "smooth"
+                  behavior: "smooth"
                 });
 
             }
@@ -1953,9 +1442,9 @@
     }
 
 
-    /* =========================
+    /* ============================
        PRODUTOS
-    ========================== */
+    ============================ */
 
     async function carregarProdutos() {
 
@@ -1964,16 +1453,12 @@
         error
       } =
         await supabaseClient
-
           .from("produtos")
-
           .select("*")
-
           .eq(
             "Disponível",
             true
           )
-
           .order(
             "created_at",
             {
@@ -1993,16 +1478,13 @@
         productsContainer.innerHTML = `
 
           <div class="loading">
-
             Não foi possível carregar
             os produtos.
-
           </div>
 
         `;
 
         return;
-
       }
 
 
@@ -2020,7 +1502,9 @@
       mostrarProdutos(
 
         destaques.length > 0
+
           ? destaques
+
           : todosProdutos
 
       );
@@ -2028,9 +1512,49 @@
     }
 
 
-    /* =========================
+    /* ============================
+       ESCAPAR HTML
+    ============================ */
+
+    function escapeHtml(
+      valor
+    ) {
+
+      return String(
+        valor ?? ""
+      )
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* ============================
        MOSTRAR PRODUTOS
-    ========================== */
+    ============================ */
 
     function mostrarProdutos(
       produtos
@@ -2048,15 +1572,12 @@
         productsContainer.innerHTML = `
 
           <div class="loading">
-
             Nenhum produto encontrado.
-
           </div>
 
         `;
 
         return;
-
       }
 
 
@@ -2079,11 +1600,8 @@
             ).toLocaleString(
               "pt-BR",
               {
-                style:
-                  "currency",
-
-                currency:
-                  "BRL"
+                style: "currency",
+                currency: "BRL"
               }
             );
 
@@ -2107,10 +1625,12 @@
                 src="${escapeHtml(
                   produto.imagem_url
                 )}"
+
                 alt="${escapeHtml(
                   produto["Nome"] ||
                   "Produto"
                 )}"
+
                 loading="lazy"
               >
 
@@ -2131,12 +1651,10 @@
             <div class="product-info">
 
               <h3>
-
                 ${escapeHtml(
                   produto["Nome"] ||
                   "Produto"
                 )}
-
               </h3>
 
 
@@ -2156,9 +1674,11 @@
                   produto["Material"]
 
                     ? "🧵 Material: " +
+
                       escapeHtml(
                         produto["Material"]
                       ) +
+
                       "<br>"
 
                     : ""
@@ -2169,9 +1689,11 @@
                   produto["Dimensões"]
 
                     ? "📐 Dimensões: " +
+
                       escapeHtml(
                         produto["Dimensões"]
                       ) +
+
                       "<br>"
 
                     : ""
@@ -2182,6 +1704,7 @@
                   produto["Cores"]
 
                     ? "🎨 Cores: " +
+
                       escapeHtml(
                         produto["Cores"]
                       )
@@ -2203,9 +1726,7 @@
                 class="whatsapp"
                 href="#"
               >
-
                 💬 Tenho interesse
-
               </a>
 
             </div>
@@ -2239,6 +1760,7 @@
 
               event.stopPropagation();
 
+
               abrirWhatsApp(
                 produto
               );
@@ -2257,9 +1779,9 @@
     }
 
 
-    /* =========================
-       ABRIR PRODUTO
-    ========================== */
+    /* ============================
+       MODAL
+    ============================ */
 
     function abrirProduto(
       produto
@@ -2275,6 +1797,7 @@
             src="${escapeHtml(
               produto.imagem_url
             )}"
+
             alt="${escapeHtml(
               produto["Nome"] ||
               "Produto"
@@ -2290,9 +1813,7 @@
         modalImage.innerHTML = `
 
           <div class="no-image">
-
             Foto do produto
-
           </div>
 
         `;
@@ -2306,11 +1827,8 @@
         ).toLocaleString(
           "pt-BR",
           {
-            style:
-              "currency",
-
-            currency:
-              "BRL"
+            style: "currency",
+            currency: "BRL"
           }
         );
 
@@ -2343,9 +1861,11 @@
             produto["Material"]
 
               ? "🧵 <strong>Material:</strong> " +
+
                 escapeHtml(
                   produto["Material"]
                 ) +
+
                 "<br>"
 
               : ""
@@ -2356,9 +1876,11 @@
             produto["Dimensões"]
 
               ? "📐 <strong>Dimensões:</strong> " +
+
                 escapeHtml(
                   produto["Dimensões"]
                 ) +
+
                 "<br>"
 
               : ""
@@ -2369,6 +1891,7 @@
             produto["Cores"]
 
               ? "🎨 <strong>Cores:</strong> " +
+
                 escapeHtml(
                   produto["Cores"]
                 )
@@ -2409,6 +1932,7 @@
 
             event.preventDefault();
 
+
             abrirWhatsApp(
               produto
             );
@@ -2428,24 +1952,23 @@
     }
 
 
-    /* =========================
+    /* ============================
        WHATSAPP
-    ========================== */
+    ============================ */
 
     function abrirWhatsApp(
       produto
     ) {
 
-      const nome =
-        produto["Nome"] ||
-        "Produto";
-
-
       const mensagem =
         encodeURIComponent(
 
           "Olá! Tenho interesse no produto: " +
-          nome
+
+          (
+            produto["Nome"] ||
+            "Produto"
+          )
 
         );
 
@@ -2453,6 +1976,7 @@
       window.open(
 
         "https://wa.me/5511920060315?text=" +
+
         mensagem,
 
         "_blank"
@@ -2462,9 +1986,9 @@
     }
 
 
-    /* =========================
+    /* ============================
        FECHAR MODAL
-    ========================== */
+    ============================ */
 
     function fecharModal() {
 
@@ -2517,9 +2041,9 @@
     );
 
 
-    /* =========================
+    /* ============================
        INICIAR
-    ========================== */
+    ============================ */
 
     async function iniciarSite() {
 
